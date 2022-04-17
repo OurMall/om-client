@@ -1,0 +1,67 @@
+/* RESET DEFAULT STYLES FOR ANY BROWSER */
+@use "variables";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+html {
+	line-height: 1.15;
+	-webkit-text-size-adjust: 100%;
+}
+
+/* Sections */
+
+body {
+	font-size: variables.$base-font-size;
+}
+
+main {
+	display: block;
+}
+
+a {
+	text-decoration: none;
+	background-color: transparent;
+}
+
+ul > li {
+	list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: bold;
+}
+
+h1 {
+	font-size: variables.$h1-font-size;
+}
+
+h2 {
+	font-size: variables.$h2-font-size;
+}
+
+h3 {
+	font-size: variables.$h3-font-size;
+}
+
+h4 {
+	font-size: variables.$h4-font-size;
+}
+
+h5 {
+	font-size: variables.$h5-font-size;
+}
+
+h6 {
+	font-size: variables.$h6-font-size;
+}

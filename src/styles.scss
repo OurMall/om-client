@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+@use "sass:color";
+@use "assets/sass/variables";
+@use "assets/sass/normalize";
+@use "assets/sass/custom";
+
+:root {
+	--primary-color: hsl(
+		color.hue(variables.$main-color),
+		color.saturation(variables.$main-color),
+		color.lightness(variables.$main-color)
+	);
+	--primary-alt-color: hsl(
+		color.hue(variables.$main-alt-color),
+		color.saturation(variables.$main-alt-color),
+		color.lightness(variables.$main-alt-color)
+	);
+	--dark-color: hsl(
+		color.hue(variables.$dark-color),
+		color.saturation(variables.$dark-color),
+		color.lightness(variables.$dark-color)
+	);
+	--dark-alt-color: hsl(
+		color.hue(variables.$dark-alt-color),
+		color.saturation(variables.$dark-alt-color),
+		color.lightness(variables.$dark-alt-color)
+	);
+	--light-color: hsl(
+		color.hue(variables.$light-color),
+		color.saturation(variables.$light-color),
+		color.lightness(variables.$light-color)
+	);
+	--light-alt-color: hsl(
+		color.hue(variables.$light-alt-color),
+		color.saturation(variables.$light-alt-color),
+		color.lightness(variables.$light-alt-color)
+	);
+}
