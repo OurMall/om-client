@@ -1,0 +1,36 @@
+@use "./variables";
+
+/* ================ BUTTONS =================== */
+
+%_button {
+	display: inline-block;
+	border: none;
+	outline: none;
+	border-radius: 0;
+	cursor: pointer;
+}
+
+%_flex-button {
+	@extend %_button;
+	display: inline-flex;
+}
+
+.om-icon-button {
+	@extend %_flex-button;
+	height: 40px;
+	width: 40px;
+	margin: 0 .25rem;
+	border-radius: 50%;
+	background-color: transparent;
+	color: var(--nord-light-color);
+
+	.icon {
+		font-size: 2rem;
+	}
+
+	&:hover {
+		color: var(--main-color);
+	}
+}
+
+/* ================ END BUTTONs =============== */

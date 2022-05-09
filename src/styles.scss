@@ -4,35 +4,81 @@
 @use "assets/sass/normalize";
 @use "assets/sass/custom";
 
+@import url("https://fonts.googleapis.com/css2?family=Anybody:wght@100;200;300;400;500;600;800&family=Eczar:wght@400;500;700;800&family=Poppins:wght@100;200;300;400;500;600;700;900&family=Sora:wght@100;200;300;400;500;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400;1,500&display=swap");
+
 :root {
-	--primary-color: hsl(
-		color.hue(variables.$main-color),
-		color.saturation(variables.$main-color),
-		color.lightness(variables.$main-color)
-	);
-	--primary-alt-color: hsl(
-		color.hue(variables.$main-alt-color),
-		color.saturation(variables.$main-alt-color),
-		color.lightness(variables.$main-alt-color)
-	);
-	--dark-color: hsl(
-		color.hue(variables.$dark-color),
-		color.saturation(variables.$dark-color),
-		color.lightness(variables.$dark-color)
-	);
-	--dark-alt-color: hsl(
-		color.hue(variables.$dark-alt-color),
-		color.saturation(variables.$dark-alt-color),
-		color.lightness(variables.$dark-alt-color)
-	);
-	--light-color: hsl(
-		color.hue(variables.$light-color),
-		color.saturation(variables.$light-color),
-		color.lightness(variables.$light-color)
-	);
-	--light-alt-color: hsl(
-		color.hue(variables.$light-alt-color),
-		color.saturation(variables.$light-alt-color),
-		color.lightness(variables.$light-alt-color)
-	);
+	--main-color: #{variables.$main-color};
+	--main-alt-color: #{variables.$main-alt-color};
+	--dark-color: #{variables.$dark-color};
+	--dark-alt-color: #{variables.$dark-alt-color};
+	--light-color: #{variables.$light-color};
+	--light-alt-color: #{variables.$light-alt-color};
+	--nord-dark-color: #{variables.$nord-dark-color};
+	--nord-dark-alt-color: #{variables.$nord-dark-alt-color};
+	--nord-light-color: #{variables.$nord-light-color};
+	--nord-light-alt-color: #{variables.$nord-light-alt-color};
+
+	--navbar-height: 50px;
+}
+
+* {
+	&::-webkit-scrollbar {
+		height: 5px;
+		width: 5px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 20px;
+		background-color: var(--main-color);
+	}
+}
+
+body {
+	font-family: "Ubuntu", sans-serif;
+	background-color: var(--nord-dark-color);
+	color: var(--light-color);
+}
+
+.no__script {
+	display: block;
+	width: 100%;
+	height: 100vh;
+	min-height: 100%;
+
+	&__container {
+		height: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		align-items: center;
+
+		.content__image {
+			max-height: 330px;
+			width: auto;
+		}
+
+		.content {
+			display: flex;
+			flex-direction: column;
+			max-width: 460px;
+			padding: 1rem 1.5rem;
+			text-align: center;
+
+			.title {
+				font-weight: 800;
+				text-transform: uppercase;
+				margin-bottom: 0.5rem;
+			}
+
+			.description {
+				font-size: 18px;
+				letter-spacing: 1px;
+			}
+		}
+	}
 }
