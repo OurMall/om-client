@@ -3,6 +3,7 @@
 @use "assets/sass/variables";
 @use "assets/sass/normalize";
 @use "assets/sass/custom";
+@use "assets/sass/animations";
 
 @import url("https://fonts.googleapis.com/css2?family=Anybody:wght@100;200;300;400;500;600;800&family=Eczar:wght@400;500;700;800&family=Poppins:wght@100;200;300;400;500;600;700;900&family=Sora:wght@100;200;300;400;500;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400;1,500&display=swap");
 
@@ -18,7 +19,7 @@
 	--nord-light-color: #{variables.$nord-light-color};
 	--nord-light-alt-color: #{variables.$nord-light-alt-color};
 
-	--navbar-height: 50px;
+	--navbar-height: variables.$navbar-height;
 }
 
 * {

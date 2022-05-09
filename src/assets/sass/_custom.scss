@@ -1,4 +1,19 @@
 @use "./variables";
+@use "./animations";
+
+/* ================ SECTIONS =================== */
+
+.om-section {
+	display: block;
+	position: static;
+	height: calc(100vh - (variables.$navbar-height/2 - 5px));
+	min-height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+	animation: 1s fadeIn 0s ease-in;
+}
+
+/* ================ END SECTIONS ================= */
 
 /* ================ BUTTONS =================== */
 
