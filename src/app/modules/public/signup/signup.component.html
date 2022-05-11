@@ -6,55 +6,70 @@
 		</div>
 		<div class="body">
 			<form class="signup__form">
-				<div class="om-field-grid"> -- grid
-					<div>
-						<input class="om-input" id="name" type="text" placeholder="Name">
+				<div class="om-field-group">
+					<div class="om-field">
+						<label for="name" class="om-field-label">Name</label>
+						<input class="om-input" id="name" type="text" placeholder="Lola, Pepe..">
 					</div>
-					<div>
-						<input type="text" placeholder="Lastname">
-					</div>
-				</div>
-				<div>
-					<div>
-						<input type="tel" placeholder="Phone number">
+					<div class="om-field">
+						<label for="lastname" class="om-field-label">Last name</label>
+						<input class="om-input" id="lastname" type="text" placeholder="Lastname">
 					</div>
 				</div>
-				<div>
-					<div>
-						<input type="email" placeholder="Email">
+				<div class="om-field">
+					<label for="phone-number" class="om-field-label">Phone number</label>
+					<input class="om-input" id="phone-number" type="tel" placeholder="Phone number">
+				</div>
+				<div class="om-field">
+					<label for="email" class="om-field-label">Email</label>
+					<input class="om-input" id="email" type="email" placeholder="Email">
+				</div>
+				<div class="om-field-group">
+					<div class="om-field">
+						<label for="password" class="om-field-label">Password</label>
+						<input class="om-input" id="password" type="password" placeholder="Password">
+					</div>
+					<div class="om-field">
+						<label for="confirm-password" class="om-field-label">Confirm password</label>
+						<input class="om-input" id="confirm-password" type="password" placeholder="Confirm password">
 					</div>
 				</div>
-				<div> -- grid
-					<div>
-						<input type="password" placeholder="Password">
+				<div class="om-field">
+					<label for="birthdate" class="om-field-label">Birthdate</label>
+					<input class="om-input" id="birthdate" type="date" placeholder="Birthdate">
+				</div>
+				<div class="gender__section om-field">
+					<div class="information">
+						<h3 class="information__title">Género</h3>
+						<p class="information__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptates!</p>
 					</div>
-					<div>
-						<input type="password" placeholder="Confirm password">
+					<div class="gender__option">
+						<input type="radio" id="male" value="Male">
+						<div class="helper">
+							<label for="male">Masculino</label>
+						</div>
+					</div>
+					<div class="gender__option">
+						<input type="radio" id="female" value="Female">
+						<div class="helper">
+							<label for="female">Femenino</label>
+						</div>
+					</div>
+					<div class="gender__option">
+						<input type="radio" id="other" value="Other">
+						<div class="helper">
+							<label for="other">Otro</label>
+						</div>
 					</div>
 				</div>
-				<div>
-					<div>
-						<input type="date" placeholder="Birthdate">
-					</div>
-				</div>
-				<div>
-					<div>
-						<input type="radio" name="gender" value="Male">
-					</div>
-					<div>
-						<input type="radio" name="gender" value="Female">
-					</div>
-					<div>
-						<input type="radio" name="gender" value="Other">
-					</div>
-				</div>
-				<div>
+				<div class="privacy__section om-field">
 					<input type="checkbox" id="privacy">
 					<label for="privacy">Acepto los t&eacute;rminos y pol&iacute;ticas de privacidad</label>
 				</div>
-				<div>
-					<button type="submit">
+				<div class="om-field">
+					<button class="om-button" type="submit">
 						Signup
+						<i class="icon uil uil-signout"></i>
 					</button>
 				</div>
 			</form>
@@ -63,10 +78,4 @@
 			footer
 		</div>
 	</div>
-</section>
-<section class="one">
-	one
-</section>
-<section class="two">
-	two
 </section>

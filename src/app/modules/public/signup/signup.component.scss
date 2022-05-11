@@ -4,11 +4,11 @@
 
 	.container {
 		height: 100%;
-		max-width: 1280px;
+		max-width: 768px;
 		display: flex;
 		flex-direction: column;
 		margin: 0 auto;
-		padding: 2.5rem .85rem;
+		padding: 1.5rem .85rem;
 
 		.heading {
 			display: flex;
@@ -17,17 +17,17 @@
 			border-bottom: 1px solid rgba($color: variables.$light-color, $alpha: 0.1);
 
 			.title {
-				font-family: "Poppins", sans-serif;
+				font-family: "poppins", sans-serif;
 				font-weight: 700;
 				font-size: 2rem;
-				line-height: 50px;
+				line-height: 30px;
 				letter-spacing: 2px;
 			}
 
 			.description {
 				font-size: 18px;
 				letter-spacing: 1px;
-				padding: .85rem 0 3rem 0;
+				padding: .85rem 0 2.5rem 0;
 			}
 		}
 
@@ -39,16 +39,59 @@
 				display: flex;
 				flex-direction: column;
 
+				.gender__section {
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-start;
+					flex-wrap: wrap;
 
+					.information {
+						display: flex;
+						flex-direction: column;
+						padding: 0 0 1rem 0;
+						border-bottom: 1px solid rgba($color: variables.$light-color, $alpha: 0.1);
+
+						&__title {
+							font-size: 1.25rem;
+							margin-bottom: .25rem;
+						}
+					}
+
+					.gender__option {
+						display: flex;
+						flex-direction: row;
+						align-items: center;
+						justify-content: flex-start;
+						padding: .5rem 0;
+
+						input {
+							height: 15px;
+							width: 15px;
+						}
+
+						.helper {
+							display: flex;
+							flex-direction: column;
+
+							label {
+								margin-left: .25rem;
+								font-weight: 600;
+							}
+						}
+					}
+				}
+
+				.privacy__section {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+
+					label {
+						margin-left: .5rem;
+						color: rgba($color: variables.$light-color, $alpha: 0.75);
+					}
+				}
 			}
 		}
 	}
-}
-
-.one {
-	height: 100vh;
-}
-
-.two {
-	height: 100vh;
 }

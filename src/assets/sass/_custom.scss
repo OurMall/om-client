@@ -23,6 +23,7 @@
 	outline: none;
 	border-radius: 0;
 	cursor: pointer;
+	transition: all .5s cubic-bezier(0.86, 0.01, 0.15, 0.99);
 }
 
 %_flex-button {
@@ -39,7 +40,6 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	outline: rgba($color: variables.$nord-light-color, $alpha: 1) solid 2px;
-	transition: all .5s cubic-bezier(0.86, 0.01, 0.15, 0.99);
 
 	&:hover {
 		background-color: rgba($color: variables.$nord-light-color, $alpha: 1.0);
@@ -65,18 +65,63 @@
 	}
 }
 
+.om-button {
+	@extend %_flex-button;
+	text-transform: uppercase;
+	font-weight: 700;
+	padding: .85rem 1.25rem;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba($color: variables.$main-color, $alpha: 1.0);
+	color: rgba($color: variables.$nord-light-color, $alpha: 1.0);
+	border: 1px solid rgba($color: variables.$light-color, $alpha: 1.0);
+
+	&:hover {
+		background-color: rgba($color: variables.$main-alt-color, $alpha: 1.0);
+		border-radius: 15px;
+	}
+}
+
 /* ================ END BUTTONs =============== */
 
 /* =============== FORMS ====================== */
 
+.om-field {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 1rem .5rem;
+}
+
+.om-field-label {
+	font-weight: 600;
+	font-size: .85rem;
+	padding: 0 0 0 .5rem;
+	margin-bottom: .25rem;
+	color: rgba($color: variables.$light-color, $alpha: 0.65);
+
+	&::after {
+		content: " *";
+		color: rgba($color: #e40707, $alpha: 1.0);
+	}
+}
+
+.om-field-group {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
 .om-field-grid {
-	display: grid;
-	grid-template-columns: auto auto auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
 }
 
 %_input {
 	font-family: inherit;
-	padding: .5rem .85rem;
+	padding: .65rem 1rem;
 	border-radius: 5px;
 	border: 1px solid rgba($color: variables.$main-color, $alpha: 0.5);
 
@@ -87,8 +132,9 @@
 
 .om-input {
 	@extend %_input;
-	background-color: rgba($color: variables.$nord-dark-color, $alpha: 0.5);
+	background-color: rgba($color: variables.$nord-dark-alt-color, $alpha: 0.5);
 	color: rgba($color: variables.$nord-light-color, $alpha: 1.0);
+	width: 100%;
 }
 
 /* =============== ENDFORMS =================== */
