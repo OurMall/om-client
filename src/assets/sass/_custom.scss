@@ -6,7 +6,7 @@
 .om-section {
 	display: block;
 	position: static;
-	height: calc(100vh - (variables.$navbar-height/2 - 5px));
+	height: calc(100vh - (variables.$navbar-height*2 - 5px));
 	min-height: 100%;
 	width: 100%;
 	box-sizing: border-box;
@@ -30,6 +30,23 @@
 	display: inline-flex;
 }
 
+.om-rounded-button {
+	@extend %_flex-button;
+	padding: 1rem 2rem;
+	border-radius: 20px;
+	background-color: variables.$main-color;
+	color: variables.$nord-light-color;
+	font-weight: 700;
+	text-transform: uppercase;
+	outline: rgba($color: variables.$nord-light-color, $alpha: 1) solid 2px;
+	transition: all .5s cubic-bezier(0.86, 0.01, 0.15, 0.99);
+
+	&:hover {
+		background-color: rgba($color: variables.$nord-light-color, $alpha: 1.0);
+		color: variables.$main-color;
+	}
+}
+
 .om-icon-button {
 	@extend %_flex-button;
 	height: 40px;
@@ -49,3 +66,29 @@
 }
 
 /* ================ END BUTTONs =============== */
+
+/* =============== FORMS ====================== */
+
+.om-field-grid {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+%_input {
+	font-family: inherit;
+	padding: .5rem .85rem;
+	border-radius: 5px;
+	border: 1px solid rgba($color: variables.$main-color, $alpha: 0.5);
+
+	&:focus {
+		outline: rgba($color: variables.$main-color, $alpha: 1) solid 1px;
+	}
+}
+
+.om-input {
+	@extend %_input;
+	background-color: rgba($color: variables.$nord-dark-color, $alpha: 0.5);
+	color: rgba($color: variables.$nord-light-color, $alpha: 1.0);
+}
+
+/* =============== ENDFORMS =================== */

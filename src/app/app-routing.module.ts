@@ -18,6 +18,13 @@ const routes: Routes = [
 			import('./modules/public/signup/signup.module').then((m) => m.SignupModule),
 	},
 	{
+		path: 'support',
+		loadChildren: () =>
+			import('./modules/public/support/support.module').then(
+				(m) => m.SupportModule
+			),
+	},
+	{
 		path: '404',
 		loadChildren: () =>
 			import('./modules/public/page-not-found/page-not-found.module').then(
