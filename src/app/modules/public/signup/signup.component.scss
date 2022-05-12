@@ -42,20 +42,33 @@
 				padding: 0 0 1.5rem 0;
 
 				.step {
-					height: 40px;
-					width: 40px;
 					display: flex;
-					align-items: center;
+					flex-direction: column;
 					justify-content: center;
-					border-radius: 50%;
-					background-color: variables.$light-color;
-					color: variables.$dark-color;
-					cursor: default;
-				}
+					align-items: center;
 
-				.step-active {
-					background-color: variables.$main-color;
-					color: variables.$light-color;
+					.step-indicator {
+						height: 40px;
+						width: 40px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						border-radius: 50%;
+						font-weight: 700;
+						background-color: variables.$light-color;
+						color: variables.$dark-color;
+						cursor: default;
+					}
+
+					.label {
+						font-size: 13px;
+						margin-top: .5rem;
+					}
+
+					.step-active {
+						background-color: variables.$main-color;
+						color: variables.$light-color;
+					}
 				}
 			}
 		}

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { MessageService } from '@app/common/services';
+
 @Component({
 	selector: 'app-user-register',
 	templateUrl: './user-register.component.html',
@@ -11,7 +13,10 @@ export class UserRegisterComponent implements OnInit {
 	signupForm!: FormGroup;
 	@Output() nextStepEvent = new EventEmitter<number>();
 
-	constructor(private fb: FormBuilder) {}
+	constructor(
+		private fb: FormBuilder,
+		private message: MessageService
+	) {}
 
 	ngOnInit(): void {
 		this.signupForm = this.fb.group({
@@ -23,18 +28,20 @@ export class UserRegisterComponent implements OnInit {
 			confirm_password: [null, [Validators.required, Validators.minLength(8)]],
 			birthdate: [null, [Validators.required]],
 			gender: [null, [Validators.required]],
-			accept_terms: [false, [Validators.required]],
+			accept_terms: [null, [Validators.required]],
 		});
 	}
 
 	onSubmit(): void {
-		console.log(this.signupForm.value);
-		if (!this.validate()) return;
-		this.nextStepEvent.emit(1);
+		if (!this.validate()) {
+			this.message.error("Los datos del formulario son inválidos o no coinciden");
+			return;
+		}
+		this.nextStepEvent.emit(2);
 	}
 
 	private validate(): boolean {
-		return true;
+		return this.confirm_password?.value == this.password?.value && this.accept_terms ? true : false;
 	}
 
 	get given_name() {

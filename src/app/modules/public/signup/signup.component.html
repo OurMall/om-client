@@ -7,22 +7,32 @@
 				officia nostrum porro maxime temporibus magnam autem?
 			</p>
 			<ul class="stepper">
-				<li class="step {{stepper == 1 ? 'step-active' : ''}}">
-					{{ 1 }}
+				<li class="step">
+					<div class="step-indicator {{stepper == 1 ? 'step-active' : ''}}">
+						{{ 1 }}
+					</div>
+					<span class="label">
+						Informaci&oacute;n del usuario
+					</span>
 				</li>
-				<li class="step {{stepper == 2 ? 'step-active' : ''}}">
-					{{ 2 }}
+				<li class="step">
+					<div class="step-indicator {{stepper == 2 ? 'step-active' : ''}}">
+						{{ 2 }}
+					</div>
+					<span class="label">
+						Elegir rol
+					</span>
 				</li>
-				<li class="step {{stepper == 3 ? 'step-active' : ''}}">
-					{{ 3 }}
+				<li class="step">
+					<div class="step-indicator {{stepper == 3 ? 'step-active' : ''}}">
+						{{ 3 }}
+					</div>
+					<span class="label">
+						Informaci&oacute;n adicional
+					</span>
 				</li>
 				<!--<li class="step" *ngFor="let step of steps; let i = index" [ngIf]="stepper == i ? 'step-active' : ''">{{ i }}</li>-->
 			</ul>
-			<!-- TODO: crear un stepper apartir de los numeros, cada numero identificara
-			un formulario 1. formulario de registro, 2. formulario del rol, 3. formulario del espacio de trabajo
-			o informacion del cliente, tal como la direccion. El stepper iniciara en 1, es decir con el registro de datos
-			cuando el componente de registro de datos del usuario emita un evento de validacion de datos y de creacion del usuario, el stepper se incrementara y
-			pasara al siguiente numero, esto ocurrira de igual forma con los otros 2 formularios -->
 		</div>
 		<div class="body">
 			<ng-template [ngIf]="stepper == 1">

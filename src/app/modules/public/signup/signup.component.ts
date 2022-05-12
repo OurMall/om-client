@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
 	}
 
 	changeCurrentStep(nextStep: number): void {
-		if(this.stepper >= 3) this.stepper = 0;
-		this.stepper = this.stepper + nextStep;
+		if(this.stepper >= 3) this.stepper = 1;
+		this.stepper = nextStep;
 	}
 }
