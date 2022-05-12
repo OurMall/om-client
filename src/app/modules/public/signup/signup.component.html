@@ -2,77 +2,38 @@
 	<div class="container">
 		<div class="heading">
 			<h2 class="title">Registrarse</h2>
-			<p class="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque eum, eaque et atque officia nostrum porro maxime temporibus magnam autem?</p>
+			<p class="description">
+				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque eum, eaque et atque
+				officia nostrum porro maxime temporibus magnam autem?
+			</p>
+			<ul class="stepper">
+				<li class="step {{stepper == 1 ? 'step-active' : ''}}">
+					{{ 1 }}
+				</li>
+				<li class="step {{stepper == 2 ? 'step-active' : ''}}">
+					{{ 2 }}
+				</li>
+				<li class="step {{stepper == 3 ? 'step-active' : ''}}">
+					{{ 3 }}
+				</li>
+				<!--<li class="step" *ngFor="let step of steps; let i = index" [ngIf]="stepper == i ? 'step-active' : ''">{{ i }}</li>-->
+			</ul>
+			<!-- TODO: crear un stepper apartir de los numeros, cada numero identificara
+			un formulario 1. formulario de registro, 2. formulario del rol, 3. formulario del espacio de trabajo
+			o informacion del cliente, tal como la direccion. El stepper iniciara en 1, es decir con el registro de datos
+			cuando el componente de registro de datos del usuario emita un evento de validacion de datos y de creacion del usuario, el stepper se incrementara y
+			pasara al siguiente numero, esto ocurrira de igual forma con los otros 2 formularios -->
 		</div>
 		<div class="body">
-			<form class="signup__form">
-				<div class="om-field-group">
-					<div class="om-field">
-						<label for="name" class="om-field-label">Name</label>
-						<input class="om-input" id="name" type="text" placeholder="Lola, Pepe..">
-					</div>
-					<div class="om-field">
-						<label for="lastname" class="om-field-label">Last name</label>
-						<input class="om-input" id="lastname" type="text" placeholder="Lastname">
-					</div>
-				</div>
-				<div class="om-field">
-					<label for="phone-number" class="om-field-label">Phone number</label>
-					<input class="om-input" id="phone-number" type="tel" placeholder="Phone number">
-				</div>
-				<div class="om-field">
-					<label for="email" class="om-field-label">Email</label>
-					<input class="om-input" id="email" type="email" placeholder="Email">
-				</div>
-				<div class="om-field-group">
-					<div class="om-field">
-						<label for="password" class="om-field-label">Password</label>
-						<input class="om-input" id="password" type="password" placeholder="Password">
-					</div>
-					<div class="om-field">
-						<label for="confirm-password" class="om-field-label">Confirm password</label>
-						<input class="om-input" id="confirm-password" type="password" placeholder="Confirm password">
-					</div>
-				</div>
-				<div class="om-field">
-					<label for="birthdate" class="om-field-label">Birthdate</label>
-					<input class="om-input" id="birthdate" type="date" placeholder="Birthdate">
-				</div>
-				<div class="gender__section om-field">
-					<div class="information">
-						<h3 class="information__title">Género</h3>
-						<p class="information__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus, voluptates!</p>
-					</div>
-					<div class="gender__option">
-						<input type="radio" id="male" value="Male">
-						<div class="helper">
-							<label for="male">Masculino</label>
-						</div>
-					</div>
-					<div class="gender__option">
-						<input type="radio" id="female" value="Female">
-						<div class="helper">
-							<label for="female">Femenino</label>
-						</div>
-					</div>
-					<div class="gender__option">
-						<input type="radio" id="other" value="Other">
-						<div class="helper">
-							<label for="other">Otro</label>
-						</div>
-					</div>
-				</div>
-				<div class="privacy__section om-field">
-					<input type="checkbox" id="privacy">
-					<label for="privacy">Acepto los t&eacute;rminos y pol&iacute;ticas de privacidad</label>
-				</div>
-				<div class="om-field">
-					<button class="om-button" type="submit">
-						Signup
-						<i class="icon uil uil-signout"></i>
-					</button>
-				</div>
-			</form>
+			<ng-template [ngIf]="stepper == 1">
+				<app-user-register (nextStepEvent)="changeCurrentStep($event)"></app-user-register>
+			</ng-template>
+			<ng-template [ngIf]="stepper == 2">
+				stepper {{ stepper }}
+			</ng-template>
+			<ng-template [ngIf]="stepper == 3">
+				stepper {{ stepper }}
+			</ng-template>
 		</div>
 		<div class="footer">
 			footer

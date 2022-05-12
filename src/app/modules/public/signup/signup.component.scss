@@ -1,6 +1,7 @@
 @use "~src/assets/sass/variables";
 
 .signup {
+	height: 100%;
 
 	.container {
 		height: 100%;
@@ -13,10 +14,12 @@
 		.heading {
 			display: flex;
 			flex-direction: column;
-			justify-content: flex-start;
+			//justify-content: flex-start;
+			align-items: center;
 			border-bottom: 1px solid rgba($color: variables.$light-color, $alpha: 0.1);
 
 			.title {
+				margin-right: auto;
 				font-family: "poppins", sans-serif;
 				font-weight: 700;
 				font-size: 2rem;
@@ -29,69 +32,41 @@
 				letter-spacing: 1px;
 				padding: .85rem 0 2.5rem 0;
 			}
+
+			.stepper {
+				width: 90%;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0 0 1.5rem 0;
+
+				.step {
+					height: 40px;
+					width: 40px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					border-radius: 50%;
+					background-color: variables.$light-color;
+					color: variables.$dark-color;
+					cursor: default;
+				}
+
+				.step-active {
+					background-color: variables.$main-color;
+					color: variables.$light-color;
+				}
+			}
 		}
 
 		.body {
 			height: 100%;
 			width: 100%;
+		}
 
-			.signup__form {
-				display: flex;
-				flex-direction: column;
-
-				.gender__section {
-					display: flex;
-					flex-direction: column;
-					justify-content: flex-start;
-					flex-wrap: wrap;
-
-					.information {
-						display: flex;
-						flex-direction: column;
-						padding: 0 0 1rem 0;
-						border-bottom: 1px solid rgba($color: variables.$light-color, $alpha: 0.1);
-
-						&__title {
-							font-size: 1.25rem;
-							margin-bottom: .25rem;
-						}
-					}
-
-					.gender__option {
-						display: flex;
-						flex-direction: row;
-						align-items: center;
-						justify-content: flex-start;
-						padding: .5rem 0;
-
-						input {
-							height: 15px;
-							width: 15px;
-						}
-
-						.helper {
-							display: flex;
-							flex-direction: column;
-
-							label {
-								margin-left: .25rem;
-								font-weight: 600;
-							}
-						}
-					}
-				}
-
-				.privacy__section {
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-
-					label {
-						margin-left: .5rem;
-						color: rgba($color: variables.$light-color, $alpha: 0.75);
-					}
-				}
-			}
+		.footer {
+			display: block;
 		}
 	}
 }

@@ -1,0 +1,59 @@
+@use "~src/assets/sass/variables";
+
+.signup__form {
+	display: flex;
+	flex-direction: column;
+
+	.gender__section {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+
+		.information {
+			display: flex;
+			flex-direction: column;
+			padding: 0 0 1rem 0;
+			border-bottom: 1px solid rgba($color: variables.$light-color, $alpha: 0.1);
+
+			&__title {
+				font-size: 1.25rem;
+				margin-bottom: 0.25rem;
+			}
+		}
+
+		.gender__option {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: flex-start;
+			padding: 0.5rem 0;
+
+			input {
+				height: 15px;
+				width: 15px;
+			}
+
+			.helper {
+				display: flex;
+				flex-direction: column;
+
+				label {
+					margin-left: 0.25rem;
+					font-weight: 600;
+				}
+			}
+		}
+	}
+
+	.privacy__section {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		label {
+			margin-left: 0.5rem;
+			color: rgba($color: variables.$light-color, $alpha: 0.75);
+		}
+	}
+}

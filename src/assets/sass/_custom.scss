@@ -82,6 +82,17 @@
 	}
 }
 
+.om-button-disabled {
+	background-color: variables.$main-alt-color;
+	border: none;
+	cursor: not-allowed;
+
+	&:hover {
+		border-radius: 0;
+		outline: none;
+	}
+}
+
 /* ================ END BUTTONs =============== */
 
 /* =============== FORMS ====================== */
@@ -103,6 +114,18 @@
 	&::after {
 		content: " *";
 		color: rgba($color: #e40707, $alpha: 1.0);
+	}
+}
+
+.om-field-error {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: .5rem 0 0 0;
+
+	.om-error-text {
+		color: rgba($color: variables.$light-color, $alpha: 0.65);
 	}
 }
 

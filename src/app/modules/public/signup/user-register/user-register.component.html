@@ -1,0 +1,117 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup__form">
+	<div class="om-field-group">
+		<div class="om-field">
+			<label for="name" class="om-field-label">Name</label>
+			<input formControlName="given_name" class="om-input" id="name" type="text" placeholder="Lola, Pepe..">
+			<div class="om-field-error" *ngIf="given_name?.invalid && (given_name?.touched || given_name?.dirty)">
+				<small class="om-error-text" *ngIf="given_name?.errors?.['required']">
+					El campo es requerido
+				</small>
+			</div>
+		</div>
+		<div class="om-field">
+			<label for="lastname" class="om-field-label">Last name</label>
+			<input formControlName="family_name" class="om-input" id="lastname" type="text" placeholder="Lastname">
+			<div class="om-field-error" *ngIf="family_name?.invalid && (family_name?.touched || family_name?.dirty)">
+				<small class="om-error-text" *ngIf="family_name?.errors?.['required']">
+					El campo es requerido
+				</small>
+			</div>
+		</div>
+	</div>
+	<div class="om-field">
+		<label for="phone-number" class="om-field-label">Phone number</label>
+		<input formControlName="phone_number" class="om-input" id="phone-number" type="tel" placeholder="Phone number">
+		<div class="om-field-error" *ngIf="phone_number?.invalid && (phone_number?.touched || phone_number?.dirty)">
+			<small class="om-error-text" *ngIf="phone_number?.errors?.['required']">
+				El campo es requerido
+			</small>
+			<small class="om-error-text" *ngIf="phone_number?.errors?.['minlength']">
+				M&iacute;nimo 10 caracteres
+			</small>
+		</div>
+	</div>
+	<div class="om-field">
+		<label for="email" class="om-field-label">Email</label>
+		<input formControlName="email" class="om-input" id="email" type="email" placeholder="Email">
+		<div class="om-field-error" *ngIf="email?.invalid && (email?.touched || email?.dirty)">
+			<small class="om-error-text" *ngIf="email?.errors?.['required']">
+				El campo es requerido
+			</small>
+			<small class="om-error-text" *ngIf="email?.errors?.['email']">
+				El correo electr&oacute;nico es inv&aacute;lido
+			</small>
+		</div>
+	</div>
+	<div class="om-field-group">
+		<div class="om-field">
+			<label for="password" class="om-field-label">Password</label>
+			<input formControlName="password" class="om-input" id="password" type="password" placeholder="Password">
+			<div class="om-field-error" *ngIf="password?.invalid && (password?.touched || password?.dirty)">
+				<small class="om-error-text" *ngIf="password?.errors?.['required']">
+					El campo es requerido
+				</small>
+				<small class="om-error-text" *ngIf="password?.errors?.['minlength']">
+					La contrase&ntilde;a debe tener m&iacute;nimo 8 caracteres
+				</small>
+			</div>
+		</div>
+		<div class="om-field">
+			<label for="confirm-password" class="om-field-label">Confirm password</label>
+			<input formControlName="confirm_password" class="om-input" id="confirm-password" type="password"
+				placeholder="Confirm password">
+			<div class="om-field-error" *ngIf="confirm_password?.invalid && (confirm_password?.touched || confirm_password?.dirty)">
+				<small class="om-error-text" *ngIf="confirm_password?.errors?.['required']">
+					El campo es requerido
+				</small>
+				<small class="om-error-text" *ngIf="confirm_password?.errors?.['minlength']">
+					La contrase&ntilde;a debe tener m&iacute;nimo 8 caracteres
+				</small>
+			</div>
+		</div>
+	</div>
+	<div class="om-field">
+		<label for="birthdate" class="om-field-label">Birthdate</label>
+		<input formControlName="birthdate" class="om-input" id="birthdate" type="date" placeholder="Birthdate">
+		<div class="om-field-error" *ngIf="birthdate?.invalid && (birthdate?.touched || birthdate?.dirty)">
+			<small class="om-error-text" *ngIf="birthdate?.errors?.['required']">
+				El campo es requerido
+			</small>
+		</div>
+	</div>
+	<div class="gender__section om-field">
+		<div class="information">
+			<h3 class="information__title">Género</h3>
+			<p class="information__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus,
+				voluptates!</p>
+		</div>
+		<div class="gender__option">
+			<input formControlName="gender" type="radio" id="male" [value]="'male'">
+			<div class="helper">
+				<label for="male">Masculino</label>
+			</div>
+		</div>
+		<div class="gender__option">
+			<input formControlName="gender" type="radio" id="female" [value]="'female'">
+			<div class="helper">
+				<label for="female">Femenino</label>
+			</div>
+		</div>
+		<div class="gender__option">
+			<input formControlName="gender" type="radio" id="other" [value]="'other'">
+			<div class="helper">
+				<label for="other">Otro</label>
+			</div>
+		</div>
+	</div>
+	<div class="privacy__section om-field">
+		<input formControlName="accept_terms" type="checkbox" id="privacy">
+		<label for="privacy">Acepto los t&eacute;rminos y pol&iacute;ticas de privacidad</label>
+	</div>
+	<div class="om-field">
+		<button class="om-button {{!signupForm.valid ? 'om-button-disabled' : ''}}" type="submit" [disabled]="!signupForm.valid">
+			Signup
+			<i class="icon uil uil-signout"></i>
+		</button>
+	</div>
+</form>
