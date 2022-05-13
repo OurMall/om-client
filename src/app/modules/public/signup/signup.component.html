@@ -12,7 +12,7 @@
 						{{ 1 }}
 					</div>
 					<span class="label">
-						Informaci&oacute;n del usuario
+						Informaci&oacute;n personal
 					</span>
 				</li>
 				<li class="step">
@@ -36,10 +36,10 @@
 		</div>
 		<div class="body">
 			<ng-template [ngIf]="stepper == 1">
-				<app-user-register (nextStepEvent)="changeCurrentStep($event)"></app-user-register>
+				<app-user-register (nextStepEvent)="changeCurrentStep($event)" [currentStep]="this.stepper"></app-user-register>
 			</ng-template>
 			<ng-template [ngIf]="stepper == 2">
-				stepper {{ stepper }}
+				<app-user-role></app-user-role>
 			</ng-template>
 			<ng-template [ngIf]="stepper == 3">
 				stepper {{ stepper }}

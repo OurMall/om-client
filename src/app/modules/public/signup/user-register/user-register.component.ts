@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { MessageService } from '@app/common/services';
@@ -11,6 +11,7 @@ import { MessageService } from '@app/common/services';
 export class UserRegisterComponent implements OnInit {
 
 	signupForm!: FormGroup;
+	@Input() currentStep!: number;
 	@Output() nextStepEvent = new EventEmitter<number>();
 
 	constructor(
@@ -37,7 +38,8 @@ export class UserRegisterComponent implements OnInit {
 			this.message.error("Los datos del formulario son inválidos o no coinciden");
 			return;
 		}
-		this.nextStepEvent.emit(2);
+		const nextStep = this.currentStep + 1;
+		this.nextStepEvent.emit(nextStep);
 	}
 
 	private validate(): boolean {

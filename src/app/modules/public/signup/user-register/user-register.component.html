@@ -1,4 +1,4 @@
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup__form">
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="user__register-form">
 	<div class="om-field-group">
 		<div class="om-field">
 			<label for="name" class="om-field-label">Nombre</label>
@@ -110,8 +110,7 @@
 	</div>
 	<div class="om-field">
 		<button class="om-button {{!signupForm.valid ? 'om-button-disabled' : ''}}" type="submit" [disabled]="!signupForm.valid">
-			Signup
-			<i class="icon uil uil-signout"></i>
+			Continuar
 		</button>
 	</div>
 </form>
