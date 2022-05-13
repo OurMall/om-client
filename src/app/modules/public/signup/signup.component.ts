@@ -13,7 +13,7 @@ export class SignupComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit(): void {
-		this.stepper = 2;
+		this.stepper = 1;
 	}
 
 	changeCurrentStep(nextStep: number): void {

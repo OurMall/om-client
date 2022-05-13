@@ -9,6 +9,10 @@ export enum Gender {
 	OTHER="other"
 }
 
+export interface Groups {
+	value: string;
+}
+
 export interface UserSignup extends User {
 	given_name: string;
 	family_name: string;

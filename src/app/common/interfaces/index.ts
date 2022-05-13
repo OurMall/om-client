@@ -1,1 +1,1 @@
-export { User, UserSignup, Gender } from './user.interface';
+export { User, UserSignup, Gender, Groups } from './user.interface';

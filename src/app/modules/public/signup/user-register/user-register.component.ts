@@ -33,7 +33,7 @@ export class UserRegisterComponent implements OnInit {
 		});
 	}
 
-	onSubmit(): void {
+	onContinue(): void {
 		if (!this.validate()) {
 			this.message.error("Los datos del formulario son inválidos o no coinciden");
 			return;
