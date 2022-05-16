@@ -1,54 +1,62 @@
 <section class="signup om-section">
 	<div class="container">
 		<div class="heading">
-			<h2 class="title">
-				Registrarse
-			</h2>
+			<h2 class="title">Registrarse</h2>
 			<p class="description">
-				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque eum, eaque et atque
-				officia nostrum porro maxime temporibus magnam autem?
+				Gracias por querer hacer parte de Our Mall, solo debes llenar los datos a
+				continuaci&oacute;n. &iquest;Ya tienes una cuenta? <a routerLink="../login" class="om-link">Acceder</a>
 			</p>
 			<ul class="stepper">
 				<li class="step">
-					<div class="step-indicator {{stepper == 1 ? 'step-active' : ''}}">
+					<div class="step-indicator {{ stepper == 1 ? 'step-active' : '' }}">
 						{{ 1 }}
 					</div>
-					<span class="label">
-						Informaci&oacute;n personal
-					</span>
+					<span class="label"> Informaci&oacute;n personal </span>
 				</li>
 				<li class="step">
-					<div class="step-indicator {{stepper == 2 ? 'step-active' : ''}}">
+					<div class="step-indicator {{ stepper == 2 ? 'step-active' : '' }}">
 						{{ 2 }}
 					</div>
-					<span class="label">
-						Elegir rol
-					</span>
+					<span class="label"> Elegir rol </span>
 				</li>
 				<li class="step">
-					<div class="step-indicator {{stepper == 3 ? 'step-active' : ''}}">
+					<div class="step-indicator {{ stepper == 3 ? 'step-active' : '' }}">
 						{{ 3 }}
 					</div>
-					<span class="label">
-						Informaci&oacute;n adicional
-					</span>
+					<span class="label"> Informaci&oacute;n adicional </span>
 				</li>
-				<!--<li class="step" *ngFor="let step of steps; let i = index" [ngIf]="stepper == i ? 'step-active' : ''">{{ i }}</li>-->
 			</ul>
 		</div>
 		<div class="body">
 			<ng-template [ngIf]="stepper == 1">
-				<app-user-register (nextStepEvent)="changeCurrentStep($event)" [currentStep]="this.stepper"></app-user-register>
+				<app-user-register
+					(nextStepEvent)="changeCurrentStep($event)"
+					[currentStep]="this.stepper"
+				>
+				</app-user-register>
 			</ng-template>
 			<ng-template [ngIf]="stepper == 2">
-				<app-user-role (nextTurnEvent)="changeCurrentStep($event)" [currentStep]="this.stepper"></app-user-role>
+				<app-user-role
+					(nextTurnEvent)="changeCurrentStep($event)"
+					[currentStep]="this.stepper"
+				></app-user-role>
 			</ng-template>
-			<ng-template [ngIf]="stepper == 3">
-				stepper {{ stepper }}
-			</ng-template>
+			<ng-template [ngIf]="stepper == 3"> stepper {{ stepper }} </ng-template>
 		</div>
-		<div class="footer">
-			footer
-		</div>
+		<div class="footer">footer</div>
 	</div>
+	<svg
+		id="visual-wave"
+		viewBox="0 0 900 450"
+		xmlns="http://www.w3.org/2000/svg"
+		xmlns:xlink="http://www.w3.org/1999/xlink"
+		version="1.1"
+	>
+		<path
+			d="M0 420L8.8 420.8C17.7 421.7 35.3 423.3 53 418.8C70.7 414.3 88.3 403.7 106 403.3C123.7 403 141.3 413 159 408.7C176.7 404.3 194.3 385.7 212 376.7C229.7 367.7 247.3 368.3 265 377.5C282.7 386.7 300.3 404.3 318 398.3C335.7 392.3 353.3 362.7 371 349.7C388.7 336.7 406.3 340.3 423.8 340.5C441.3 340.7 458.7 337.3 476.2 338.5C493.7 339.7 511.3 345.3 529 353.8C546.7 362.3 564.3 373.7 582 380.7C599.7 387.7 617.3 390.3 635 386C652.7 381.7 670.3 370.3 688 359.5C705.7 348.7 723.3 338.3 741 336.2C758.7 334 776.3 340 794 347.8C811.7 355.7 829.3 365.3 847 378.5C864.7 391.7 882.3 408.3 891.2 416.7L900 425L900 451L891.2 451C882.3 451 864.7 451 847 451C829.3 451 811.7 451 794 451C776.3 451 758.7 451 741 451C723.3 451 705.7 451 688 451C670.3 451 652.7 451 635 451C617.3 451 599.7 451 582 451C564.3 451 546.7 451 529 451C511.3 451 493.7 451 476.2 451C458.7 451 441.3 451 423.8 451C406.3 451 388.7 451 371 451C353.3 451 335.7 451 318 451C300.3 451 282.7 451 265 451C247.3 451 229.7 451 212 451C194.3 451 176.7 451 159 451C141.3 451 123.7 451 106 451C88.3 451 70.7 451 53 451C35.3 451 17.7 451 8.8 451L0 451Z"
+			fill="#0066FF"
+			stroke-linecap="round"
+			stroke-linejoin="miter"
+		></path>
+	</svg>
 </section>

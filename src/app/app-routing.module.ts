@@ -10,7 +10,7 @@ const routes: Routes = [
 	{
 		path: 'home',
 		data: {
-			title: 'Our Mall'
+			title: 'Our Mall',
 		},
 		loadChildren: () =>
 			import('./modules/public/home/home.module').then((m) => m.HomeModule),
@@ -18,7 +18,7 @@ const routes: Routes = [
 	{
 		path: 'signup',
 		data: {
-			title: 'Registrarse'
+			title: 'Registrarse',
 		},
 		loadChildren: () =>
 			import('./modules/public/signup/signup.module').then((m) => m.SignupModule),
@@ -26,7 +26,7 @@ const routes: Routes = [
 	{
 		path: 'support',
 		data: {
-			title: 'Support'
+			title: 'Support',
 		},
 		loadChildren: () =>
 			import('./modules/public/support/support.module').then(
@@ -36,7 +36,7 @@ const routes: Routes = [
 	{
 		path: '404',
 		data: {
-			title: 'No encontrado'
+			title: 'No encontrado',
 		},
 		loadChildren: () =>
 			import('./modules/public/page-not-found/page-not-found.module').then(

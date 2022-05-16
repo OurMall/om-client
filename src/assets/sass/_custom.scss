@@ -6,7 +6,7 @@
 .om-section {
 	display: block;
 	position: static;
-	height: calc(100vh - (variables.$navbar-height*2 - 5px));
+	height: calc(100vh - (variables.$navbar-height * 2 - 5px));
 	min-height: 100%;
 	width: 100%;
 	box-sizing: border-box;
@@ -18,12 +18,13 @@
 /* ================ BUTTONS =================== */
 
 %_button {
+	font-family: "Poppins", sans-serif;
 	display: inline-block;
 	border: none;
 	outline: none;
 	border-radius: 0;
 	cursor: pointer;
-	transition: all .5s cubic-bezier(0.86, 0.01, 0.15, 0.99);
+	transition: all 0.5s cubic-bezier(0.86, 0.01, 0.15, 0.99);
 }
 
 %_flex-button {
@@ -42,7 +43,7 @@
 	outline: rgba($color: variables.$nord-light-color, $alpha: 1) solid 2px;
 
 	&:hover {
-		background-color: rgba($color: variables.$nord-light-color, $alpha: 1.0);
+		background-color: rgba($color: variables.$nord-light-color, $alpha: 1);
 		color: variables.$main-color;
 	}
 }
@@ -51,7 +52,7 @@
 	@extend %_flex-button;
 	height: 40px;
 	width: 40px;
-	margin: 0 .25rem;
+	margin: 0 0.25rem;
 	border-radius: 50%;
 	background-color: transparent;
 	color: var(--nord-light-color);
@@ -67,18 +68,18 @@
 
 .om-button {
 	@extend %_flex-button;
-	text-transform: uppercase;
-	font-weight: 700;
-	padding: .85rem 1.25rem;
+	font-weight: 600;
+	padding: 0.75rem 0.85rem;
 	justify-content: center;
 	align-items: center;
-	background-color: rgba($color: variables.$main-color, $alpha: 1.0);
-	color: rgba($color: variables.$nord-light-color, $alpha: 1.0);
-	border: 1px solid rgba($color: variables.$light-color, $alpha: 1.0);
+	background-color: rgba($color: variables.$main-color, $alpha: 1);
+	color: rgba($color: variables.$nord-light-color, $alpha: 1);
+	border-radius: 5px;
 
+	&-active,
 	&:hover {
-		background-color: rgba($color: variables.$main-alt-color, $alpha: 1.0);
-		border-radius: 15px;
+		color: rgba($color: variables.$main-color, $alpha: 1);
+		background-color: variables.$nord-light-alt-color;
 	}
 }
 
@@ -88,9 +89,28 @@
 	cursor: not-allowed;
 
 	&:hover {
+		background-color: variables.$main-alt-color;
+		color: currentColor;
 		border-radius: 0;
 		outline: none;
 	}
+}
+
+.om-link {
+	font-family: "Poppins", sans-serif;
+	text-decoration: underline;
+	padding: 0.25rem 0.85rem 0.25rem 0;
+	color: variables.$nord-light-color;
+	letter-spacing: 1px;
+
+	&-active,
+	&:hover {
+		color: variables.$main-color;
+	}
+}
+
+.om-transition {
+	transition: all 0.5s cubic-bezier(0.86, 0.01, 0.15, 0.99);
 }
 
 /* ================ END BUTTONs =============== */
@@ -101,19 +121,19 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	padding: 1rem .5rem;
+	padding: 1.5rem 0.5rem 0.5rem 0.5rem;
 }
 
 .om-field-label {
 	font-weight: 600;
-	font-size: .85rem;
-	padding: 0 0 0 .5rem;
-	margin-bottom: .25rem;
+	font-size: 0.85rem;
+	padding: 0 0 0 0.5rem;
+	margin-bottom: 0.25rem;
 	color: rgba($color: variables.$light-color, $alpha: 0.85);
 
 	&::after {
 		content: " *";
-		color: rgba($color: #e40707, $alpha: 1.0);
+		color: rgba($color: variables.$main-color, $alpha: 1);
 	}
 }
 
@@ -122,10 +142,27 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	padding: .5rem 0 0 0;
+	padding: 0.5rem 0 0 0;
 
 	.om-error-text {
-		color: rgba($color: variables.$light-color, $alpha: 0.65);
+		color: rgba($color: variables.$light-color, $alpha: 0.75);
+	}
+}
+
+.om-field-help {
+	width: 70%;
+	margin: 0.5rem auto 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.25rem 1.5rem;
+	border: 1px solid rgba($color: variables.$main-color, $alpha: 1);
+	background-color: rgba($color: variables.$main-color, $alpha: 0.1);
+	color: rgba($color: variables.$main-color, $alpha: 1);
+	border-radius: 5px;
+
+	.text {
+		margin-left: 0.5rem;
 	}
 }
 
@@ -144,7 +181,7 @@
 
 %_input {
 	font-family: inherit;
-	padding: .65rem 1rem;
+	padding: 0.65rem 1rem;
 	border-radius: 5px;
 	border: 1px solid rgba($color: variables.$main-color, $alpha: 0.5);
 
@@ -156,8 +193,28 @@
 .om-input {
 	@extend %_input;
 	background-color: rgba($color: variables.$nord-dark-alt-color, $alpha: 0.5);
-	color: rgba($color: variables.$nord-light-color, $alpha: 1.0);
+	color: rgba($color: variables.$nord-light-color, $alpha: 1);
 	width: 100%;
 }
 
 /* =============== ENDFORMS =================== */
+
+%_toast {
+	box-shadow: 7px 10px 14px -1px rgba(0,0,0,0.54);
+}
+
+.om-toast-info,
+.om-toast-success {
+	@extend %_toast;
+	background-color: variables.$main-color;
+}
+
+.om-toast-error {
+	@extend %_toast;
+	background-color: rgba($color: rgb(214, 30, 30), $alpha: 1.0);
+}
+
+.om-toast-warning {
+	@extend %_toast;
+	background-color: rgba($color: #d3b460, $alpha: 1.0);
+}

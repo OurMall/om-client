@@ -9,7 +9,6 @@ import { Groups } from '@app/common/interfaces';
 	styleUrls: ['./user-role.component.scss'],
 })
 export class UserRoleComponent implements OnInit {
-
 	roleForm!: FormGroup;
 	roles!: Groups[];
 	@Input() currentStep!: number;

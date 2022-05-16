@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ToastrModule } from 'ngx-toastr';
 
 import { environment } from '@environment/environment';
+import { SharedModule } from '@shared/shared.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
-import { SharedModule } from '@shared/shared.module';
-import { ToastrModule } from 'ngx-toastr';
+import { EndpointInterceptor } from '@app/common/interceptors';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -36,7 +37,11 @@ import { ToastrModule } from 'ngx-toastr';
 			registrationStrategy: 'registerWhenStable:30000',
 		}),
 	],
-	providers: [],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS, useClass: EndpointInterceptor, multi: true
+		}
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

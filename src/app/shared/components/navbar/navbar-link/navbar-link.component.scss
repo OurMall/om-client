@@ -7,9 +7,8 @@
 	padding: 0 1.5rem;
 	text-decoration: none;
 	color: var(--nord-light-color);
-	//background-color: var(--main-color);
 	border-radius: 2.5px;
-	margin: 0 .15rem;
+	margin: 0 0.15rem;
 
 	.icon {
 		font-size: 2rem;
@@ -17,6 +16,6 @@
 
 	&:hover {
 		color: var(--main-color);
-		background-color: var(--nord-dark-color);
+		background-color: var(--nord-dark-alt-color);
 	}
 }

@@ -6,9 +6,7 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-
 	stepper!: number;
-	steps: number[] = [1, 2, 3];
 
 	constructor() {}
 
@@ -17,7 +15,7 @@ export class SignupComponent implements OnInit {
 	}
 
 	changeCurrentStep(nextStep: number): void {
-		if(this.stepper >= 3) this.stepper = 1;
+		if (this.stepper >= 3) this.stepper = 1;
 		this.stepper = nextStep;
 	}
 }

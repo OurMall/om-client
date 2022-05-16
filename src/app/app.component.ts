@@ -1,6 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
-import { RouteService } from '@app/common/services';
+import { RouteService, AuthorizationService } from '@app/common/services';
 
 @Component({
 	selector: 'app-root',
@@ -10,10 +11,12 @@ import { RouteService } from '@app/common/services';
 export class AppComponent implements OnInit {
 
 	constructor(
-		private routeService: RouteService
+		private routeService: RouteService,
+		private authorizationService: AuthorizationService
 	) {}
 
 	ngOnInit(): void {
 		this.routeService.setRouteTitle();
+		this.authorizationService.authorizeKnownClient().subscribe();
 	}
 }

@@ -7,25 +7,26 @@ import { filter, map, switchMap } from 'rxjs';
 	providedIn: 'root',
 })
 export class RouteService {
-
 	constructor(
 		private readonly activatedRoute: ActivatedRoute,
 		private readonly router: Router,
-		private readonly title: Title,
+		private readonly title: Title
 	) {}
 
 	setRouteTitle(): void {
-		this.router.events.pipe(
-			filter((event) => event instanceof NavigationEnd),
-			map(() => this.activatedRoute),
-			map((route: ActivatedRoute) => {
-				while(route.firstChild) {
-					route = route.firstChild;
-				}
-				return route;
-			}),
-			switchMap((route) => route.data),
-			map((data) => data['title'])
-		).subscribe((title) => this.title.setTitle(title))
+		this.router.events
+			.pipe(
+				filter((event) => event instanceof NavigationEnd),
+				map(() => this.activatedRoute),
+				map((route: ActivatedRoute) => {
+					while (route.firstChild) {
+						route = route.firstChild;
+					}
+					return route;
+				}),
+				switchMap((route) => route.data),
+				map((data) => data['title'])
+			)
+			.subscribe((title) => this.title.setTitle(title));
 	}
 }

@@ -9,16 +9,7 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserRoleComponent } from './user-role/user-role.component';
 
 @NgModule({
-  declarations: [
-    SignupComponent,
-    UserRegisterComponent,
-    UserRoleComponent
-  ],
-  imports: [
-    CommonModule,
-    SignupRoutingModule,
-	ReactiveFormsModule,
-	SharedModule,
-  ]
+	declarations: [SignupComponent, UserRegisterComponent, UserRoleComponent],
+	imports: [CommonModule, SignupRoutingModule, ReactiveFormsModule, SharedModule],
 })
-export class SignupModule { }
+export class SignupModule {}

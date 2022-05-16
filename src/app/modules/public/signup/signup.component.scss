@@ -3,34 +3,43 @@
 .signup {
 	height: 100%;
 
+	#visual-wave {
+		position: fixed;
+		width: 100vw;
+		bottom: 0;
+		opacity: 0.5;
+		z-index: -1;
+
+		path {
+			fill: variables.$nord-dark-alt-color;
+		}
+	}
+
 	.container {
 		height: 100%;
 		max-width: 768px;
 		display: flex;
 		flex-direction: column;
-		margin: 0 auto;
-		padding: 1.5rem .85rem;
+		margin: 1.5rem auto 0 auto;
+		padding: 1.5rem 0.85rem;
 
 		.heading {
 			display: flex;
 			flex-direction: column;
-			//justify-content: flex-start;
-			align-items: center;
 			border-bottom: 1px solid rgba($color: variables.$light-color, $alpha: 0.1);
+			margin-bottom: 1rem;
 
 			.title {
 				margin-right: auto;
 				font-family: "poppins", sans-serif;
-				font-weight: 700;
+				font-weight: 600;
 				font-size: 2rem;
-				line-height: 30px;
-				letter-spacing: 2px;
+				letter-spacing: 1px;
 			}
 
 			.description {
-				font-size: 18px;
-				letter-spacing: 1px;
-				padding: .85rem 0 2.5rem 0;
+				letter-spacing: 0px;
+				padding: 0.85rem 0 2.5rem 0;
 			}
 
 			.stepper {
@@ -62,7 +71,7 @@
 
 					.label {
 						font-size: 13px;
-						margin-top: .5rem;
+						margin-top: 0.5rem;
 					}
 
 					.step-active {

@@ -5,17 +5,11 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarLinkComponent } from './components/navbar/navbar-link/navbar-link.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
-	declarations: [NavbarComponent, NavbarLinkComponent],
-	imports: [
-		CommonModule,
-		RouterModule,
-		KeyFilterModule
-	],
-	exports: [
-		NavbarComponent,
-		KeyFilterModule
-	],
+	declarations: [NavbarComponent, NavbarLinkComponent, LoaderComponent],
+	imports: [CommonModule, RouterModule, KeyFilterModule],
+	exports: [NavbarComponent, KeyFilterModule, LoaderComponent],
 })
 export class SharedModule {}
