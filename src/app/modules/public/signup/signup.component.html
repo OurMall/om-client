@@ -38,12 +38,27 @@
 			<ng-template [ngIf]="stepper == 2">
 				<app-user-role
 					(nextTurnEvent)="changeCurrentStep($event)"
+					(selectedRole)="setUserRole($event)"
 					[currentStep]="this.stepper"
 				></app-user-role>
 			</ng-template>
-			<ng-template [ngIf]="stepper == 3"> stepper {{ stepper }} </ng-template>
+			<ng-template [ngIf]="stepper == 3">
+				<div [ngSwitch]="role">
+					<div *ngSwitchCase="'client'">
+						client
+					</div>
+					<div *ngSwitchCase="'seller'">
+						seller
+					</div>
+					<div *ngSwitchDefault>
+						default
+					</div>
+				</div>
+				stepper {{ stepper }}
+				role {{ role }}
+			</ng-template>
 		</div>
-		<div class="footer">footer</div>
+		<!--<div class="footer">footer</div>-->
 	</div>
 	<svg
 		id="visual-wave"

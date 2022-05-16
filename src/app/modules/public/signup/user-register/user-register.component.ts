@@ -17,9 +17,9 @@ export class UserRegisterComponent implements OnInit {
 	@Output() nextStepEvent = new EventEmitter<number>();
 
 	constructor(
-		private fb: FormBuilder,
 		private message: MessageService,
-		private authService: AuthenticationService
+		private authService: AuthenticationService,
+		private readonly fb: FormBuilder,
 	) {}
 
 	ngOnInit(): void {
@@ -51,7 +51,7 @@ export class UserRegisterComponent implements OnInit {
 			},
 			error: (err: HttpErrorResponse) => {
 				console.log(err);
-				this.message.error("El usuario ya está registrado", "Oh-no!");
+				this.message.error("El usuario ya está registrado o ocurrió un error", "Oh-no!");
 			}
 		})
 	}

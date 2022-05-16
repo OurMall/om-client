@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Groups } from '@app/common/interfaces';
+import { AuthenticationService, MessageService } from '@app/common/services';
 
 @Component({
 	selector: 'app-user-role',
@@ -13,8 +15,13 @@ export class UserRoleComponent implements OnInit {
 	roles!: Groups[];
 	@Input() currentStep!: number;
 	@Output() nextTurnEvent = new EventEmitter<number>();
+	@Output() selectedRole = new EventEmitter<string>();
 
-	constructor(private readonly fb: FormBuilder) {}
+	constructor(
+		private message: MessageService,
+		private authService: AuthenticationService,
+		private readonly fb: FormBuilder
+	) {}
 
 	ngOnInit(): void {
 		this.roles = [
@@ -31,10 +38,22 @@ export class UserRoleComponent implements OnInit {
 	}
 
 	onContinue(): void {
-		console.log('continue...');
-		console.log(this.roleForm.value);
-		const nextStep = this.currentStep + 1;
-		this.nextTurnEvent.emit(nextStep);
+		if(!this.roleForm.value) {
+			this.message.error("Por favor elige un rol", "Falta algo..");
+			return;
+		}
+		const { role } = this.roleForm.value;
+		this.authService.addGroupToUser(role).subscribe({
+			next: (response) => {
+				this.message.success(`¿Un ${role}? Increíble!`, "Wow");
+				const nextStep = this.currentStep + 1;
+				this.nextTurnEvent.emit(nextStep);
+				this.selectedRole.emit(role);
+			},
+			error: (err: HttpErrorResponse) => {
+				this.message.error(err.message);
+			}
+		})
 	}
 
 	get role() {

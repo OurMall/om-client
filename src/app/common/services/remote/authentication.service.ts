@@ -53,6 +53,23 @@ export class AuthenticationService {
 		);
 	}
 
+	addGroupToUser(code_name: string): Observable<any> {
+		return this.http.post<any>("user/group", code_name, {
+			headers: new HttpHeaders({
+				Authorization: `Bearer ${this.localStorageService.get("access_token")}`
+			})
+		}).pipe(
+			filter((response) => response && !!response),
+			tap((response) => {
+				console.log(response);
+			}),
+			catchError((err: HttpErrorResponse) => {
+				console.log(err);
+				return throwError(() => err);
+			})
+		);
+	}
+
 	logOut(): void {
 		this.localStorageService.remove("access_token");
 		this.localStorageService.remove("refresh_token");
