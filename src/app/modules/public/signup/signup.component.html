@@ -31,7 +31,7 @@
 			<ng-template [ngIf]="stepper == 1">
 				<app-user-register
 					(nextStepEvent)="changeCurrentStep($event)"
-					[currentStep]="this.stepper"
+					[currentStep]="stepper"
 				>
 				</app-user-register>
 			</ng-template>
@@ -39,7 +39,7 @@
 				<app-user-role
 					(nextTurnEvent)="changeCurrentStep($event)"
 					(selectedRole)="setUserRole($event)"
-					[currentStep]="this.stepper"
+					[currentStep]="stepper"
 				></app-user-role>
 			</ng-template>
 			<ng-template [ngIf]="stepper == 3">
@@ -48,14 +48,12 @@
 						client
 					</div>
 					<div *ngSwitchCase="'seller'">
-						seller
+						<app-user-workspace></app-user-workspace>
 					</div>
 					<div *ngSwitchDefault>
 						default
 					</div>
 				</div>
-				stepper {{ stepper }}
-				role {{ role }}
 			</ng-template>
 		</div>
 		<!--<div class="footer">footer</div>-->

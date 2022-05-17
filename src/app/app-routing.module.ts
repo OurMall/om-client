@@ -24,6 +24,13 @@ const routes: Routes = [
 			import('./modules/public/signup/signup.module').then((m) => m.SignupModule),
 	},
 	{
+		path: 'verifyAccount',
+		loadChildren: () =>
+			import('./modules/tmp/verify-account/verify-account.module').then(
+				(m) => m.VerifyAccountModule
+			),
+	},
+	{
 		path: 'support',
 		data: {
 			title: 'Support',

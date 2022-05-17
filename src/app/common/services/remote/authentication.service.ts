@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, tap, filter, take, catchError, throwError, BehaviorSubject } from 'rxjs';
 
 import { SessionStorageService, LocalStorageService } from '@app/common/services';
@@ -68,6 +68,14 @@ export class AuthenticationService {
 				return throwError(() => err);
 			})
 		);
+	}
+
+	verifyAccount(token: string): Observable<any> {
+		return this.http.post("user/verifyAccount", token, {
+			headers: new HttpHeaders({
+				Authorization: `Bearer ${this.localStorageService.get("access_token")}`
+			})
+		});
 	}
 
 	logOut(): void {
