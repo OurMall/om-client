@@ -28,6 +28,7 @@
 			</ul>
 		</div>
 		<div class="body">
+			<button (click)="incrementStep()">Step</button>
 			<ng-template [ngIf]="stepper == 1">
 				<app-user-register
 					(nextStepEvent)="changeCurrentStep($event)"
