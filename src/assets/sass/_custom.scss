@@ -13,6 +13,14 @@
 	animation: 1s fadeIn 0s ease-in;
 }
 
+.om-container {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
 /* ================ END SECTIONS ================= */
 
 /* ================ BUTTONS =================== */

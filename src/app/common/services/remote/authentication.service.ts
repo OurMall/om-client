@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, tap, filter, take, catchError, throwError, BehaviorSubject } from 'rxjs';
 
 import { SessionStorageService, LocalStorageService } from '@app/common/services';
@@ -20,9 +20,9 @@ export class AuthenticationService {
 
 	signUp(user: UserSignup): Observable<AccessToken> {
 		return this.http.post<AccessToken>("oauth2/signup", user, {
-			headers: new HttpHeaders({
+			/*headers: new HttpHeaders({
 				knownAuthorization: `Bearer ${this.sessionStorageService.get("known_token")}`
-			})
+			})*/
 		}).pipe(
 			take(1),
 			filter(response => response && !!response),
@@ -38,9 +38,9 @@ export class AuthenticationService {
 
 	logIn(user: any): Observable<AccessToken> {
 		return this.http.post<AccessToken>("oauth2/login", user, {
-			headers: new HttpHeaders({
+			/*headers: new HttpHeaders({
 				knownAuthorization: `Bearer ${this.sessionStorageService.get("known_token")}`
-			})
+			})*/
 		}).pipe(
 			take(1),
 			filter(response => response && !!response),
@@ -55,9 +55,9 @@ export class AuthenticationService {
 
 	addGroupToUser(code_name: string): Observable<any> {
 		return this.http.post<any>("user/group", code_name, {
-			headers: new HttpHeaders({
+			/*headers: new HttpHeaders({
 				Authorization: `Bearer ${this.localStorageService.get("access_token")}`
-			})
+			})*/
 		}).pipe(
 			filter((response) => response && !!response),
 			tap((response) => {
@@ -71,10 +71,10 @@ export class AuthenticationService {
 	}
 
 	verifyAccount(token: string): Observable<any> {
-		return this.http.post("user/verifyAccount", token, {
-			headers: new HttpHeaders({
+		return this.http.post("user/account/verify", token, {
+			/*headers: new HttpHeaders({
 				Authorization: `Bearer ${this.localStorageService.get("access_token")}`
-			})
+			})*/
 		});
 	}
 

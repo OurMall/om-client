@@ -9,7 +9,7 @@ import {
 import { finalize, Observable } from 'rxjs';
 
 import { environment } from '@environment/environment';
-import { LoaderService, LocalStorageService } from '@app/common/services';
+import { LoaderService, LocalStorageService, SessionStorageService } from '@app/common/services';
 
 @Injectable()
 export class EndpointInterceptor implements HttpInterceptor {
@@ -18,7 +18,8 @@ export class EndpointInterceptor implements HttpInterceptor {
 
 	constructor(
 		private loaderService: LoaderService,
-		private localStorageService: LocalStorageService
+		private localStorageService: LocalStorageService,
+		private sessionStorage: SessionStorageService
 	) {}
 
 	intercept(
@@ -30,9 +31,10 @@ export class EndpointInterceptor implements HttpInterceptor {
 			url: `${this.endpoint}/${req.url}`,
 			withCredentials: true,
 			//TODO: remove interceptors headers if I got an error.
-			/*headers: new HttpHeaders({
-				Authorization: `Bearer ${this.localStorageService.get("access_token")}`
-			})*/
+			headers: new HttpHeaders({
+				Authorization: `Bearer ${this.localStorageService.get("access_token")}`,
+				knownAuthorization: `Bearer ${this.sessionStorage.get("known_token")}`
+			})
 		});
 		return next.handle(request).pipe(
 			finalize(() => this.loaderService.hideLoader())
