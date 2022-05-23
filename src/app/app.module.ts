@@ -10,6 +10,7 @@ import { SharedModule } from '@shared/shared.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { EndpointInterceptor } from '@app/common/interceptors';
+import { LoggedInGuard } from '@app/common/guards';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -38,6 +39,7 @@ import { EndpointInterceptor } from '@app/common/interceptors';
 		}),
 	],
 	providers: [
+		LoggedInGuard,
 		{
 			provide: HTTP_INTERCEPTORS, useClass: EndpointInterceptor, multi: true
 		}

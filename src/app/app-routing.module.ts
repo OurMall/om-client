@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { LoggedInGuard } from '@app/common/guards';
+
 const routes: Routes = [
 	{
 		path: '',
@@ -36,6 +38,7 @@ const routes: Routes = [
 			import('./modules/tmp/verify-account/verify-account.module').then(
 				(m) => m.VerifyAccountModule
 			),
+		canActivate: [LoggedInGuard]
 	},
 	{
 		path: 'support',
@@ -46,6 +49,7 @@ const routes: Routes = [
 			import('./modules/public/support/support.module').then(
 				(m) => m.SupportModule
 			),
+		canActivate: [LoggedInGuard]
 	},
 	{
 		path: '404',

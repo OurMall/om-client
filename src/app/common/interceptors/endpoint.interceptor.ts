@@ -30,7 +30,6 @@ export class EndpointInterceptor implements HttpInterceptor {
 		const request: HttpRequest<any> = req.clone({
 			url: `${this.endpoint}/${req.url}`,
 			withCredentials: true,
-			//TODO: remove interceptors headers if I got an error.
 			headers: new HttpHeaders({
 				Authorization: `Bearer ${this.localStorageService.get("access_token")}`,
 				knownAuthorization: `Bearer ${this.sessionStorage.get("known_token")}`

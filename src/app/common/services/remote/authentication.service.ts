@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, tap, filter, take, catchError, throwError, BehaviorSubject } from 'rxjs';
 
 import { SessionStorageService, LocalStorageService } from '@app/common/services';
-import { AccessToken, UserSignup } from '@app/common/interfaces';
+import { AccessToken, UserLogin, UserSignup } from '@app/common/interfaces';
 
 @Injectable({
 	providedIn: 'root',
@@ -32,12 +32,14 @@ export class AuthenticationService {
 		);
 	}
 
-	logIn(user: any): Observable<AccessToken> {
+	logIn(user: UserLogin): Observable<AccessToken> {
 		return this.http.post<AccessToken>("oauth2/login", user).pipe(
 			take(1),
 			filter(response => response && !!response),
 			tap((response) => {
 				console.log(response);
+				this.localStorageService.set("access_token", response.access_token);
+				this.localStorageService.set("refresh_token", response.refresh_token);
 			}),
 			catchError((err: HttpErrorResponse) => {
 				return throwError(() => err);
@@ -59,11 +61,7 @@ export class AuthenticationService {
 	}
 
 	verifyAccount(token: string): Observable<any> {
-		return this.http.post("user/account/verify", token, {
-			/*headers: new HttpHeaders({
-				Authorization: `Bearer ${this.localStorageService.get("access_token")}`
-			})*/
-		});
+		return this.http.post("user/account/verify", token);
 	}
 
 	logOut(): void {
