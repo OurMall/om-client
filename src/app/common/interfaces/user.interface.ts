@@ -1,4 +1,4 @@
-export interface User {
+export interface UserLogin {
 	email: string;
 	password?: string;
 }
@@ -13,7 +13,7 @@ export interface Groups {
 	value: string;
 }
 
-export interface UserSignup extends User {
+export interface UserSignup extends UserLogin {
 	given_name: string;
 	family_name: string;
 	middle_name?: string;
@@ -21,4 +21,8 @@ export interface UserSignup extends User {
 	birthdate: string | Date;
 	gender: Gender;
 	accept_terms: boolean;
+}
+
+export interface User extends UserSignup {
+
 }

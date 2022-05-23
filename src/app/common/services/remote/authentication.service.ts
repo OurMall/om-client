@@ -19,11 +19,7 @@ export class AuthenticationService {
 	) {}
 
 	signUp(user: UserSignup): Observable<AccessToken> {
-		return this.http.post<AccessToken>("oauth2/signup", user, {
-			/*headers: new HttpHeaders({
-				knownAuthorization: `Bearer ${this.sessionStorageService.get("known_token")}`
-			})*/
-		}).pipe(
+		return this.http.post<AccessToken>("oauth2/signup", user).pipe(
 			take(1),
 			filter(response => response && !!response),
 			tap((response) => {
@@ -37,11 +33,7 @@ export class AuthenticationService {
 	}
 
 	logIn(user: any): Observable<AccessToken> {
-		return this.http.post<AccessToken>("oauth2/login", user, {
-			/*headers: new HttpHeaders({
-				knownAuthorization: `Bearer ${this.sessionStorageService.get("known_token")}`
-			})*/
-		}).pipe(
+		return this.http.post<AccessToken>("oauth2/login", user).pipe(
 			take(1),
 			filter(response => response && !!response),
 			tap((response) => {
@@ -54,11 +46,7 @@ export class AuthenticationService {
 	}
 
 	addGroupToUser(code_name: string): Observable<any> {
-		return this.http.post<any>("user/group", code_name, {
-			/*headers: new HttpHeaders({
-				Authorization: `Bearer ${this.localStorageService.get("access_token")}`
-			})*/
-		}).pipe(
+		return this.http.post<any>("user/group", code_name).pipe(
 			filter((response) => response && !!response),
 			tap((response) => {
 				console.log(response);

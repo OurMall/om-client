@@ -14,10 +14,8 @@
 }
 
 .om-container {
-	height: 100%;
-	width: 100%;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	flex-wrap: wrap;
 }
 
@@ -106,7 +104,6 @@
 
 .om-link {
 	font-family: "Poppins", sans-serif;
-	text-decoration: underline;
 	padding: 0.25rem 0.85rem 0.25rem 0;
 	color: variables.$nord-light-color;
 	letter-spacing: 1px;
@@ -142,6 +139,15 @@
 	&::after {
 		content: " *";
 		color: rgba($color: variables.$main-color, $alpha: 1);
+	}
+}
+
+.om-optional-label {
+	@extend .om-field-label;
+
+	&::after {
+		content: " (Optional)";
+		color: rgba($color: variables.$main-color, $alpha: 1.0);
 	}
 }
 

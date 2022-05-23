@@ -8,9 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 	links!: any;
 
-	constructor() {}
-
-	ngOnInit(): void {
+	constructor() {
 		this.links = [
 			{
 				route: 'home',
@@ -34,4 +32,6 @@ export class NavbarComponent implements OnInit {
 			},
 		];
 	}
+
+	ngOnInit(): void {}
 }
