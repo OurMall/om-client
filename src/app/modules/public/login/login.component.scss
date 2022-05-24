@@ -1,0 +1,93 @@
+@use "~src/assets/sass/variables";
+
+.login__section {
+
+	.om-container {
+		height: 100%;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 0 2.5rem;
+
+		.login__card {
+			height: 80%;
+			width: 80%;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			background-color: variables.$nord-dark-alt-color;
+			border: 2px solid rgba($color: variables.$nord-light-color, $alpha: 0.2);
+			border-radius: 10px;
+
+			&__content {
+				height: 100%;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				//justify-content: space-evenly;
+				overflow: hidden;
+
+				.header {
+					height: 10%;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					padding: 1.5rem 0 0 0;
+					margin-top: 2rem;
+
+					h2 {
+						font-family: "Sora", sans-serif;
+					}
+				}
+
+				.body {
+					height: 70%;
+					margin: 0 0;
+
+					.login__form {
+						height: 100%;
+						width: 70%;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						margin: 0 auto;
+
+						.om-field {
+							.om-input {
+								padding: 1.15rem .85rem;
+							}
+						}
+
+						.forgot__password {
+							flex-direction: row;
+							justify-content: flex-end;
+							padding: .55rem 0;
+						}
+					}
+				}
+
+				.footer {
+					height: 10%;
+				}
+			}
+
+			&__image {
+				background-color: variables.$nord-light-alt-color;
+				border: 1px solid variables.$main-color;
+				border-radius: 0 10px 10px 0;
+				height: 100%;
+				width: 90%;
+				padding: .5rem 1.5rem;
+				box-sizing: border-box;
+				overflow: hidden;
+
+				.image {
+					height: 100%;
+					width: 100%;
+				}
+			}
+		}
+	}
+}

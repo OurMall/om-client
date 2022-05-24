@@ -1,1 +1,54 @@
-<p>login works!</p>
+<section class="login__section om-section">
+	<div class="om-container">
+		<div class="login__card om-shadow">
+			<div class="login__card__content">
+				<div class="header">
+					<h2>Iniciar sesi&oacute;n</h2>
+				</div>
+				<div class="body">
+					<form [formGroup]="loginForm" class="login__form">
+						<div class="om-field">
+							<label for="email" class="om-field-label">Correo electr&oacute;nico</label>
+							<input [pKeyFilter]="'email'" formControlName="email" type="email" class="om-input"
+								id="email" placeholder="example@mail.com" autocomplete="email" autofocus>
+							<div class="om-field-error" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+								<small class="om-error-text" *ngIf="email?.errors?.['email']">El email es
+									inv&aacute;lido</small>
+								<small class="om-error-text" *ngIf="email?.errors?.['required']">El campo es
+									requerido</small>
+							</div>
+						</div>
+						<div class="om-field">
+							<label for="password" class="om-field-label">Contrase&ntilde;a</label>
+							<input formControlName="password" type="password" class="om-input" id="password"
+								placeholder="*******" autocomplete="current-password">
+							<div class="om-field-error"
+								*ngIf="password?.invalid && (password?.dirty || password?.touched)">
+								<small class="om-error-text" *ngIf="password?.errors?.['required']">El campo es
+									requerido</small>
+							</div>
+						</div>
+						<div class="om-field forgot__password">
+							<a routerLink="forgotPassword" class="om-link">
+								<span>&iquest;Olvidaste tu contrase&ntilde;a?</span>
+							</a>
+						</div>
+						<div class="om-field">
+							<button class="om-button {{ !loginForm.valid ? 'om-button-disabled' : '' }}" type="submit"
+								[disabled]="!loginForm.valid">
+								Acceder
+							</button>
+						</div>
+					</form>
+				</div>
+				<div class="footer">
+					footer
+				</div>
+			</div>
+			<div class="login__card__image">
+				<img src="assets/images/auth-background.svg" alt="Our Mall image for detail log in" class="image"
+					loading="lazy">
+			</div>
+		</div>
+	</div>
+</section>
