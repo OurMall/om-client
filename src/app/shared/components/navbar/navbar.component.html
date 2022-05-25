@@ -60,16 +60,21 @@
 			/>
 		</div>
 		<div class="header__options">
-			<a
-				routerLink="login"
-				routerLinkActive="om-link-active"
-				class="om-link om-transition"
-			>
-				Log in
-			</a>
-			<a routerLink="signup" routerLinkActive="om-button-active" class="om-button">
-				Sign up
-			</a>
+			<div *ngIf="isLoggedIn$ | async; else notLogged">
+				logged
+			</div>
+			<ng-template #notLogged>
+				<a
+					routerLink="login"
+					routerLinkActive="om-link-active"
+					class="om-link om-transition"
+				>
+					Log in
+				</a>
+				<a routerLink="signup" routerLinkActive="om-button-active" class="om-button">
+					Sign up
+				</a>
+			</ng-template>
 		</div>
 	</div>
 </header>
@@ -92,7 +97,7 @@
 	<div class="toolbar">
 		<a class="profile">
 			<img class="picture" src="assets/images/profile.png" alt="Username profile" />
-			<span class="username">Brian</span>
+			<span class="username">{{ user$ | async }}</span>
 		</a>
 		<button class="om-icon-button">
 			<i class="icon uil uil-bell"></i>
