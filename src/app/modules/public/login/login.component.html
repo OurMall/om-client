@@ -6,16 +6,18 @@
 					<h2>Iniciar sesi&oacute;n</h2>
 				</div>
 				<div class="body">
-					<form [formGroup]="loginForm" class="login__form">
+					<form [formGroup]="loginForm" class="login__form" (ngSubmit)="onSubmit()">
 						<div class="om-field">
 							<label for="email" class="om-field-label">Correo electr&oacute;nico</label>
 							<input [pKeyFilter]="'email'" formControlName="email" type="email" class="om-input"
 								id="email" placeholder="example@mail.com" autocomplete="email" autofocus>
 							<div class="om-field-error" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-								<small class="om-error-text" *ngIf="email?.errors?.['email']">El email es
-									inv&aacute;lido</small>
-								<small class="om-error-text" *ngIf="email?.errors?.['required']">El campo es
-									requerido</small>
+								<small class="om-error-text" *ngIf="email?.errors?.['email']">
+									El email es inv&aacute;lido
+								</small>
+								<small class="om-error-text" *ngIf="email?.errors?.['required']">
+									El campo es requerido
+								</small>
 							</div>
 						</div>
 						<div class="om-field">
@@ -41,9 +43,9 @@
 						</div>
 					</form>
 				</div>
-				<div class="footer">
+				<!--<div class="footer">
 					footer
-				</div>
+				</div>-->
 			</div>
 			<div class="login__card__image">
 				<img src="assets/images/auth-background.svg" alt="Our Mall image for detail log in" class="image"

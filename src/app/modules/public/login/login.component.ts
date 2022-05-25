@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { AuthenticationService } from '@app/common/services';
+import { AuthenticationService, MessageService } from '@app/common/services';
 
 @Component({
 	selector: 'app-login',
@@ -13,14 +14,29 @@ export class LoginComponent implements OnInit {
 	loginForm!: FormGroup;
 
 	constructor(
-		private authenticationService: AuthenticationService,
-		private readonly fb: FormBuilder
+		private readonly fb: FormBuilder,
+		private readonly router: Router,
+		private message: MessageService,
+		private authenticationService: AuthenticationService
 	) {}
 
 	ngOnInit(): void {
 		this.loginForm = this.fb.group({
 			email: [null, [Validators.required, Validators.email]],
 			password: [null, [Validators.required]]
+		});
+	}
+
+	onSubmit(): void {
+		if(!this.loginForm.valid) return;
+		this.authenticationService.logIn(this.loginForm.value).subscribe({
+			next: (_) => {
+				this.message.success("Anciabamos tu regreso", "Bienvenido");
+				this.router.navigate([""]);
+			},
+			error: (err) => {
+				this.message.error("Parece que algo ha ido mal, verifica tus datos");
+			}
 		});
 	}
 

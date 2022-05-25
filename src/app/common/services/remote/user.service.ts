@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { User } from '@app/common/interfaces';
 
@@ -9,11 +9,13 @@ import { User } from '@app/common/interfaces';
 })
 export class UserService {
 
+	private userSubject$!: BehaviorSubject<User>;
+
 	constructor(
 		private readonly http: HttpClient
 	) {}
 
 	account(): Observable<User> {
-		return this.http.get<User>("user/account")
+		return this.http.get<User>("user/account").pipe();
 	}
 }

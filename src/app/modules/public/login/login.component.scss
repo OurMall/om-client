@@ -24,7 +24,6 @@
 				width: 100%;
 				display: flex;
 				flex-direction: column;
-				//justify-content: space-evenly;
 				overflow: hidden;
 
 				.header {
@@ -33,8 +32,7 @@
 					flex-direction: column;
 					align-items: center;
 					justify-content: center;
-					padding: 1.5rem 0 0 0;
-					margin-top: 2rem;
+					margin-top: 1.5rem;
 
 					h2 {
 						font-family: "Sora", sans-serif;
@@ -42,7 +40,7 @@
 				}
 
 				.body {
-					height: 70%;
+					height: 80%;
 					margin: 0 0;
 
 					.login__form {
@@ -55,15 +53,22 @@
 						margin: 0 auto;
 
 						.om-field {
-							.om-input {
-								padding: 1.15rem .85rem;
-							}
+							padding: .85rem .5rem;
+
+							/*.om-input {
+								//padding: .95rem .75rem;
+							}*/
 						}
 
 						.forgot__password {
 							flex-direction: row;
-							justify-content: flex-end;
-							padding: .55rem 0;
+							justify-content: center;
+							padding: .45rem 0;
+
+							.om-link {
+								padding: 0;
+								font-size: 14px;
+							}
 						}
 					}
 				}
@@ -89,5 +94,39 @@
 				}
 			}
 		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+
+	.login__section {
+
+		.om-container {
+
+			.login__card {
+				height: 90%;
+				width: 100%;
+				border: none;
+				background-color: transparent;
+
+				.login__card__content {
+
+					.body {
+
+						.login__form {
+							width: 100%;
+						}
+					}
+				}
+			}
+
+			.om-shadow {
+				box-shadow: none;
+			}
+		}
+	}
+
+	.login__card__image {
+		display: none;
 	}
 }
