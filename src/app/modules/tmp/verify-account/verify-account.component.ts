@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthenticationService, MessageService } from '@app/common/services';
+import { MessageService, UserService } from '@app/common/services';
 
 @Component({
 	selector: 'app-verify-account',
@@ -17,15 +17,15 @@ export class VerifyAccountComponent implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		private router: Router,
 		private message: MessageService,
-		private authService: AuthenticationService
+		private userService: UserService
 	) {}
 
 	ngOnInit(): void {
 		this.activatedRoute.queryParams.subscribe(params => {
 			const { token } = params;
-			this.authService.verifyAccount(token).subscribe({
-				next: (response) => {
-					console.log(response);
+			this.userService.verifyAccount(token).subscribe({
+				next: (_) => {
+					console.log(_);
 					this.message.success("Hemos verificado la cuenta", "Felicidades!");
 					this.router.navigate([""]);
 				},

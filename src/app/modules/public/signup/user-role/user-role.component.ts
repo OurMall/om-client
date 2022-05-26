@@ -3,7 +3,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Groups } from '@app/common/interfaces';
-import { AuthenticationService, MessageService } from '@app/common/services';
+import { AuthenticationService, MessageService, UserService } from '@app/common/services';
 
 @Component({
 	selector: 'app-user-role',
@@ -19,7 +19,7 @@ export class UserRoleComponent implements OnInit {
 
 	constructor(
 		private message: MessageService,
-		private authService: AuthenticationService,
+		private userService: UserService,
 		private readonly fb: FormBuilder
 	) {}
 
@@ -43,8 +43,8 @@ export class UserRoleComponent implements OnInit {
 			return;
 		}
 		const { role } = this.roleForm.value;
-		this.authService.addGroupToUser(role).subscribe({
-			next: (response) => {
+		this.userService.addGroupToUser(role).subscribe({
+			next: (_) => {
 				this.message.success(`¿Un ${role}? Increíble!`, "Wow");
 				const nextStep = this.currentStep + 1;
 				this.nextTurnEvent.emit(nextStep);

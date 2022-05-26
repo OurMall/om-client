@@ -62,6 +62,7 @@
 		<div class="header__options">
 			<div *ngIf="isLoggedIn$ | async; else notLogged">
 				logged
+				<button (click)="onLogout()">Logout</button>
 			</div>
 			<ng-template #notLogged>
 				<a
@@ -97,7 +98,7 @@
 	<div class="toolbar">
 		<a class="profile">
 			<img class="picture" src="assets/images/profile.png" alt="Username profile" />
-			<span class="username">{{ user$ | async }}</span>
+			<span class="username">{{ user$ | async | json }}</span>
 		</a>
 		<button class="om-icon-button">
 			<i class="icon uil uil-bell"></i>

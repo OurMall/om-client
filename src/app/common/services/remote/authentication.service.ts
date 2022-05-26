@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, tap, filter, take, catchError, throwError, BehaviorSubject } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
+import { tap, filter, take, catchError } from 'rxjs/operators';
 
 import { SessionStorageService, LocalStorageService } from '@app/common/services';
 import { AccessToken, UserLogin, UserSignup } from '@app/common/interfaces';
@@ -10,7 +11,7 @@ import { AccessToken, UserLogin, UserSignup } from '@app/common/interfaces';
 })
 export class AuthenticationService {
 
-	private accessToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+	private _accessToken$: Subject<boolean> = new Subject<boolean>();
 
 	constructor(
 		private sessionStorageService: SessionStorageService,
@@ -25,6 +26,7 @@ export class AuthenticationService {
 			tap((response) => {
 				this.localStorageService.set("access_token", response.access_token);
 				this.localStorageService.set("refresh_token", response.refresh_token);
+				this._accessToken$.next(true);
 			}),
 			catchError((err: HttpErrorResponse) => {
 				return throwError(() => err);
@@ -40,34 +42,18 @@ export class AuthenticationService {
 				console.log(response);
 				this.localStorageService.set("access_token", response.access_token);
 				this.localStorageService.set("refresh_token", response.refresh_token);
+				this._accessToken$.next(true);
 			}),
 			catchError((err: HttpErrorResponse) => {
 				return throwError(() => err);
 			})
 		);
-	}
-
-	addGroupToUser(code_name: string): Observable<any> {
-		return this.http.post<any>("user/group", code_name).pipe(
-			filter((response) => response && !!response),
-			tap((response) => {
-				console.log(response);
-			}),
-			catchError((err: HttpErrorResponse) => {
-				console.log(err);
-				return throwError(() => err);
-			})
-		);
-	}
-
-	verifyAccount(token: string): Observable<any> {
-		return this.http.post("user/account/verify", token);
 	}
 
 	logOut(): void {
 		this.localStorageService.remove("access_token");
 		this.localStorageService.remove("refresh_token");
-		this.accessToken$.next(false);
+		this._accessToken$.next(false);
 	}
 
 	refreshAccessToken(refreshToken: string): Observable<AccessToken> {
@@ -85,6 +71,15 @@ export class AuthenticationService {
 	}
 
 	hasAccessToken(): boolean {
-		return this.localStorageService.get("access_token") ? true : false;
+		if(!this.localStorageService.get("access_token")) {
+			this.accessToken$.next(false);
+			return false;
+		}
+		this.accessToken$.next(true);
+		return true;
+	}
+
+	get accessToken$() {
+		return this._accessToken$;
 	}
 }
