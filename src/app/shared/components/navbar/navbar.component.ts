@@ -12,7 +12,7 @@ import { AuthenticationService, UserService } from '@app/common/services';
 })
 export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
-	isLoggedIn$: Subject<boolean> = new Subject<boolean>();
+	isLoggedIn$: Observable<boolean> = this.authenticationService.accessToken$;
 	user$: Subject<User> = new Subject<User>();
 	suscription!: Subscription;
 	links!: any;
@@ -47,7 +47,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	ngOnInit(): void {
 		this.suscription = this.authenticationService.accessToken$.subscribe((isLogged) => {
-			this.isLoggedIn$.next(isLogged);
 			this.userService.account().subscribe((user) => {
 				this.user$.next(user);
 			});

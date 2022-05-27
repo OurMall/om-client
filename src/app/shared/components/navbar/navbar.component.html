@@ -83,7 +83,6 @@
 	<div class="menu">
 		<button class="om-icon-button">
 			<i class="icon uil uil-bars"></i>
-			Menu
 		</button>
 	</div>
 	<div class="navigation__links">
@@ -97,8 +96,8 @@
 	</div>
 	<div class="toolbar">
 		<a class="profile">
-			<img class="picture" src="assets/images/profile.png" alt="Username profile" />
-			<span class="username">{{ user$ | async | json }}</span>
+			<img class="picture" src="assets/images/profile.png" alt="{{(user$ | async)?.given_name}}" />
+			<!--<span class="username">{{ (user$ | async) ? (user$ | async)?.given_name : 'Profile'}}</span>-->
 		</a>
 		<button class="om-icon-button">
 			<i class="icon uil uil-bell"></i>

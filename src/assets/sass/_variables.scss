@@ -26,4 +26,5 @@ $nord-light-alt-color: #e5e9f0;
 
 /* SIZES */
 $navbar-height: 50px;
+$total-height: calc(97vh - (($navbar-height * 2) - 20px));
 /* ============================== */

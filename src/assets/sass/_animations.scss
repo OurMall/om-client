@@ -18,3 +18,21 @@
 		transform: translateX(100%) scaleX(0.5);
 	}
 }
+
+@keyframes floaty {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(15px);
+	}
+}
+
+@keyframes shadow {
+	0% {
+		transform: scale(1, 1);
+	}
+	100% {
+		transform: scale(.85, .85);
+	}
+}

@@ -1,6 +1,7 @@
 @use "~src/assets/sass/variables";
 
 .login__section {
+	height: variables.$total-height;
 
 	.om-container {
 		height: 100%;
