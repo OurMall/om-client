@@ -33,12 +33,12 @@ const routes: Routes = [
 		loadChildren: () => import('./modules/public/login/login.module').then(m => m.LoginModule)
 	},
 	{
-		path: 'verifyAccount',
-		loadChildren: () =>
-			import('./modules/tmp/verify-account/verify-account.module').then(
-				(m) => m.VerifyAccountModule
-			),
-		canActivate: [LoggedInGuard]
+		path: 'profile',
+		data: {
+			title: 'Perfil'
+		},
+		canActivate: [LoggedInGuard],
+		loadChildren: () => import('./modules/private/profile/profile.module').then(m => m.ProfileModule)
 	},
 	{
 		path: 'support',

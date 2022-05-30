@@ -34,6 +34,9 @@ export class UserRegisterComponent implements OnInit {
 			birthdate: [null, [Validators.required]],
 			gender: [null, [Validators.required]],
 			accept_terms: [null, [Validators.required]],
+			profile: this.fb.group({
+				picture: ["https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_960_720.png", []]
+			})
 		});
 	}
 

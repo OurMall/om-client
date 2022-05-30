@@ -24,5 +24,8 @@ export interface UserSignup extends UserLogin {
 }
 
 export interface User extends UserSignup {
-
+	name: string;
+	profile: any;
+	created_at: Date;
+	updated_at: Date;
 }

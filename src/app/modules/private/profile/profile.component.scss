@@ -1,0 +1,114 @@
+@use "~src/assets/sass/variables";
+
+.profile {
+	//height: calc(100vh - (variables.$navbar-height * 2));
+
+	&__container {
+		height: 100%;
+		width: 100%;
+		max-width: 1366px;
+		margin: 0 auto;
+		display: flex;
+
+		&__sidebar {
+			width: 30%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			//overflow: hidden;
+
+			.account {
+				display: flex;
+				flex-direction: column;
+				padding: 1rem 2.25rem;
+
+				&__information {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					align-content: center;
+
+					.picture {
+						width: 100%;
+						height: auto;
+						max-width: 300px;
+						max-height: 300px;
+
+						img {
+							height: 100%;
+							width: 100%;
+							object-fit: cover;
+							border: 3px solid
+								rgba($color: variables.$nord-dark-alt-color, $alpha: 1);
+							border-radius: 50%;
+						}
+					}
+
+					.profile {
+						display: flex;
+						flex-direction: column;
+						font-family: "Ubuntu", sans-serif;
+
+						.profile__data {
+							display: flex;
+							flex-direction: column;
+							padding: 1rem 0;
+
+							.userinfo {
+								display: flex;
+								flex-direction: column;
+								justify-content: center;
+								align-items: center;
+
+								.name {
+									line-height: 1.25;
+								}
+
+								.username {
+									font-size: 1.25rem;
+									color: var(--nord-light-color);
+								}
+							}
+
+							.biography {
+								max-height: 70px;
+								font-size: 14px;
+								margin: 0.75rem 0;
+								overflow: auto;
+							}
+						}
+
+						.details {
+							display: flex;
+							flex-direction: column;
+							align-items: flex-start;
+							justify-content: center;
+							font-size: 15px;
+
+							.detail {
+								display: flex;
+								align-items: center;
+								max-width: 300px;
+
+								.icon {
+									padding: .15rem .5rem;
+								}
+
+								.link {
+									color: variables.$light-color;
+
+									&:hover {
+										color: variables.$main-color;
+										text-decoration: underline;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,33 @@
+<div class="account" (scroll)="onScroll($event)">
+	<div class="account__container">
+		<div class="account__container__content">
+			<div class="heading">
+				<div class="image">
+					<img class="picture" [src]="(isLoggedIn$|async) ? (user$|async)?.profile.picture : 'assets/images/profile.png'" [alt]="(user$|async)?.name">
+				</div>
+				<div class="profile">
+					<h3 class="name">{{ (isLoggedIn$|async) ? (user$|async)?.name : 'Account Name' }}</h3>
+					<a [routerLink]="(isLoggedIn$|async) ? 'profile' : 'login'" role="link">{{ (isLoggedIn$|async) ? 'Ver perfil' : 'Iniciar session' }}</a>
+				</div>
+			</div>
+			<div class="body">
+				<ng-container *ngIf="isLoggedIn$ | async; else notLogged">
+					<a class="item-link" (click)="logout()">
+						<div class="icon">
+							<i class="uil uil-box"></i>
+						</div>
+						<span class="text">Cerrar sesi&oacute;n</span>
+					</a>
+				</ng-container>
+				<ng-template #notLogged>
+					<a [routerLink]="'help'" class="item-link">
+						<div class="icon">
+							<i class="uil uil-box"></i>
+						</div>
+						<span class="text">Ayuda</span>
+					</a>
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</div>

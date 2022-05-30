@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 				this.router.navigate([""]);
 			},
 			error: (err) => {
-				this.message.error("Parece que algo ha ido mal, verifica tus datos");
+				this.message.error("Los datos que ingresaste son inválidos");
 			}
 		});
 	}

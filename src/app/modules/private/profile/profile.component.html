@@ -1,0 +1,42 @@
+<section class="profile om-section">
+	<div class="profile__container">
+		<aside class="profile__container__sidebar">
+			<div class="account">
+				<div class="account__information">
+					<div class="picture">
+						<img [src]="(user$|async)?.profile.picture" alt="{{(user$|async)?.name}} picture">
+					</div>
+					<div class="profile">
+						<div class="profile__data">
+							<h1 class="userinfo">
+								<span class="name">{{(user$|async)?.name}}</span>
+								<span class="username">{{(user$|async)?.email}}</span>
+							</h1>
+							<p class="biography" *ngIf="(user$|async)?.profile.biography">
+								{{(user$|async)?.profile.biography}}
+							</p>
+						</div>
+						<ul class="details">
+							<ng-container [ngSwitch]="(user$|async)?.gender">
+								<li class="detail">
+									<i class="icon uil uil-user-circle"></i>
+									<span *ngSwitchCase="'male'">Masculino</span>
+									<span *ngSwitchCase="'female'">Femenino</span>
+									<span *ngSwitchCase="'other'">Otro</span>
+								</li>
+							</ng-container>
+							<li class="detail" *ngIf="(user$|async)?.profile.website">
+								<i class="icon uil uil-paperclip"></i>
+								<a [href]="secureRedirection((user$|async)?.profile.website)" target="_blank" class="link om-transition">{{(user$|async)?.profile.website}}</a>
+							</li>
+							<li class="detail">
+								<i class="icon uil uil-calendar-alt"></i>
+								<span>{{(user$|async)?.created_at | date}}</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</div>
+</section>

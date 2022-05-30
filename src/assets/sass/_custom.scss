@@ -121,6 +121,10 @@
 	}
 }
 
+.om-active-button {
+	background-color: variables.$main-alt-color;
+}
+
 .om-transition {
 	transition: all 0.5s cubic-bezier(0.86, 0.01, 0.15, 0.99);
 }
@@ -238,4 +242,11 @@
 .om-toast-warning {
 	@extend %_toast;
 	background-color: rgba($color: #d3b460, $alpha: 1.0);
+}
+
+/* ================ TEXT =============== */
+.om-no-break-text {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
