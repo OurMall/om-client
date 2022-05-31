@@ -65,8 +65,8 @@
 				&iquest;Qu&eacute; funcionalidades deseas implementar en tu espacio de trabajo? Te listamos las principales.
 			</p>
 		</div>
-		<div class="option" *ngFor="let service of services$ | async">
-			<input formControlName="services" type="checkbox" [id]="service.code_name" [checked]="service.activate" [value]="service">
+		<div class="option" *ngFor="let service of services$ | async; index as i">
+			<input formControlName="services" type="checkbox" (click)="addServiceToList(service, inputCheck)" #inputCheck>
 			<label for="{{service.code_name}}" class="helper">
 				<h4 class="name">{{service.name}}</h4>
 				<p class="description">{{service.description}}</p>

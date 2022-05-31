@@ -1,0 +1,21 @@
+<div class="alert alert-{{severity}}" role="alert" *ngIf="opened">
+	<div class="om-container">
+		<div class="content">
+			<div class="icon" [ngSwitch]="severity">
+				<i class="uil uil-question-circle" *ngSwitchCase="'info'"></i>
+				<i class="uil uil-check-circle" *ngSwitchCase="'success'"></i>
+				<i class="uil uil-exclamation-triangle" *ngSwitchCase="'warning'"></i>
+				<i class="uil uil-times-circle" *ngSwitchCase="'error'"></i>
+			</div>
+			<span class="title">
+				{{ title | titlecase }}
+			</span>
+			<span class="description">
+				{{ description }}
+			</span>
+		</div>
+		<div class="closable" *ngIf="closable">
+			<span (click)="onClose()" aria-label="close">&times;</span>
+		</div>
+	</div>
+</div>

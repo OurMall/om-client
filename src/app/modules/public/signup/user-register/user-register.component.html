@@ -100,7 +100,7 @@
 				class="om-input"
 				id="password"
 				type="{{ this.visiblePassword ? 'text' : 'password' }}"
-				placeholder="A-Z09"
+				placeholder="********"
 				autocomplete="new-password"
 			/>
 			<div
@@ -124,7 +124,7 @@
 				class="om-input"
 				id="confirm-password"
 				type="{{ this.visiblePassword ? 'text' : 'password' }}"
-				placeholder="A-Z09"
+				placeholder="********"
 				autocomplete="new-password"
 			/>
 			<div
@@ -151,12 +151,6 @@
 		<div class="show-password" title="Ver contrase&ntilde;a" (click)="showPassword()">
 			<i class="icon uil uil-{{ visiblePassword ? 'eye-slash' : 'eye' }}"></i>
 		</div>
-	</div>
-	<div class="om-field-help">
-		<i class="uil uil-exclamation-triangle"></i>
-		<small class="text"
-			>Por favor asegúrate de que sea una contrase&ntilde;a segura</small
-		>
 	</div>
 	<div class="om-field">
 		<label for="birthdate" class="om-field-label">Fecha de nacimiento</label>

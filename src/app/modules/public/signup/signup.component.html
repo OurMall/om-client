@@ -28,7 +28,8 @@
 			</ul>
 		</div>
 		<div class="body">
-			<button (click)="incrementStep()">Step</button>
+			<app-alert-message [severity]="'info'" [closable]="true" [title]="'Info'" [description]="'Los campos con asterisco (*) son requeridos'"></app-alert-message>
+			<!--<button (click)="incrementStep()">Step</button>-->
 			<ng-template [ngIf]="stepper == 1">
 				<app-user-register
 					(nextStepEvent)="changeCurrentStep($event)"
@@ -50,9 +51,6 @@
 					</div>
 					<div *ngSwitchCase="'seller'">
 						<app-user-workspace></app-user-workspace>
-					</div>
-					<div *ngSwitchDefault>
-						default
 					</div>
 				</div>
 			</ng-template>

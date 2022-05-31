@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { Category, Service } from '@app/common/interfaces';
-import { CategoryService, ServiceService } from '@app/common/services';
+import { CategoryService, ServiceService, WorkspaceService } from '@app/common/services';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-user-workspace',
@@ -12,15 +13,18 @@ import { CategoryService, ServiceService } from '@app/common/services';
 })
 export class UserWorkspaceComponent implements OnInit, AfterViewInit {
 
-	categories$!: Observable<Category[]>;
-	services$!: Observable<Service[]>;
+	categories$: Observable<Category[]> = this.categoryService.categories$;
+	services$: Observable<Service[]> = this.serviceService.services$;
+	servicesList: any[] = [];
 	userWorkspaceForm!: FormGroup;
 	blockSpecial: RegExp = /^[^{}<>*!]+$/
 
 	constructor(
+		private readonly fb: FormBuilder,
+		private readonly router: Router,
 		private categoryService: CategoryService,
 		private serviceService: ServiceService,
-		private readonly fb: FormBuilder
+		private workspaceService: WorkspaceService,
 	) {
 		this.userWorkspaceForm = this.fb.group({
 			profile: this.fb.group({
@@ -30,22 +34,41 @@ export class UserWorkspaceComponent implements OnInit, AfterViewInit {
 				logo: [null, [Validators.required]]
 			}),
 			category: [null, [Validators.required]],
-			services: [[], [Validators.required]],
+			services: [null, [Validators.required]],
 			tags: [[], []]
 		});
 	}
 
 	ngOnInit(): void {
 		this.categoryService.categories().subscribe();
-		this.categories$ = this.categoryService.categories$;
 		this.serviceService.services().subscribe();
-		this.services$ = this.serviceService.services$;
 	}
 
 	ngAfterViewInit(): void {}
 
 	onSubmit(): void {
+		this.userWorkspaceForm.patchValue({
+			services: this.servicesList
+		});
 		console.log(this.userWorkspaceForm.value);
+		this.workspaceService.createWorkspace(this.userWorkspaceForm.value).subscribe({
+			complete: () => {
+				console.log("Complete transaction...");
+				this.router.navigateByUrl("profile");
+			}
+		});
+	}
+
+	addServiceToList(service: any, input: HTMLInputElement): void {
+		const { code_name } = service;
+		const element = this.servicesList.find(service => service == code_name);
+		if(!element && input.checked){
+			this.servicesList.push(code_name);
+		} else {
+			const index = this.servicesList.indexOf(element);
+			this.servicesList.splice(index, 1);
+		};
+		console.log(this.servicesList);
 	}
 
 	get name() {
