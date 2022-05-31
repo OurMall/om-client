@@ -54,7 +54,7 @@
 						margin: 0 auto;
 
 						.om-field {
-							padding: .85rem .5rem;
+							padding: 0.85rem 0.5rem;
 
 							/*.om-input {
 								//padding: .95rem .75rem;
@@ -64,7 +64,7 @@
 						.forgot__password {
 							flex-direction: row;
 							justify-content: center;
-							padding: .45rem 0;
+							padding: 0.45rem 0;
 
 							.om-link {
 								padding: 0;
@@ -85,7 +85,7 @@
 				border-radius: 0 10px 10px 0;
 				height: 100%;
 				width: 90%;
-				padding: .5rem 1.5rem;
+				padding: 0.5rem 1.5rem;
 				box-sizing: border-box;
 				overflow: hidden;
 
@@ -99,11 +99,8 @@
 }
 
 @media screen and (max-width: 768px) {
-
 	.login__section {
-
 		.om-container {
-
 			.login__card {
 				height: 90%;
 				width: 100%;
@@ -111,9 +108,7 @@
 				background-color: transparent;
 
 				.login__card__content {
-
 					.body {
-
 						.login__form {
 							width: 100%;
 						}

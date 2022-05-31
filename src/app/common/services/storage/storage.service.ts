@@ -6,9 +6,7 @@ export class StorageService {
 	}
 
 	get(key: string): any {
-		let item: any = this.storage.getItem(key)
-			? this.storage.getItem(key)
-			: undefined;
+		let item: any = this.storage.getItem(key) ? this.storage.getItem(key) : undefined;
 		return item;
 	}
 

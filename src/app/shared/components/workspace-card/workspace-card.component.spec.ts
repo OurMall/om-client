@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccountComponent } from './account.component';
+import { WorkspaceCardComponent } from './workspace-card.component';
 
-describe('AccountComponent', () => {
-	let component: AccountComponent;
-	let fixture: ComponentFixture<AccountComponent>;
+describe('WorkspaceCardComponent', () => {
+	let component: WorkspaceCardComponent;
+	let fixture: ComponentFixture<WorkspaceCardComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [AccountComponent],
+			declarations: [WorkspaceCardComponent],
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(AccountComponent);
+		fixture = TestBed.createComponent(WorkspaceCardComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

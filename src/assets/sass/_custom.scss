@@ -158,7 +158,7 @@
 
 	&::after {
 		content: " (Optional)";
-		color: rgba($color: variables.$main-color, $alpha: 1.0);
+		color: rgba($color: variables.$main-color, $alpha: 1);
 	}
 }
 
@@ -225,7 +225,7 @@
 /* =============== ENDFORMS =================== */
 
 %_toast {
-	box-shadow: 7px 10px 14px -1px rgba(0,0,0,0.54);
+	box-shadow: 7px 10px 14px -1px rgba(0, 0, 0, 0.54);
 }
 
 .om-toast-info,
@@ -236,12 +236,12 @@
 
 .om-toast-error {
 	@extend %_toast;
-	background-color: rgba($color: rgb(214, 30, 30), $alpha: 1.0);
+	background-color: rgba($color: rgb(214, 30, 30), $alpha: 1);
 }
 
 .om-toast-warning {
 	@extend %_toast;
-	background-color: rgba($color: #d3b460, $alpha: 1.0);
+	background-color: rgba($color: #d3b460, $alpha: 1);
 }
 
 /* ================ TEXT =============== */

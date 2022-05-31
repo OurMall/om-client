@@ -4,7 +4,7 @@
 	display: block;
 	max-width: 100%;
 	height: 45px;
-	border: 2px solid rgba($color: variables.$nord-light-alt-color, $alpha: .15);
+	border: 2px solid rgba($color: variables.$nord-light-alt-color, $alpha: 0.15);
 	border-radius: 5px;
 	overflow: hidden;
 
@@ -22,7 +22,7 @@
 			font-family: "Poppins", sans-serif;
 
 			.icon {
-				padding: 0 .5rem;
+				padding: 0 0.5rem;
 			}
 
 			.title {
@@ -38,7 +38,7 @@
 
 			.description {
 				max-width: 80%;
-				margin-left: .5rem;
+				margin-left: 0.5rem;
 				font-size: 14px;
 				overflow: hidden;
 				white-space: nowrap;
@@ -49,7 +49,6 @@
 					background-color: transparent;
 				}
 			}
-
 		}
 
 		.closable {
@@ -69,22 +68,22 @@
 	}
 
 	&-info {
-		background-color: rgba($color: variables.$main-color, $alpha: .1);
+		background-color: rgba($color: variables.$main-color, $alpha: 0.1);
 		color: variables.$main-color;
 	}
 
 	&-success {
-		background-color: rgba($color: #1ea97c, $alpha: .1);
+		background-color: rgba($color: #1ea97c, $alpha: 0.1);
 		color: #0e700b;
 	}
 
 	&-warning {
-		background-color: rgba($color: #e4d062, $alpha: .1);
+		background-color: rgba($color: #e4d062, $alpha: 0.1);
 		color: #e4d062;
 	}
 
 	&-error {
-		background-color: rgba($color: #9c0909, $alpha: .1);
+		background-color: rgba($color: #9c0909, $alpha: 0.1);
 		color: #c50606;
 	}
 }

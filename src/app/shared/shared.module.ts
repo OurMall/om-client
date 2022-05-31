@@ -8,10 +8,25 @@ import { NavbarLinkComponent } from './components/navbar/navbar-link/navbar-link
 import { LoaderComponent } from './components/loader/loader.component';
 import { AccountComponent } from './components/account/account.component';
 import { AlertMessageComponent } from './components/alert-message/alert-message.component';
+import { WorkspaceCardComponent } from './components/workspace-card/workspace-card.component';
 
 @NgModule({
-	declarations: [NavbarComponent, NavbarLinkComponent, LoaderComponent, AccountComponent, AlertMessageComponent],
+	declarations: [
+		NavbarComponent,
+		NavbarLinkComponent,
+		LoaderComponent,
+		AccountComponent,
+		AlertMessageComponent,
+		WorkspaceCardComponent,
+	],
 	imports: [CommonModule, RouterModule, KeyFilterModule],
-	exports: [NavbarComponent, KeyFilterModule, LoaderComponent, AccountComponent, AlertMessageComponent],
+	exports: [
+		NavbarComponent,
+		KeyFilterModule,
+		LoaderComponent,
+		AccountComponent,
+		AlertMessageComponent,
+		WorkspaceCardComponent,
+	],
 })
 export class SharedModule {}

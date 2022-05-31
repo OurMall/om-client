@@ -6,15 +6,15 @@ import { VerifyAccountComponent } from './verify-account/verify-account.componen
 const routes: Routes = [
 	{
 		path: '',
-		component: ProfileComponent
+		component: ProfileComponent,
 	},
 	{
 		path: 'verifyAccount',
 		data: {
-			title: "Verificar cuenta"
+			title: 'Verificar cuenta',
 		},
-		component: VerifyAccountComponent
-	}
+		component: VerifyAccountComponent,
+	},
 ];
 
 @NgModule({

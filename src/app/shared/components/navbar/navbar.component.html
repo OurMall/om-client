@@ -74,7 +74,11 @@
 				>
 					Acceder
 				</a>
-				<a routerLink="signup" routerLinkActive="om-button-active" class="om-button">
+				<a
+					routerLink="signup"
+					routerLinkActive="om-button-active"
+					class="om-button"
+				>
 					Registrarse
 				</a>
 			</ng-template>
@@ -97,9 +101,28 @@
 		</nav-link>
 	</div>
 	<div class="toolbar">
-		<a class="profile {{active ? 'om-active-button' : ''}} om-transition" (click)="displayAccount()" role="button" title="Cuenta">
-			<img class="picture" [src]="(isLoggedIn$|async) ? (user$|async)?.profile.picture : 'assets/images/profile.png'" alt="{{(isLoggedIn$|async) ? (user$ | async)?.given_name : 'demonstrative profile image'}}" />
-			<span class="username">{{ (isLoggedIn$|async) ? (user$|async)?.given_name : 'Perfil' }}</span>
+		<a
+			class="profile {{ active ? 'om-active-button' : '' }} om-transition"
+			(click)="displayAccount()"
+			role="button"
+			title="Cuenta"
+		>
+			<img
+				class="picture"
+				[src]="
+					(isLoggedIn$ | async)
+						? (user$ | async)?.profile.picture
+						: 'assets/images/profile.png'
+				"
+				alt="{{
+					(isLoggedIn$ | async)
+						? (user$ | async)?.given_name
+						: 'demonstrative profile image'
+				}}"
+			/>
+			<span class="username">{{
+				(isLoggedIn$ | async) ? (user$ | async)?.given_name : "Perfil"
+			}}</span>
 		</a>
 		<ng-container *ngIf="isLoggedIn$ | async; else notProfile">
 			<button class="om-icon-button">

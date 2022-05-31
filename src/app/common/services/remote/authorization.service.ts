@@ -10,25 +10,26 @@ import { KnownToken } from '@app/common/interfaces';
 	providedIn: 'root',
 })
 export class AuthorizationService {
-
 	constructor(
 		private sessionStorageService: SessionStorageService,
 		private readonly http: HttpClient
 	) {}
 
 	authorizeKnownClient(): Observable<KnownToken> {
-		return this.http.post<KnownToken>("oauth2/known", {
-			application_id: environment.authorizationServer.application_id,
-			application_secret: environment.authorizationServer.application_secret
-		}).pipe(
-			take(1),
-			filter(response => response && !!response),
-			tap((response) => {
-				this.sessionStorageService.set("known_token", response.known_token);
-			}),
-			catchError((err: HttpErrorResponse) => {
-				return throwError(() => err);
+		return this.http
+			.post<KnownToken>('oauth2/known', {
+				application_id: environment.authorizationServer.application_id,
+				application_secret: environment.authorizationServer.application_secret,
 			})
-		)
+			.pipe(
+				take(1),
+				filter((response) => response && !!response),
+				tap((response) => {
+					this.sessionStorageService.set('known_token', response.known_token);
+				}),
+				catchError((err: HttpErrorResponse) => {
+					return throwError(() => err);
+				})
+			);
 	}
 }

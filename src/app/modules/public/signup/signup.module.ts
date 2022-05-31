@@ -10,7 +10,12 @@ import { UserRoleComponent } from './user-role/user-role.component';
 import { UserWorkspaceComponent } from './user-workspace/user-workspace.component';
 
 @NgModule({
-	declarations: [SignupComponent, UserRegisterComponent, UserRoleComponent, UserWorkspaceComponent],
+	declarations: [
+		SignupComponent,
+		UserRegisterComponent,
+		UserRoleComponent,
+		UserWorkspaceComponent,
+	],
 	imports: [CommonModule, SignupRoutingModule, ReactiveFormsModule, SharedModule],
 })
 export class SignupModule {}

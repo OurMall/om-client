@@ -8,26 +8,25 @@ import { Service } from '@app/common/interfaces';
 	providedIn: 'root',
 })
 export class ServiceService {
-
-	private servicesSubject$: BehaviorSubject<Service[]> = new BehaviorSubject<Service[]>([]);
+	private servicesSubject$: BehaviorSubject<Service[]> = new BehaviorSubject<Service[]>(
+		[]
+	);
 	services$: Observable<Service[]> = this.servicesSubject$.asObservable();
 
-	constructor(
-		private readonly http: HttpClient
-	) {}
+	constructor(private readonly http: HttpClient) {}
 
 	services(): Observable<Service[]> {
-		return this.http.get<Service[]>("service").pipe(
+		return this.http.get<Service[]>('service').pipe(
 			tap({
 				next: (response) => {
 					console.log(response);
 					this.servicesSubject$.next(response);
-				}
+				},
 			}),
 			catchError((err: HttpErrorResponse) => {
 				console.log(err);
 				return throwError(() => err);
 			})
-		)
+		);
 	}
 }

@@ -7,7 +7,7 @@ export const environment = {
 	authorizationServer: {
 		endpoint: `http://localhost:8000`,
 		application_id: 'well-known-client',
-		application_secret: '03072004'
+		application_secret: '03072004',
 	},
 };
 

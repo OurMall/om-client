@@ -10,7 +10,6 @@ import { AuthenticationService, MessageService } from '@app/common/services';
 	styleUrls: ['./user-register.component.scss'],
 })
 export class UserRegisterComponent implements OnInit {
-
 	visiblePassword!: boolean;
 	signupForm!: FormGroup;
 	@Input() currentStep!: number;
@@ -19,7 +18,7 @@ export class UserRegisterComponent implements OnInit {
 	constructor(
 		private message: MessageService,
 		private authService: AuthenticationService,
-		private readonly fb: FormBuilder,
+		private readonly fb: FormBuilder
 	) {}
 
 	ngOnInit(): void {
@@ -35,8 +34,11 @@ export class UserRegisterComponent implements OnInit {
 			gender: [null, [Validators.required]],
 			accept_terms: [null, [Validators.required]],
 			profile: this.fb.group({
-				picture: ["https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_960_720.png", []]
-			})
+				picture: [
+					'https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_960_720.png',
+					[],
+				],
+			}),
 		});
 	}
 
@@ -48,15 +50,18 @@ export class UserRegisterComponent implements OnInit {
 		this.authService.signUp(this.signupForm.value).subscribe({
 			next: (response) => {
 				console.log(response);
-				this.message.success("Continuamos con tu rol...", "Estúpendo");
+				this.message.success('Continuamos con tu rol...', 'Estúpendo');
 				const nextStep = this.currentStep + 1;
 				this.nextStepEvent.emit(nextStep);
 			},
 			error: (err: HttpErrorResponse) => {
 				console.log(err);
-				this.message.error("El usuario ya está registrado o ocurrió un error", "Oh-no!");
-			}
-		})
+				this.message.error(
+					'El usuario ya está registrado o ocurrió un error',
+					'Oh-no!'
+				);
+			},
+		});
 	}
 
 	showPassword(): void {

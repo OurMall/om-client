@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	HostBinding,
+	HostListener,
+	OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { AuthenticationService, UserService } from '@app/common/services';
@@ -8,10 +14,9 @@ import { User } from '@app/common/interfaces';
 	selector: 'app-account',
 	templateUrl: './account.component.html',
 	styleUrls: ['./account.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountComponent implements OnInit {
-
 	isLoggedIn$: Observable<boolean> = this.authenticationService.accessToken$;
 	user$: Observable<User> = this.userService.user$;
 
@@ -24,7 +29,7 @@ export class AccountComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.userService.toggle.subscribe(isOpen => {
+		this.userService.toggle.subscribe((isOpen) => {
 			this.isOpen = isOpen;
 		});
 	}
@@ -33,7 +38,7 @@ export class AccountComponent implements OnInit {
 		this.authenticationService.logOut();
 	}
 
-	@HostListener("window:scroll", ['$event'])
+	@HostListener('window:scroll', ['$event'])
 	onScroll($event: Event): void {
 		//console.log($event);
 	}

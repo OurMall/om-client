@@ -6,9 +6,8 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-
 	stepper!: number;
-	role: string = "seller";
+	role: string = 'seller';
 
 	constructor() {}
 

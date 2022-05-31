@@ -8,25 +8,24 @@ import { UserService } from '@app/common/services';
 	styleUrls: ['./verify-account.component.scss'],
 })
 export class VerifyAccountComponent implements OnInit {
-
 	constructor(
 		private readonly activatedRoute: ActivatedRoute,
 		private readonly router: Router,
-		private userService: UserService,
+		private userService: UserService
 	) {}
 
 	ngOnInit(): void {
-		this.activatedRoute.queryParams.subscribe(params => {
+		this.activatedRoute.queryParams.subscribe((params) => {
 			const { token } = params;
-			if(!token) {
-				this.router.navigate(["profile"]);
+			if (!token) {
+				this.router.navigate(['profile']);
 				return;
 			}
 			this.userService.verifyAccount(token).subscribe({
 				error: (_) => {
-					this.router.navigate(["profile"]);
-				}
+					this.router.navigate(['profile']);
+				},
 			});
-		})
+		});
 	}
 }

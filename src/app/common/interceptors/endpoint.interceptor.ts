@@ -4,16 +4,19 @@ import {
 	HttpHandler,
 	HttpEvent,
 	HttpInterceptor,
-	HttpHeaders
+	HttpHeaders,
 } from '@angular/common/http';
 import { finalize, Observable } from 'rxjs';
 
 import { environment } from '@environment/environment';
-import { LoaderService, LocalStorageService, SessionStorageService } from '@app/common/services';
+import {
+	LoaderService,
+	LocalStorageService,
+	SessionStorageService,
+} from '@app/common/services';
 
 @Injectable()
 export class EndpointInterceptor implements HttpInterceptor {
-
 	private readonly endpoint: string = environment.authorizationServer.endpoint;
 
 	constructor(
@@ -22,21 +25,16 @@ export class EndpointInterceptor implements HttpInterceptor {
 		private sessionStorage: SessionStorageService
 	) {}
 
-	intercept(
-		req: HttpRequest<any>,
-		next: HttpHandler
-	): Observable<HttpEvent<any>> {
+	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		this.loaderService.showLoader();
 		const request: HttpRequest<any> = req.clone({
 			url: `${this.endpoint}/${req.url}`,
 			withCredentials: true,
 			headers: new HttpHeaders({
-				Authorization: `Bearer ${this.localStorageService.get("access_token")}`,
-				knownAuthorization: `Bearer ${this.sessionStorage.get("known_token")}`
-			})
+				Authorization: `Bearer ${this.localStorageService.get('access_token')}`,
+				knownAuthorization: `Bearer ${this.sessionStorage.get('known_token')}`,
+			}),
 		});
-		return next.handle(request).pipe(
-			finalize(() => this.loaderService.hideLoader())
-		);
+		return next.handle(request).pipe(finalize(() => this.loaderService.hideLoader()));
 	}
 }

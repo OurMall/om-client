@@ -38,22 +38,22 @@ export class UserRoleComponent implements OnInit {
 	}
 
 	onContinue(): void {
-		if(!this.roleForm.value) {
-			this.message.error("Por favor elige un rol", "Falta algo..");
+		if (!this.roleForm.value) {
+			this.message.error('Por favor elige un rol', 'Falta algo..');
 			return;
 		}
 		const { role } = this.roleForm.value;
 		this.userService.addGroupToUser(role).subscribe({
 			next: (_) => {
-				this.message.success(`¿Un ${role}? Increíble!`, "Wow");
+				this.message.success(`¿Un ${role}? Increíble!`, 'Wow');
 				const nextStep = this.currentStep + 1;
 				this.nextTurnEvent.emit(nextStep);
 				this.selectedRole.emit(role);
 			},
 			error: (err: HttpErrorResponse) => {
 				this.message.error(err.message);
-			}
-		})
+			},
+		});
 	}
 
 	get role() {

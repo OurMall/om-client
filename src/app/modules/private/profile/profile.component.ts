@@ -11,7 +11,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 	styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-
 	user$: Observable<User> = this.userService.user$;
 
 	constructor(

@@ -4,7 +4,8 @@
 			<h2 class="title">Registrarse</h2>
 			<p class="description">
 				Gracias por querer hacer parte de Our Mall, solo debes llenar los datos a
-				continuaci&oacute;n. &iquest;Ya tienes una cuenta? <a routerLink="../login" class="om-link">Acceder</a>
+				continuaci&oacute;n. &iquest;Ya tienes una cuenta?
+				<a routerLink="../login" class="om-link">Acceder</a>
 			</p>
 			<ul class="stepper">
 				<li class="step">
@@ -28,7 +29,12 @@
 			</ul>
 		</div>
 		<div class="body">
-			<app-alert-message [severity]="'info'" [closable]="true" [title]="'Info'" [description]="'Los campos con asterisco (*) son requeridos'"></app-alert-message>
+			<app-alert-message
+				[severity]="'info'"
+				[closable]="true"
+				[title]="'Info'"
+				[description]="'Los campos con asterisco (*) son requeridos'"
+			></app-alert-message>
 			<!--<button (click)="incrementStep()">Step</button>-->
 			<ng-template [ngIf]="stepper == 1">
 				<app-user-register
@@ -46,9 +52,7 @@
 			</ng-template>
 			<ng-template [ngIf]="stepper == 3">
 				<div [ngSwitch]="role">
-					<div *ngSwitchCase="'client'">
-						client
-					</div>
+					<div *ngSwitchCase="'client'">client</div>
 					<div *ngSwitchCase="'seller'">
 						<app-user-workspace></app-user-workspace>
 					</div>

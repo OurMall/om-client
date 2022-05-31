@@ -12,30 +12,29 @@ import { Router } from '@angular/router';
 	styleUrls: ['./user-workspace.component.scss'],
 })
 export class UserWorkspaceComponent implements OnInit, AfterViewInit {
-
 	categories$: Observable<Category[]> = this.categoryService.categories$;
 	services$: Observable<Service[]> = this.serviceService.services$;
 	servicesList: any[] = [];
 	userWorkspaceForm!: FormGroup;
-	blockSpecial: RegExp = /^[^{}<>*!]+$/
+	blockSpecial: RegExp = /^[^{}<>*!]+$/;
 
 	constructor(
 		private readonly fb: FormBuilder,
 		private readonly router: Router,
 		private categoryService: CategoryService,
 		private serviceService: ServiceService,
-		private workspaceService: WorkspaceService,
+		private workspaceService: WorkspaceService
 	) {
 		this.userWorkspaceForm = this.fb.group({
 			profile: this.fb.group({
 				name: [null, [Validators.required]],
 				description: [null, [Validators.required, Validators.maxLength(300)]],
 				slogan: [null, [Validators.maxLength(100)]],
-				logo: [null, [Validators.required]]
+				logo: [null, [Validators.required]],
 			}),
 			category: [null, [Validators.required]],
 			services: [null, [Validators.required]],
-			tags: [[], []]
+			tags: [[], []],
 		});
 	}
 
@@ -48,54 +47,52 @@ export class UserWorkspaceComponent implements OnInit, AfterViewInit {
 
 	onSubmit(): void {
 		this.userWorkspaceForm.patchValue({
-			services: this.servicesList
+			services: this.servicesList,
 		});
-		console.log(this.userWorkspaceForm.value);
 		this.workspaceService.createWorkspace(this.userWorkspaceForm.value).subscribe({
 			complete: () => {
-				console.log("Complete transaction...");
-				this.router.navigateByUrl("profile");
-			}
+				this.router.navigateByUrl('profile');
+			},
 		});
 	}
 
 	addServiceToList(service: any, input: HTMLInputElement): void {
 		const { code_name } = service;
-		const element = this.servicesList.find(service => service == code_name);
-		if(!element && input.checked){
+		const element = this.servicesList.find((service) => service == code_name);
+		if (!element && input.checked) {
 			this.servicesList.push(code_name);
 		} else {
 			const index = this.servicesList.indexOf(element);
 			this.servicesList.splice(index, 1);
-		};
+		}
 		console.log(this.servicesList);
 	}
 
 	get name() {
-		return this.userWorkspaceForm.get("profile.name");
+		return this.userWorkspaceForm.get('profile.name');
 	}
 
 	get description() {
-		return this.userWorkspaceForm.get("profile.description");
+		return this.userWorkspaceForm.get('profile.description');
 	}
 
 	get slogan() {
-		return this.userWorkspaceForm.get("profile.slogan");
+		return this.userWorkspaceForm.get('profile.slogan');
 	}
 
 	get logo() {
-		return this.userWorkspaceForm.get("profile.logo");
+		return this.userWorkspaceForm.get('profile.logo');
 	}
 
 	get category() {
-		return this.userWorkspaceForm.get("category");
+		return this.userWorkspaceForm.get('category');
 	}
 
 	get services() {
-		return this.userWorkspaceForm.get("services");
+		return this.userWorkspaceForm.get('services');
 	}
 
 	get tags() {
-		return this.userWorkspaceForm.get("tags");
+		return this.userWorkspaceForm.get('tags');
 	}
 }

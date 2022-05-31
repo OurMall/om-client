@@ -3,11 +3,27 @@
 		<div class="account__container__content">
 			<div class="heading">
 				<div class="image">
-					<img class="picture" [src]="(isLoggedIn$|async) ? (user$|async)?.profile.picture : 'assets/images/profile.png'" [alt]="(user$|async)?.name">
+					<img
+						class="picture"
+						[src]="
+							(isLoggedIn$ | async)
+								? (user$ | async)?.profile.picture
+								: 'assets/images/profile.png'
+						"
+						[alt]="(user$ | async)?.name"
+					/>
 				</div>
 				<div class="profile">
-					<h3 class="name">{{ (isLoggedIn$|async) ? (user$|async)?.name : 'Account Name' }}</h3>
-					<a [routerLink]="(isLoggedIn$|async) ? 'profile' : 'login'" role="link">{{ (isLoggedIn$|async) ? 'Ver perfil' : 'Iniciar session' }}</a>
+					<h3 class="name">
+						{{
+							(isLoggedIn$ | async) ? (user$ | async)?.name : "Account Name"
+						}}
+					</h3>
+					<a
+						[routerLink]="(isLoggedIn$ | async) ? 'profile' : 'login'"
+						role="link"
+						>{{ (isLoggedIn$ | async) ? "Ver perfil" : "Iniciar session" }}</a
+					>
 				</div>
 			</div>
 			<div class="body">

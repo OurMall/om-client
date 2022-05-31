@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-type AlertType = "info" | "success" | "warning" | "error";
+type AlertType = 'info' | 'success' | 'warning' | 'error';
 
 @Component({
 	selector: 'app-alert-message',
@@ -8,10 +8,9 @@ type AlertType = "info" | "success" | "warning" | "error";
 	styleUrls: ['./alert-message.component.scss'],
 })
 export class AlertMessageComponent implements OnInit {
-
 	opened: boolean = true;
 	@Input() closable: boolean = false;
-	@Input() severity: AlertType = "info";
+	@Input() severity: AlertType = 'info';
 	@Input() title!: string;
 	@Input() description!: string;
 

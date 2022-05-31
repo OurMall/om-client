@@ -9,7 +9,6 @@ import { RouteService, AuthorizationService } from '@app/common/services';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
 	constructor(
 		private routeService: RouteService,
 		private authorizationService: AuthorizationService

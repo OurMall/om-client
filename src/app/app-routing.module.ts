@@ -28,17 +28,21 @@ const routes: Routes = [
 	{
 		path: 'login',
 		data: {
-			title: 'Iniciar sesión'
+			title: 'Iniciar sesión',
 		},
-		loadChildren: () => import('./modules/public/login/login.module').then(m => m.LoginModule)
+		loadChildren: () =>
+			import('./modules/public/login/login.module').then((m) => m.LoginModule),
 	},
 	{
 		path: 'profile',
 		data: {
-			title: 'Perfil'
+			title: 'Perfil',
 		},
 		canActivate: [LoggedInGuard],
-		loadChildren: () => import('./modules/private/profile/profile.module').then(m => m.ProfileModule)
+		loadChildren: () =>
+			import('./modules/private/profile/profile.module').then(
+				(m) => m.ProfileModule
+			),
 	},
 	{
 		path: 'support',
@@ -49,7 +53,7 @@ const routes: Routes = [
 			import('./modules/public/support/support.module').then(
 				(m) => m.SupportModule
 			),
-		canActivate: [LoggedInGuard]
+		canActivate: [LoggedInGuard],
 	},
 	{
 		path: '404',

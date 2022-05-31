@@ -10,9 +10,8 @@ import { MessageService } from '@app/common/services';
 	providedIn: 'root',
 })
 export class UserService {
-
 	@Output() toggle: EventEmitter<boolean> = new EventEmitter();
-	private readonly prefix: string = "user";
+	private readonly prefix: string = 'user';
 	private isOpen: boolean = false;
 	private userSubject$: Subject<User> = new Subject<User>();
 	user$: Observable<User> = this.userSubject$.asObservable();
@@ -29,7 +28,7 @@ export class UserService {
 				next: (user) => {
 					console.log(user);
 					this.userSubject$.next(user);
-				}
+				},
 			}),
 			catchError((err: HttpErrorResponse) => {
 				return throwError(() => console.log(err));
@@ -38,23 +37,32 @@ export class UserService {
 	}
 
 	addGroupToUser(code_name: string): Observable<any> {
-		return this.http.post(`${this.prefix}/group`, code_name);
+		return this.http.post(`${this.prefix}/group`, code_name).pipe(
+			take(1),
+			tap((response) => {
+				console.log(response);
+			}),
+			catchError((err: HttpErrorResponse) => {
+				console.log(err);
+				return throwError(() => err);
+			})
+		);
 	}
 
 	verifyAccount(token: string): Observable<any> {
 		return this.http.post(`${this.prefix}/account/verify`, token).pipe(
 			take(1),
-			filter(response => response && !!response),
+			filter((response) => response && !!response),
 			tap({
 				complete: () => {
 					setTimeout(() => {
-						this.message.success("Hemos verificado la cuenta", "Felicidades");
-						this.router.navigate([""]);
-					}, 5000)
-				}
+						this.message.success('Hemos verificado la cuenta', 'Felicidades');
+						this.router.navigate(['']);
+					}, 5000);
+				},
 			}),
 			catchError((err: HttpErrorResponse) => {
-				this.message.error("Ha habido un problema o la cuenta ya ha sido verificada", "Oh-no!");
+				this.message.error('La cuenta ya ha sido verificada', 'Vaya!');
 				return throwError(() => err);
 			})
 		);

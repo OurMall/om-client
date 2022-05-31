@@ -31,7 +31,7 @@
 			.helper {
 				display: flex;
 				flex-direction: column;
-				margin-left: .5rem;
+				margin-left: 0.5rem;
 
 				.name {
 					font-size: 1rem;
@@ -40,7 +40,7 @@
 				}
 
 				.description {
-					font-size: .85rem;
+					font-size: 0.85rem;
 					color: rgba($color: variables.$nord-light-color, $alpha: 0.65);
 				}
 			}

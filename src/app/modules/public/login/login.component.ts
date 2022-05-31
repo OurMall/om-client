@@ -10,7 +10,6 @@ import { AuthenticationService, MessageService } from '@app/common/services';
 	styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
 	loginForm!: FormGroup;
 
 	constructor(
@@ -23,28 +22,28 @@ export class LoginComponent implements OnInit {
 	ngOnInit(): void {
 		this.loginForm = this.fb.group({
 			email: [null, [Validators.required, Validators.email]],
-			password: [null, [Validators.required]]
+			password: [null, [Validators.required]],
 		});
 	}
 
 	onSubmit(): void {
-		if(!this.loginForm.valid) return;
+		if (!this.loginForm.valid) return;
 		this.authenticationService.logIn(this.loginForm.value).subscribe({
 			next: (_) => {
-				this.message.success("Anciabamos tu regreso", "Bienvenido");
-				this.router.navigate([""]);
+				this.message.success('Anciabamos tu regreso', 'Bienvenido');
+				this.router.navigate(['']);
 			},
 			error: (err) => {
-				this.message.error("Los datos que ingresaste son inválidos");
-			}
+				this.message.error('Los datos que ingresaste son inválidos');
+			},
 		});
 	}
 
 	get email() {
-		return this.loginForm.get("email");
+		return this.loginForm.get('email');
 	}
 
 	get password() {
-		return this.loginForm.get("password");
+		return this.loginForm.get('password');
 	}
 }

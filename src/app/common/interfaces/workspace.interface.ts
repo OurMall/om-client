@@ -10,7 +10,7 @@ export interface WorkspaceProfile {
 }
 
 export interface WorkspaceCreate {
-	profile: WorkspaceProfile,
+	profile: WorkspaceProfile;
 	category: any;
 	tags: string[];
 	services: any[];

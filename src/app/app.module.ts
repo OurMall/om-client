@@ -41,8 +41,10 @@ import { LoggedInGuard } from '@app/common/guards';
 	providers: [
 		LoggedInGuard,
 		{
-			provide: HTTP_INTERCEPTORS, useClass: EndpointInterceptor, multi: true
-		}
+			provide: HTTP_INTERCEPTORS,
+			useClass: EndpointInterceptor,
+			multi: true,
+		},
 	],
 	bootstrap: [AppComponent],
 })

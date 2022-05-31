@@ -11,23 +11,22 @@ import { Router } from '@angular/router';
 	providedIn: 'root',
 })
 export class AuthenticationService {
-
 	private _accessToken$: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
 	constructor(
 		private readonly http: HttpClient,
 		private readonly router: Router,
 		private sessionStorageService: SessionStorageService,
-		private localStorageService: LocalStorageService,
+		private localStorageService: LocalStorageService
 	) {}
 
 	signUp(user: UserSignup): Observable<AccessToken> {
-		return this.http.post<AccessToken>("oauth2/signup", user).pipe(
+		return this.http.post<AccessToken>('oauth2/signup', user).pipe(
 			take(1),
-			filter(response => response && !!response),
+			filter((response) => response && !!response),
 			tap((response) => {
-				this.localStorageService.set("access_token", response.access_token);
-				this.localStorageService.set("refresh_token", response.refresh_token);
+				this.localStorageService.set('access_token', response.access_token);
+				this.localStorageService.set('refresh_token', response.refresh_token);
 				this._accessToken$.next(true);
 			}),
 			catchError((err: HttpErrorResponse) => {
@@ -37,13 +36,13 @@ export class AuthenticationService {
 	}
 
 	logIn(user: UserLogin): Observable<AccessToken> {
-		return this.http.post<AccessToken>("oauth2/login", user).pipe(
+		return this.http.post<AccessToken>('oauth2/login', user).pipe(
 			take(1),
-			filter(response => response && !!response),
+			filter((response) => response && !!response),
 			tap((response) => {
 				console.log(response);
-				this.localStorageService.set("access_token", response.access_token);
-				this.localStorageService.set("refresh_token", response.refresh_token);
+				this.localStorageService.set('access_token', response.access_token);
+				this.localStorageService.set('refresh_token', response.refresh_token);
 				this._accessToken$.next(true);
 			}),
 			catchError((err: HttpErrorResponse) => {
@@ -53,29 +52,31 @@ export class AuthenticationService {
 	}
 
 	logOut(): void {
-		this.localStorageService.remove("access_token");
-		this.localStorageService.remove("refresh_token");
+		this.localStorageService.remove('access_token');
+		this.localStorageService.remove('refresh_token');
 		this._accessToken$.next(false);
 		this.router.navigate(['login']);
 	}
 
 	refreshAccessToken(refreshToken: string): Observable<AccessToken> {
-		return this.http.post<AccessToken>("oauth2/token", refreshToken).pipe(
+		return this.http.post<AccessToken>('oauth2/token', refreshToken).pipe(
 			tap((response) => {
-				this.localStorageService.set("access_token", response.access_token);
-				this.localStorageService.set("refresh_token", response.refresh_token);
+				this.localStorageService.set('access_token', response.access_token);
+				this.localStorageService.set('refresh_token', response.refresh_token);
 				this._accessToken$.next(true);
 			})
 		);
 	}
 
 	hasAccessToken$(): Observable<boolean> {
-		this.localStorageService.get("access_token") ? this._accessToken$.next(true): this._accessToken$.next(false);
+		this.localStorageService.get('access_token')
+			? this._accessToken$.next(true)
+			: this._accessToken$.next(false);
 		return this._accessToken$.asObservable();
 	}
 
 	hasAccessToken(): boolean {
-		if(!this.localStorageService.get("access_token")) {
+		if (!this.localStorageService.get('access_token')) {
 			this._accessToken$.next(false);
 			return false;
 		}
