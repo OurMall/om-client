@@ -71,7 +71,7 @@
 	<div class="om-field">
 		<label for="category" class="om-field-label">Categor&iacute;a</label>
 		<select formControlName="category" class="om-input" id="category">
-			<option selected disabled hidden>Seleccionar categor&iacute;a</option>
+			<option selected disabled>Seleccionar categor&iacute;a</option>
 			<option *ngFor="let category of categories$ | async" [value]="category.name">
 				{{ category.name }}
 			</option>

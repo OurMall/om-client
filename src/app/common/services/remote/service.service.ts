@@ -19,12 +19,10 @@ export class ServiceService {
 		return this.http.get<Service[]>('service').pipe(
 			tap({
 				next: (response) => {
-					console.log(response);
 					this.servicesSubject$.next(response);
 				},
 			}),
 			catchError((err: HttpErrorResponse) => {
-				console.log(err);
 				return throwError(() => err);
 			})
 		);

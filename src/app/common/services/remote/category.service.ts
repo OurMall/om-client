@@ -23,7 +23,6 @@ export class CategoryService {
 				},
 			}),
 			catchError((err: HttpErrorResponse) => {
-				console.log(err);
 				return throwError(() => err);
 			})
 		);

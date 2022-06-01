@@ -6,14 +6,14 @@
 					<div class="picture">
 						<img
 							[src]="(user$ | async)?.profile.picture"
-							alt="{{ (user$ | async)?.name }} picture"
+							alt="{{(user$ | async)?.name}} picture"
 						/>
 					</div>
 					<div class="profile">
 						<div class="profile__data">
 							<h1 class="userinfo">
-								<span class="name">{{ (user$ | async)?.name }}</span>
-								<span class="username">{{ (user$ | async)?.email }}</span>
+								<span class="name om-no-break-text">{{ (user$ | async)?.name }}</span>
+								<span class="username om-no-break-text">{{ (user$ | async)?.email }}</span>
 							</h1>
 							<p
 								class="biography"

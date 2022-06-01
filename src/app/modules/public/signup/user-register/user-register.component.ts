@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { AuthenticationService, MessageService } from '@app/common/services';
 
@@ -9,16 +10,20 @@ import { AuthenticationService, MessageService } from '@app/common/services';
 	templateUrl: './user-register.component.html',
 	styleUrls: ['./user-register.component.scss'],
 })
-export class UserRegisterComponent implements OnInit {
+export class UserRegisterComponent implements OnInit, OnDestroy {
+
+	private subscription: Subscription = new Subscription();
+
 	visiblePassword!: boolean;
 	signupForm!: FormGroup;
+
 	@Input() currentStep!: number;
 	@Output() nextStepEvent = new EventEmitter<number>();
 
 	constructor(
+		private readonly fb: FormBuilder,
 		private message: MessageService,
 		private authService: AuthenticationService,
-		private readonly fb: FormBuilder
 	) {}
 
 	ngOnInit(): void {
@@ -43,25 +48,31 @@ export class UserRegisterComponent implements OnInit {
 	}
 
 	onContinue(): void {
-		if (!this.validate()) {
+		if (!this.validate() || !this.signupForm.valid) {
 			this.message.error('Verifica que los datos sean correctos');
 			return;
 		}
-		this.authService.signUp(this.signupForm.value).subscribe({
-			next: (response) => {
-				console.log(response);
-				this.message.success('Continuamos con tu rol...', 'Estúpendo');
-				const nextStep = this.currentStep + 1;
-				this.nextStepEvent.emit(nextStep);
-			},
-			error: (err: HttpErrorResponse) => {
-				console.log(err);
-				this.message.error(
-					'El usuario ya está registrado o ocurrió un error',
-					'Oh-no!'
-				);
-			},
-		});
+		this.subscription.add(
+			this.authService.signUp(this.signupForm.value).subscribe({
+				next: (_) => {
+					const nextStep = this.currentStep + 1;
+					this.nextStepEvent.emit(nextStep);
+				},
+				complete: () => {
+					this.message.success('Continuamos con tu rol...', 'Estúpendo');
+				},
+				error: (_) => {
+					this.message.error(
+						'El usuario ya está registrado o ocurrió un error',
+						'Oh-no!'
+					);
+				},
+			})
+		);
+	}
+
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
 	}
 
 	showPassword(): void {

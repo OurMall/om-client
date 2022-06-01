@@ -31,7 +31,7 @@
 
 			&__image {
 				width: 100%;
-				height: 90%;
+				height: auto;
 				object-fit: cover;
 				border: 2px solid rgba($color: variables.$nord-dark-color, $alpha: 0.5);
 				border-radius: 50%;
@@ -47,7 +47,7 @@
 		}
 
 		&__body {
-			width: 50%;
+			width: 70%;
 			height: 100%;
 			display: flex;
 			flex-direction: column;
@@ -56,7 +56,7 @@
 			padding: .85rem;
 
 			.container {
-				height: 90%;
+				height: 80%;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
@@ -92,11 +92,12 @@
 			}
 
 			.footer {
-				height: 10%;
+				height: 20%;
 				width: 100%;
 				display: flex;
-				flex-direction: column;
-				justify-content: center;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
 				overflow: hidden;
 
 				.tags {
@@ -108,34 +109,67 @@
 
 					.tag {
 						max-width: 80px;
-						text-transform: lowercase;
-						font-size: 14px;
-						font-weight: 600;
 						margin: 0 .25rem;
 						padding: .25rem;
 						border: 1px solid rgba($color: variables.$light-color, $alpha: 1.0);
-						background-color: variables.$main-alt-color;
+						background-color: variables.$main-color;
 						border-radius: 8.5px;
-						overflow: hidden;
-						white-space: nowrap;
-						text-overflow: ellipsis;
+
+						&__text {
+							text-transform: lowercase;
+							font-size: 14px;
+							font-weight: 600;
+						}
+
+						&:hover {
+							cursor: pointer;
+							background-color: variables.$main-alt-color;
+						}
+					}
+				}
+
+				.options {
+					width: 25%;
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+
+					.rounded-button {
+						width: 2.5rem;
+						height: 2.5rem;
+						padding: 0.35rem;
+						border-radius: 50%;
+						margin: 0 0 0 .5rem;
+
+						i {
+							width: 100%;
+							height: 100%;
+							font-size: 20px;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+						}
 					}
 				}
 			}
 		}
 
-		&__footer {
-			width: 20%;
+		/*&__footer {
+			width: 10%;
 			height: 100%;
 			display: flex;
 			flex-direction: column;
-			align-items: center;
-			justify-content: center;
+			align-items: flex-end;
+			justify-content: flex-start;
 
 			.button {
 				width: 80%;
 				margin: 0 0 1rem 0;
 			}
-		}
+		}*/
 	}
+}
+
+@media screen and (max-width: 768px) {
+
 }

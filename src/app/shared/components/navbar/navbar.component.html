@@ -121,7 +121,7 @@
 				}}"
 			/>
 			<span class="username">{{
-				(isLoggedIn$ | async) ? (user$ | async)?.given_name : "Perfil"
+				(isLoggedIn$ | async) ? (user$ | async)?.given_name?.trim() : "Perfil"
 			}}</span>
 		</a>
 		<ng-container *ngIf="isLoggedIn$ | async; else notProfile">

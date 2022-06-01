@@ -15,8 +15,9 @@
 			height: 100%;
 			display: flex;
 			flex-direction: column;
-			justify-content: flex-start;
-			//overflow: hidden;
+			justify-content: center;
+			align-items: center;
+			align-content: center;
 
 			.account {
 				display: flex;
@@ -26,15 +27,12 @@
 				&__information {
 					display: flex;
 					flex-direction: column;
-					justify-content: center;
-					align-items: center;
-					align-content: center;
 
 					.picture {
 						width: 100%;
 						height: auto;
-						max-width: 250px;
-						max-height: 250px;
+						max-width: 280px;
+						max-height: 280px;
 
 						img {
 							height: 100%;
@@ -47,6 +45,7 @@
 					}
 
 					.profile {
+						width: 100%;
 						display: flex;
 						flex-direction: column;
 						font-family: "Ubuntu", sans-serif;
@@ -54,6 +53,7 @@
 						.profile__data {
 							display: flex;
 							flex-direction: column;
+							justify-content: center;
 							padding: 1rem 0;
 
 							.userinfo {
@@ -62,12 +62,15 @@
 								justify-content: center;
 								align-items: center;
 								margin: 0 0 0.75rem 0;
+								text-align: center;
 
 								.name {
+									max-width: 200px;
 									line-height: 1.25;
 								}
 
 								.username {
+									max-width: 200px;
 									font-size: 1.25rem;
 									color: var(--nord-light-color);
 								}
@@ -116,6 +119,7 @@
 			display: block;
 			width: 70%;
 			margin: 1.5rem 0 0 0;
+			padding: 0 2.25rem 0 0;
 
 			.user-workspaces {
 				width: 100%;

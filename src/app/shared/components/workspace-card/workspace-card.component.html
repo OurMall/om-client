@@ -1,18 +1,20 @@
 <div class="workspace__card om-shadow">
 	<div class="content">
 		<figure class="content__header">
-			<img class="content__header__image" src="assets/images/profile.png" alt="">
-			<figcaption class="om-no-break-text" title="Your slogan here Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro, earum.">
-				Your slogan here Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro, earum.
+			<img class="content__header__image" [src]="(workspace$|async)?.profile?.logo" [alt]="(workspace$|async)?.profile?.name">
+			<figcaption class="om-no-break-text" [title]="(workspace$|async)?.profile?.slogan">
+				{{(workspace$|async)?.profile?.slogan}}
 			</figcaption>
 		</figure>
 		<div class="content__body">
 			<div class="container">
 				<h2>
-					<span class="category">Category</span>
-					<span class="name">Name</span>
+					<span class="category">{{(workspace$|async)?.category.name}}</span>
+					<span class="name">{{(workspace$|async)?.profile?.name}}</span>
 				</h2>
-				<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. At, doloribus.</p>
+				<p class="description">
+					{{(workspace$|async)?.profile?.description}}
+				</p>
 				<div class="rating">
 					<i class="uil uil-star"></i>
 					<i class="uil uil-star"></i>
@@ -23,24 +25,24 @@
 			</div>
 			<div class="footer">
 				<ul class="tags">
-					<li class="tag">
-						<span class="tag__text">Tag1</span>
-					</li>
-					<li class="tag">
-						<span class="tag__text">Tag2</span>
-					</li>
-					<li class="tag">
-						<span class="tag__text">tagtagtagtagtagtagtag</span>
-					</li>
-					<li class="tag">
-						<span class="tag__text">Tag3</span>
+					<li class="tag om-no-break-text om-transition" *ngFor="let tag of (workspace$|async)?.tags">
+						<span class="tag__text">{{tag}}</span>
 					</li>
 				</ul>
+				<div class="options">
+					<a class="rounded-button om-button">
+						<i class="uil uil-info-circle"></i>
+					</a>
+					<a [routerLink]="'/workspace/' + (workspace$|async)?.profile?.name" class="rounded-button om-button" style="margin-right: .25rem;">
+						<i class="uil uil-eye"></i>
+					</a>
+				</div>
 			</div>
 		</div>
-		<div class="content__footer">
-			<button class="button om-button">Detalles</button>
-			<button class="button om-button">Visitar</button>
-		</div>
+		<!--<div class="content__footer">
+			<button class="button">
+				i.uil.uil-
+			</button>
+		</div>-->
 	</div>
 </div>

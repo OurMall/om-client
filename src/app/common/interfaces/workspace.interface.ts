@@ -15,3 +15,12 @@ export interface WorkspaceCreate {
 	tags: string[];
 	services: any[];
 }
+
+export interface Workspace extends WorkspaceCreate {
+	suscribers: any[];
+	products: any[];
+	notifications: any[];
+	is_verified: boolean;
+	created_at: Date;
+	updated_at: Date;
+}

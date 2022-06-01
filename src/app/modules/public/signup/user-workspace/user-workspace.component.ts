@@ -1,17 +1,20 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Category, Service } from '@app/common/interfaces';
 import { CategoryService, ServiceService, WorkspaceService } from '@app/common/services';
-import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-user-workspace',
 	templateUrl: './user-workspace.component.html',
 	styleUrls: ['./user-workspace.component.scss'],
 })
-export class UserWorkspaceComponent implements OnInit, AfterViewInit {
+export class UserWorkspaceComponent implements OnInit, OnDestroy {
+
+	private subscriptions: Subscription[] = [];
+
 	categories$: Observable<Category[]> = this.categoryService.categories$;
 	services$: Observable<Service[]> = this.serviceService.services$;
 	servicesList: any[] = [];
@@ -24,7 +27,13 @@ export class UserWorkspaceComponent implements OnInit, AfterViewInit {
 		private categoryService: CategoryService,
 		private serviceService: ServiceService,
 		private workspaceService: WorkspaceService
-	) {
+	) {  }
+
+	ngOnInit(): void {
+		this.subscriptions.push(
+			this.categoryService.categories().subscribe(),
+			this.serviceService.services().subscribe()
+		);
 		this.userWorkspaceForm = this.fb.group({
 			profile: this.fb.group({
 				name: [null, [Validators.required]],
@@ -38,22 +47,17 @@ export class UserWorkspaceComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	ngOnInit(): void {
-		this.categoryService.categories().subscribe();
-		this.serviceService.services().subscribe();
-	}
-
-	ngAfterViewInit(): void {}
-
 	onSubmit(): void {
 		this.userWorkspaceForm.patchValue({
 			services: this.servicesList,
 		});
-		this.workspaceService.createWorkspace(this.userWorkspaceForm.value).subscribe({
-			complete: () => {
-				this.router.navigateByUrl('profile');
-			},
-		});
+		this.subscriptions.push(
+			this.workspaceService.createWorkspace(this.userWorkspaceForm.value).subscribe({
+				complete: () => {
+					this.router.navigateByUrl('profile');
+				},
+			})
+		);
 	}
 
 	addServiceToList(service: any, input: HTMLInputElement): void {
@@ -65,7 +69,12 @@ export class UserWorkspaceComponent implements OnInit, AfterViewInit {
 			const index = this.servicesList.indexOf(element);
 			this.servicesList.splice(index, 1);
 		}
-		console.log(this.servicesList);
+	}
+
+	ngOnDestroy(): void {
+		this.subscriptions.forEach((subscription) => {
+			subscription.unsubscribe();
+		});
 	}
 
 	get name() {
