@@ -68,11 +68,11 @@
 			</small>
 		</div>
 	</div>
-	<div class="om-field">
+	<div class="om-field" formGroupName="category">
 		<label for="category" class="om-field-label">Categor&iacute;a</label>
-		<select formControlName="category" class="om-input" id="category">
+		<select formControlName="code_name" class="om-input" id="category">
 			<option selected disabled>Seleccionar categor&iacute;a</option>
-			<option *ngFor="let category of categories$ | async" [value]="category.name">
+			<option *ngFor="let category of categories$ | async" [value]="category.code_name">
 				{{ category.name }}
 			</option>
 		</select>

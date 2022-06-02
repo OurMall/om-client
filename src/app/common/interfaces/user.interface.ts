@@ -1,3 +1,5 @@
+import { Workspace } from "./workspace.interface";
+
 export interface UserLogin {
 	email: string;
 	password?: string;
@@ -26,6 +28,7 @@ export interface UserSignup extends UserLogin {
 export interface User extends UserSignup {
 	name: string;
 	profile: any;
+	workspaces: Workspace[];
 	created_at: Date;
 	updated_at: Date;
 }

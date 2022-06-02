@@ -1,4 +1,5 @@
 export interface CategoryCreate {
+	code_name: string;
 	name: string;
 	description: string;
 }

@@ -41,7 +41,9 @@ export class UserWorkspaceComponent implements OnInit, OnDestroy {
 				slogan: [null, [Validators.maxLength(100)]],
 				logo: [null, [Validators.required]],
 			}),
-			category: [null, [Validators.required]],
+			category: this.fb.group({
+				code_name: [null, [Validators.required]]
+			}),
 			services: [null, [Validators.required]],
 			tags: [[], []],
 		});
@@ -94,7 +96,7 @@ export class UserWorkspaceComponent implements OnInit, OnDestroy {
 	}
 
 	get category() {
-		return this.userWorkspaceForm.get('category');
+		return this.userWorkspaceForm.get('category.code_name');
 	}
 
 	get services() {

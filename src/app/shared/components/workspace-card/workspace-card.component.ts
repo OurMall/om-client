@@ -10,7 +10,7 @@ import { Workspace } from '@app/common/interfaces';
 })
 export class WorkspaceCardComponent implements OnInit {
 
-	@Input() workspace$!: Observable<Workspace>;
+	@Input() workspace$!: Workspace;
 
 	constructor() {}
 
