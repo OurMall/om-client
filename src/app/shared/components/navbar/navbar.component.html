@@ -124,6 +124,7 @@
 				(isLoggedIn$ | async) ? (user$ | async)?.given_name?.trim() : "Perfil"
 			}}</span>
 		</a>
+		<app-account></app-account>
 		<ng-container *ngIf="isLoggedIn$ | async; else notProfile">
 			<button class="om-icon-button">
 				<i class="icon uil uil-bell"></i>
@@ -136,4 +137,3 @@
 		</ng-template>
 	</div>
 </nav>
-<app-account></app-account>
