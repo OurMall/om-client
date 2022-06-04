@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, filter, Observable, Subject, take, tap, throwError } from 'rxjs';
 
-import { User } from '@app/common/interfaces';
+import { ApiResponse, User } from '@app/common/interfaces';
 import { MessageService } from '@app/common/services';
 
 @Injectable({
@@ -34,6 +34,19 @@ export class UserService {
 				return throwError(() => console.log(err));
 			})
 		);
+	}
+
+	editAccount(account: User): Observable<any> {
+		return this.http.patch(`${this.prefix}/account/`, account).pipe(
+			tap({
+				next: (response) => {
+					console.log(response);
+				}
+			}),
+			catchError((err: HttpErrorResponse) => {
+				return throwError(() => console.log(err));
+			})
+		)
 	}
 
 	addGroupToUser(code_name: string): Observable<any> {

@@ -26,6 +26,7 @@ export interface UserSignup extends UserLogin {
 }
 
 export interface User extends UserSignup {
+	id: string;
 	name: string;
 	profile: any;
 	workspaces: Workspace[];

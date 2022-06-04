@@ -2,28 +2,33 @@
 	<div class="account__container">
 		<div class="account__container__content">
 			<div class="heading">
-				<div class="image">
-					<img
-						class="picture"
-						[src]="
-							(isLoggedIn$ | async)
-								? (user$ | async)?.profile.picture
-								: 'assets/images/profile.png'
-						"
-						[alt]="(user$ | async)?.name"
-					/>
+				<div class="heading__info">
+					<div class="image">
+						<img
+							class="picture"
+							[src]="
+								(isLoggedIn$ | async)
+									? (user$ | async)?.profile.picture
+									: 'assets/images/profile.png'
+							"
+							[alt]="(user$ | async)?.name"
+						/>
+					</div>
+					<div class="profile">
+						<h3 class="name om-no-break-text">
+							{{ (isLoggedIn$ | async) ? (user$ | async)?.name : "Cuenta" }}
+						</h3>
+						<ng-container *ngIf="isLoggedIn$ | async">
+							<span class="identifier om-no-break-text">
+								{{ (user$|async)?.id }}
+							</span>
+						</ng-container>
+					</div>
 				</div>
-				<div class="profile">
-					<h3 class="name">
-						{{
-							(isLoggedIn$ | async) ? (user$ | async)?.name : "Account Name"
-						}}
-					</h3>
-					<a
-						[routerLink]="(isLoggedIn$ | async) ? 'profile' : 'login'"
-						role="link"
-						>{{ (isLoggedIn$ | async) ? "Ver perfil" : "Iniciar session" }}</a
-					>
+				<div class="heading__options">
+					<a [routerLink]="(isLoggedIn$ | async) ? 'profile' : 'login'" routerLinkActive="om-button-active" role="link" class="redirect-button om-button">
+						{{ (isLoggedIn$ | async) ? "Ver perfil" : "Iniciar session" }}
+					</a>
 				</div>
 			</div>
 			<div class="body">

@@ -4,52 +4,91 @@
 			<div class="account">
 				<div class="account__information">
 					<div class="picture">
-						<img
-							[src]="(user$ | async)?.profile.picture"
-							alt="{{(user$ | async)?.name}} picture"
-						/>
+						<img [src]="(user$ | async)?.profile.picture" alt="{{(user$ | async)?.name}} picture" />
 					</div>
-					<div class="profile">
-						<div class="profile__data">
+					<div class="user">
+						<div class="user__data">
 							<h1 class="userinfo">
 								<span class="name om-no-break-text">{{ (user$ | async)?.name }}</span>
 								<span class="username om-no-break-text">{{ (user$ | async)?.email }}</span>
 							</h1>
-							<p
-								class="biography"
-								*ngIf="(user$ | async)?.profile.biography"
-							>
+							<p class="biography" *ngIf="(user$ | async)?.profile.biography">
 								{{ (user$ | async)?.profile.biography }}
 							</p>
-							<button class="om-button om-transition">Editar perfil</button>
+							<button *ngIf="!(isEditingProfile$|async)" class="om-button om-transition"
+								(click)="changeEditProfileStatus(isEditingProfile)">
+								Editar perfil
+							</button>
 						</div>
-						<ul class="details">
-							<ng-container [ngSwitch]="(user$ | async)?.gender">
-								<li class="detail">
-									<i class="icon uil uil-user-circle"></i>
-									<span *ngSwitchCase="'male'">Masculino</span>
-									<span *ngSwitchCase="'female'">Femenino</span>
-									<span *ngSwitchCase="'other'">Otro</span>
+						<ng-container *ngIf="(isEditingProfile$ | async); else noEditingProfile">
+							<form [formGroup]="profileForm" class="user__edit" (ngSubmit)="onSubmit()">
+								<div class="om-field">
+									<label for="biography" class="om-field-label om-optional-label">
+										Biograf&iacute;a
+									</label>
+									<textarea formControlName="biography" id="biography" cols="10" rows="5"
+										class="om-input" style="resize: none;"
+										placeholder="Describete a ti y lo que haces"
+										[value]="(user$|async)?.profile.biography"></textarea>
+									<div class="om-field-error"
+										*ngIf="biography?.invalid && (biography?.touched || biography?.dirty)">
+										<small class="om-error-text" *ngIf="biography?.errors?.['maxlength']">
+											M&aacute;ximo 500 caracteres
+										</small>
+										<small class="om-error-text" *ngIf="biography?.errors?.['minlength']">
+											M&iacute;nimo 10 caracteres
+										</small>
+									</div>
+								</div>
+								<div class="om-field-group">
+									<div class="om-field">
+										<label for="website" class="om-field-label om-optional-label">
+											Sitio web
+										</label>
+										<input formControlName="website" type="url" id="website" class="om-input"
+											placeholder="https://example.com" [value]="(user$|async)?.profile.website">
+									</div>
+								</div>
+								<div class="om-field-group">
+									<div class="om-field">
+										<button class="om-button {{!profileForm.valid ? 'om-button-disabled' : ''}}"
+											role="button" [disabled]="!profileForm.valid">
+											Guardar
+										</button>
+									</div>
+									<div class="om-field">
+										<button class="om-button" role="button" type="button"
+											(click)="changeEditProfileStatus(isEditingProfile)">
+											Cancelar
+										</button>
+									</div>
+								</div>
+							</form>
+						</ng-container>
+						<ng-template #noEditingProfile>
+							<ul class="details">
+								<ng-container [ngSwitch]="(user$ | async)?.gender">
+									<li class="detail">
+										<i class="icon uil uil-user-circle"></i>
+										<span *ngSwitchCase="'male'">Masculino</span>
+										<span *ngSwitchCase="'female'">Femenino</span>
+										<span *ngSwitchCase="'other'">Otro</span>
+									</li>
+								</ng-container>
+								<li class="detail" *ngIf="(user$ | async)?.profile.website">
+									<i class="icon uil uil-paperclip"></i>
+									<a [href]="
+											secureRedirection(
+												(user$ | async)?.profile.website
+											)
+										" target="_blank" class="link om-transition">{{ (user$ | async)?.profile.website }}</a>
 								</li>
-							</ng-container>
-							<li class="detail" *ngIf="(user$ | async)?.profile.website">
-								<i class="icon uil uil-paperclip"></i>
-								<a
-									[href]="
-										secureRedirection(
-											(user$ | async)?.profile.website
-										)
-									"
-									target="_blank"
-									class="link om-transition"
-									>{{ (user$ | async)?.profile.website }}</a
-								>
-							</li>
-							<li class="detail">
-								<i class="icon uil uil-calendar-alt"></i>
-								<span>{{ (user$ | async)?.created_at | date }}</span>
-							</li>
-						</ul>
+								<li class="detail">
+									<i class="icon uil uil-calendar-alt"></i>
+									<span>{{ (user$ | async)?.created_at | date }}</span>
+								</li>
+							</ul>
+						</ng-template>
 					</div>
 				</div>
 			</div>
@@ -59,7 +98,8 @@
 				<h2 class="title">Espacios de trabajo</h2>
 				<div class="content">
 					<ng-container *ngIf="(user$|async)?.workspaces!.length >= 1; else noWorkspace">
-						<app-workspace-card *ngFor="let workspace of (workspaces$|async)" [workspace$]="workspace"></app-workspace-card>
+						<app-workspace-card *ngFor="let workspace of (workspaces$|async)" [workspace$]="workspace">
+						</app-workspace-card>
 					</ng-container>
 					<ng-template #noWorkspace>
 						No workspace
