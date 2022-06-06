@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 
 import { MessageService, UserService } from '@app/common/services';
 import { User, Workspace } from '@app/common/interfaces';
@@ -19,7 +19,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	user$: Observable<User> = this.userService.user$;
 	subscriptions: Subscription[] = [];
 	isEditingProfile: boolean = false;
-	profileForm!: FormGroup;
+	accountForm!: FormGroup;
+	user_id!: string;
 
 	constructor(
 		private readonly sanitizer: DomSanitizer,
@@ -32,11 +33,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		this.subscriptions.push(
 			this.userService.account().subscribe(user => {
 				this.workspaceSubject$.next(user.workspaces);
+				this.user_id = user.id;
 			})
 		);
-		this.profileForm = this.fb.group({
-			biography: [null, [Validators.nullValidator, Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
-			website: [null, [Validators.nullValidator]]
+		this.accountForm = this.fb.group({
+			profile: this.fb.group({
+				picture: ['', []],
+				biography: [null, [Validators.minLength(10), Validators.maxLength(500)]],
+				website: [null, []]
+			})
 		});
 	}
 
@@ -47,7 +52,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 	changeEditProfileStatus(currentStatus: boolean): void {
 		this.isEditingProfile = !currentStatus;
-		if(!this.isEditingProfile) {
+		if(!this.isEditingProfile || this.isEditingProfile) {
 			this.subscriptions.push(
 				this.userService.account().subscribe()
 			);
@@ -56,13 +61,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	}
 
 	onSubmit(): void {
-		if(!this.profileForm.valid) {
+		if(!this.accountForm.valid) {
 			this.message.error("Rellena la información requerida");
 			return;
 		}
-		console.log(this.profileForm.value);
 		this.subscriptions.push(
-			this.userService.editAccount(this.profileForm.value).subscribe()
+			this.userService.editAccount(this.user_id, this.accountForm.value).subscribe({
+				complete: () => {
+					this.changeEditProfileStatus(this.isEditingProfile);
+				}
+			})
 		);
 	}
 
@@ -80,11 +88,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		return this.isEditingProfileSubject$.asObservable();
 	}
 
+	get picture() {
+		return this.accountForm.get('profile.picture');
+	}
+
 	get biography() {
-		return this.profileForm.get('biography');
+		return this.accountForm.get('profile.biography');
 	}
 
 	get website() {
-		return this.profileForm.get('website');
+		return this.accountForm.get('profile.website');
 	}
 }

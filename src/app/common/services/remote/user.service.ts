@@ -31,19 +31,25 @@ export class UserService {
 				},
 			}),
 			catchError((err: HttpErrorResponse) => {
-				return throwError(() => console.log(err));
+				return throwError(() => err);
 			})
 		);
 	}
 
-	editAccount(account: User): Observable<any> {
-		return this.http.patch(`${this.prefix}/account/`, account).pipe(
+	editAccount(id: string, account: User): Observable<any> {
+		console.log(account);
+		return this.http.patch(`${this.prefix}/account/${id}`, account, {
+		}).pipe(
 			tap({
 				next: (response) => {
 					console.log(response);
+				},
+				complete: () => {
+					this.message.success("Tu cuenta ha sido actualizada", "Completado");
 				}
 			}),
 			catchError((err: HttpErrorResponse) => {
+				this.message.error("Parece que hubo un error", "Oh-no!")
 				return throwError(() => console.log(err));
 			})
 		)

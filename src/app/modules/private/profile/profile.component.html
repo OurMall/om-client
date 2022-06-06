@@ -12,7 +12,7 @@
 								<span class="name om-no-break-text">{{ (user$ | async)?.name }}</span>
 								<span class="username om-no-break-text">{{ (user$ | async)?.email }}</span>
 							</h1>
-							<p class="biography" *ngIf="(user$ | async)?.profile.biography">
+							<p class="biography">
 								{{ (user$ | async)?.profile.biography }}
 							</p>
 							<button *ngIf="!(isEditingProfile$|async)" class="om-button om-transition"
@@ -21,38 +21,49 @@
 							</button>
 						</div>
 						<ng-container *ngIf="(isEditingProfile$ | async); else noEditingProfile">
-							<form [formGroup]="profileForm" class="user__edit" (ngSubmit)="onSubmit()">
-								<div class="om-field">
-									<label for="biography" class="om-field-label om-optional-label">
-										Biograf&iacute;a
-									</label>
-									<textarea formControlName="biography" id="biography" cols="10" rows="5"
-										class="om-input" style="resize: none;"
-										placeholder="Describete a ti y lo que haces"
-										[value]="(user$|async)?.profile.biography"></textarea>
-									<div class="om-field-error"
-										*ngIf="biography?.invalid && (biography?.touched || biography?.dirty)">
-										<small class="om-error-text" *ngIf="biography?.errors?.['maxlength']">
-											M&aacute;ximo 500 caracteres
-										</small>
-										<small class="om-error-text" *ngIf="biography?.errors?.['minlength']">
-											M&iacute;nimo 10 caracteres
-										</small>
+							<form [formGroup]="accountForm" class="user__edit" (ngSubmit)="onSubmit()">
+								<ng-container formGroupName="profile">
+									<div class="om-field-group">
+										<div class="om-field">
+											<label for="picture" class="om-field-label">
+												Foto de perfil
+											</label>
+											<input formControlName="picture" type="url" id="picture" class="om-input"
+												placeholder="https://example.com/picture.png" [value]="(user$|async)?.profile.picture">
+										</div>
 									</div>
-								</div>
-								<div class="om-field-group">
 									<div class="om-field">
-										<label for="website" class="om-field-label om-optional-label">
-											Sitio web
+										<label for="biography" class="om-field-label om-optional-label">
+											Biograf&iacute;a
 										</label>
-										<input formControlName="website" type="url" id="website" class="om-input"
-											placeholder="https://example.com" [value]="(user$|async)?.profile.website">
+										<textarea formControlName="biography" id="biography" cols="10" rows="5"
+											class="om-input" style="resize: none;"
+											placeholder="Describete a ti y lo que haces"
+											[value]="(user$|async)?.profile.biography"></textarea>
+										<div class="om-field-error"
+											*ngIf="biography?.invalid && (biography?.touched || biography?.dirty)">
+											<small class="om-error-text" *ngIf="biography?.errors?.['maxlength']">
+												M&aacute;ximo 500 caracteres
+											</small>
+											<small class="om-error-text" *ngIf="biography?.errors?.['minlength']">
+												M&iacute;nimo 10 caracteres
+											</small>
+										</div>
 									</div>
-								</div>
+									<div class="om-field-group">
+										<div class="om-field">
+											<label for="website" class="om-field-label om-optional-label">
+												Sitio web
+											</label>
+											<input formControlName="website" type="url" id="website" class="om-input"
+												placeholder="https://example.com" [value]="(user$|async)?.profile?.website">
+										</div>
+									</div>
+								</ng-container>
 								<div class="om-field-group">
 									<div class="om-field">
-										<button class="om-button {{!profileForm.valid ? 'om-button-disabled' : ''}}"
-											role="button" [disabled]="!profileForm.valid">
+										<button class="om-button {{!accountForm.valid ? 'om-button-disabled' : ''}}"
+											role="button" [disabled]="!accountForm.valid">
 											Guardar
 										</button>
 									</div>
@@ -75,7 +86,7 @@
 										<span *ngSwitchCase="'other'">Otro</span>
 									</li>
 								</ng-container>
-								<li class="detail" *ngIf="(user$ | async)?.profile.website">
+								<li class="detail">
 									<i class="icon uil uil-paperclip"></i>
 									<a [href]="
 											secureRedirection(
