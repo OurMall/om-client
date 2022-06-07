@@ -15,6 +15,12 @@ export interface Groups {
 	value: string;
 }
 
+export interface Profile {
+	picture?: string;
+	website?: string;
+	biography?: string;
+}
+
 export interface UserSignup extends UserLogin {
 	given_name: string;
 	family_name: string;
@@ -28,7 +34,7 @@ export interface UserSignup extends UserLogin {
 export interface User extends UserSignup {
 	id: string;
 	name: string;
-	profile: any;
+	profile: Profile;
 	workspaces: Workspace[];
 	created_at: Date;
 	updated_at: Date;

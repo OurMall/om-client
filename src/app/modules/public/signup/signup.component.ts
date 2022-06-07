@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-signup',
@@ -9,7 +10,9 @@ export class SignupComponent implements OnInit {
 	stepper!: number;
 	role: string = 'seller';
 
-	constructor() {}
+	constructor(
+		private readonly router: Router
+	) {}
 
 	ngOnInit(): void {
 		this.stepper = 1;
@@ -27,5 +30,9 @@ export class SignupComponent implements OnInit {
 
 	setUserRole(newRole: string): void {
 		this.role = newRole;
+	}
+
+	onFinish(): void {
+		this.router.navigateByUrl('profile');
 	}
 }

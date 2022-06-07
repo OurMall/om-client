@@ -16,7 +16,7 @@
 		margin: 2rem 0;
 
 		.card-role-option {
-			max-width: 300px;
+			max-width: 320px;
 			height: 15rem;
 			display: flex;
 			flex-direction: column;
@@ -47,10 +47,13 @@
 				justify-content: center;
 				align-items: center;
 				padding: 0 1.5rem;
+				overflow: hidden;
 
 				.description {
 					text-align: center;
 					margin-bottom: 0.85rem;
+					max-height: 70px;
+					overflow-y: auto;
 				}
 
 				input,
@@ -64,7 +67,7 @@
 
 					&:checked {
 						outline: rgba($color: variables.$light-color, $alpha: 1) solid 1px;
-						background-color: green;
+						background-color: variables.$main-color;
 					}
 				}
 

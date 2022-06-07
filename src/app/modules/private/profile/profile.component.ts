@@ -45,8 +45,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	secureRedirection(url: string): string {
-		const secure = this.sanitizer.bypassSecurityTrustUrl(url);
+	secureRedirection(url?: string): string {
+		const secure = this.sanitizer.bypassSecurityTrustUrl(url!);
 		return secure as string;
 	}
 

@@ -4,7 +4,7 @@
 			<div class="account" *ngIf="user$|async; let user">
 				<div class="account__information">
 					<div class="picture">
-						<img [src]="user?.profile.picture" alt="{{user?.name}} picture" />
+						<img [src]="user?.profile?.picture" alt="{{user?.name}} picture" />
 					</div>
 					<div class="user">
 						<div class="user__data">
@@ -13,7 +13,7 @@
 								<span class="username om-no-break-text">{{ user?.email }}</span>
 							</h1>
 							<p class="biography">
-								{{ user?.profile.biography }}
+								{{ user?.profile?.biography }}
 							</p>
 							<button *ngIf="!(isEditingProfile$|async)" class="om-button om-transition"
 								(click)="changeEditProfileStatus(isEditingProfile)">
@@ -29,7 +29,7 @@
 												Foto de perfil
 											</label>
 											<input formControlName="picture" type="url" id="picture" class="om-input"
-												placeholder="https://example.com/picture.png" [value]="user?.profile.picture">
+												placeholder="https://example.com/picture.png" [value]="user?.profile?.picture">
 										</div>
 									</div>
 									<div class="om-field">
@@ -39,7 +39,7 @@
 										<textarea formControlName="biography" id="biography" cols="10" rows="5"
 											class="om-input" style="resize: none;"
 											placeholder="Describete a ti y lo que haces"
-											[value]="user?.profile.biography"></textarea>
+											[value]="user?.profile?.biography"></textarea>
 										<div class="om-field-error"
 											*ngIf="biography?.invalid && (biography?.touched || biography?.dirty)">
 											<small class="om-error-text" *ngIf="biography?.errors?.['maxlength']">
@@ -86,13 +86,13 @@
 										<span *ngSwitchCase="'other'">Otro</span>
 									</li>
 								</ng-container>
-								<li class="detail" *ngIf="user?.profile.website != null">
+								<li class="detail" *ngIf="user?.profile?.website != null">
 									<i class="icon uil uil-paperclip"></i>
 									<a [href]="
 											secureRedirection(
-												user.profile.website
+												user?.profile?.website
 											)
-										" target="_blank" class="link om-transition">{{ user?.profile.website }}</a>
+										" target="_blank" class="link om-transition">{{ user?.profile?.website }}</a>
 								</li>
 								<li class="detail">
 									<i class="icon uil uil-calendar-alt"></i>

@@ -3,7 +3,6 @@ import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angu
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { Groups } from '@app/common/interfaces';
 import { MessageService, UserService } from '@app/common/services';
 
 @Component({
@@ -15,7 +14,7 @@ export class UserRoleComponent implements OnInit, OnDestroy {
 
 	private subscription: Subscription = new Subscription();
 
-	roles: Groups[];
+	groupsModel: any[];
 	roleForm!: FormGroup;
 
 	@Input() currentStep!: number;
@@ -27,13 +26,19 @@ export class UserRoleComponent implements OnInit, OnDestroy {
 		private message: MessageService,
 		private userService: UserService,
 	) {
-		this.roles = [
+		this.groupsModel = [
 			{
-				value: 'client',
+				code_name: "client",
+				title: "Cliente",
+				icon: "uil uil-user",
+				description: "Visita los espacios de trabajo, consume los servicios, suscríbete a los que más te gustan.",
 			},
 			{
-				value: 'seller',
-			},
+				code_name: "seller",
+				title: "Vendedor",
+				icon: "uil uil-house-user",
+				description: "Crea tu espacio de trabajo, adquiere los servicios para el mismo y ofrece tus productos al público."
+			}
 		];
 	}
 

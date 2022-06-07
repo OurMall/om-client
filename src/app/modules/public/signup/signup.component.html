@@ -35,7 +35,7 @@
 				[title]="'Info'"
 				[description]="'Los campos con asterisco (*) son requeridos'"
 			></app-alert-message>
-			<!--<button (click)="incrementStep()">Step</button>-->
+			<button (click)="incrementStep()">Step</button>
 			<ng-template [ngIf]="stepper == 1">
 				<app-user-register
 					(nextStepEvent)="changeCurrentStep($event)"
@@ -53,7 +53,22 @@
 			<ng-template [ngIf]="stepper == 3">
 				<div [ngSwitch]="role">
 					<div *ngSwitchCase="'client'">
-
+						<div class="body__client">
+							<div class="content">
+								<div class="om-field">
+									<h1>Finalizado</h1>
+									<p>
+										Hemos terminado con tu registro, ahora podras visitar los espacios
+										que hayan creado e interactuar con la plataforma.
+									</p>
+								</div>
+								<div class="om-field">
+									<button type="button" class="om-button" role="button" (click)="onFinish()">
+										Finalizar
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div *ngSwitchCase="'seller'">
 						<app-user-workspace></app-user-workspace>

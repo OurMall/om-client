@@ -1,44 +1,22 @@
 <form [formGroup]="roleForm" (ngSubmit)="onContinue()" class="user__role-form">
 	<div class="container">
-		<label for="client" class="card-role-option">
+		<label *ngFor="let group of groupsModel" [for]="group.code_name" class="card-role-option">
 			<div class="header">
-				<h3 class="title">Cliente</h3>
+				<h3 class="title">{{ group.title }}</h3>
 				<div class="icon">
-					<i class="uil uil-user"></i>
+					<i class="{{group.icon}}"></i>
 				</div>
 			</div>
 			<div class="body">
 				<p class="description">
-					Visita los espacios de trabajo, consume los servicios que te ofrecen,
-					filtra busquedas y suscríbete a los que más te gustan.
+					{{ group.description }}
 				</p>
 				<input
 					formControlName="role"
-					[value]="roles[0].value"
+					[value]="group.code_name"
 					class="selector"
 					type="radio"
-					id="client"
-				/>
-			</div>
-		</label>
-		<label for="seller" class="card-role-option">
-			<div class="header">
-				<h3 class="title">Vendedor</h3>
-				<div class="icon">
-					<i class="uil uil-user"></i>
-				</div>
-			</div>
-			<div class="body">
-				<p class="description">
-					Crea tu espacio de trabajo, adquiere los servicios para el mismo y
-					ofrece tus productos al p&uacute;blico.
-				</p>
-				<input
-					formControlName="role"
-					[value]="roles[1].value"
-					class="selector"
-					type="radio"
-					id="seller"
+					[id]="group.code_name"
 				/>
 			</div>
 		</label>
