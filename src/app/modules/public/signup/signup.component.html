@@ -52,14 +52,15 @@
 			</ng-template>
 			<ng-template [ngIf]="stepper == 3">
 				<div [ngSwitch]="role">
-					<div *ngSwitchCase="'client'">client</div>
+					<div *ngSwitchCase="'client'">
+
+					</div>
 					<div *ngSwitchCase="'seller'">
 						<app-user-workspace></app-user-workspace>
 					</div>
 				</div>
 			</ng-template>
 		</div>
-		<!--<div class="footer">footer</div>-->
 	</div>
 	<svg
 		id="visual-wave"

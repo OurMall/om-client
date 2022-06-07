@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { ProfileComponent } from './profile.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 
@@ -15,6 +16,13 @@ const routes: Routes = [
 		},
 		component: VerifyAccountComponent,
 	},
+	{
+		path: ':id',
+		data: {
+			title: 'Perfil'
+		},
+		component: ProfileComponent
+	}
 ];
 
 @NgModule({

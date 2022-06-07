@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoggedInGuard } from '@app/common/guards';
+import { LoggedInGuard, NotLoggedGuard } from '@app/common/guards';
 
 const routes: Routes = [
 	{
@@ -22,6 +22,7 @@ const routes: Routes = [
 		data: {
 			title: 'Registrarse',
 		},
+		canActivate: [LoggedInGuard],
 		loadChildren: () =>
 			import('./modules/public/signup/signup.module').then((m) => m.SignupModule),
 	},
@@ -30,6 +31,7 @@ const routes: Routes = [
 		data: {
 			title: 'Iniciar sesión',
 		},
+		canActivate: [LoggedInGuard],
 		loadChildren: () =>
 			import('./modules/public/login/login.module').then((m) => m.LoginModule),
 	},
@@ -38,7 +40,7 @@ const routes: Routes = [
 		data: {
 			title: 'Perfil',
 		},
-		canActivate: [LoggedInGuard],
+		canActivate: [NotLoggedGuard],
 		loadChildren: () =>
 			import('./modules/private/profile/profile.module').then(
 				(m) => m.ProfileModule
@@ -53,7 +55,7 @@ const routes: Routes = [
 			import('./modules/public/support/support.module').then(
 				(m) => m.SupportModule
 			),
-		canActivate: [LoggedInGuard],
+		canActivate: [NotLoggedGuard],
 	},
 	{
 		path: '404',

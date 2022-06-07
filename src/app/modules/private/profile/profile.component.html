@@ -1,23 +1,23 @@
 <section class="profile om-section">
 	<div class="profile__container">
 		<aside class="profile__container__sidebar">
-			<div class="account">
+			<div class="account" *ngIf="user$|async; let user">
 				<div class="account__information">
 					<div class="picture">
-						<img [src]="(user$ | async)?.profile.picture" alt="{{(user$ | async)?.name}} picture" />
+						<img [src]="user?.profile.picture" alt="{{user?.name}} picture" />
 					</div>
 					<div class="user">
 						<div class="user__data">
 							<h1 class="userinfo">
-								<span class="name om-no-break-text">{{ (user$ | async)?.name }}</span>
-								<span class="username om-no-break-text">{{ (user$ | async)?.email }}</span>
+								<span class="name om-no-break-text">{{ user?.name }}</span>
+								<span class="username om-no-break-text">{{ user?.email }}</span>
 							</h1>
 							<p class="biography">
-								{{ (user$ | async)?.profile.biography }}
+								{{ user?.profile.biography }}
 							</p>
 							<button *ngIf="!(isEditingProfile$|async)" class="om-button om-transition"
 								(click)="changeEditProfileStatus(isEditingProfile)">
-								Editar perfil
+								Actualizar perfil
 							</button>
 						</div>
 						<ng-container *ngIf="(isEditingProfile$ | async); else noEditingProfile">
@@ -29,7 +29,7 @@
 												Foto de perfil
 											</label>
 											<input formControlName="picture" type="url" id="picture" class="om-input"
-												placeholder="https://example.com/picture.png" [value]="(user$|async)?.profile.picture">
+												placeholder="https://example.com/picture.png" [value]="user?.profile.picture">
 										</div>
 									</div>
 									<div class="om-field">
@@ -39,7 +39,7 @@
 										<textarea formControlName="biography" id="biography" cols="10" rows="5"
 											class="om-input" style="resize: none;"
 											placeholder="Describete a ti y lo que haces"
-											[value]="(user$|async)?.profile.biography"></textarea>
+											[value]="user?.profile.biography"></textarea>
 										<div class="om-field-error"
 											*ngIf="biography?.invalid && (biography?.touched || biography?.dirty)">
 											<small class="om-error-text" *ngIf="biography?.errors?.['maxlength']">
@@ -56,7 +56,7 @@
 												Sitio web
 											</label>
 											<input formControlName="website" type="url" id="website" class="om-input"
-												placeholder="https://example.com" [value]="(user$|async)?.profile?.website">
+												placeholder="https://example.com" [value]="user?.profile?.website">
 										</div>
 									</div>
 								</ng-container>
@@ -78,7 +78,7 @@
 						</ng-container>
 						<ng-template #noEditingProfile>
 							<ul class="details">
-								<ng-container [ngSwitch]="(user$ | async)?.gender">
+								<ng-container [ngSwitch]="user?.gender">
 									<li class="detail">
 										<i class="icon uil uil-user-circle"></i>
 										<span *ngSwitchCase="'male'">Masculino</span>
@@ -86,17 +86,17 @@
 										<span *ngSwitchCase="'other'">Otro</span>
 									</li>
 								</ng-container>
-								<li class="detail">
+								<li class="detail" *ngIf="user?.profile.website != null">
 									<i class="icon uil uil-paperclip"></i>
 									<a [href]="
 											secureRedirection(
-												(user$ | async)?.profile.website
+												user.profile.website
 											)
-										" target="_blank" class="link om-transition">{{ (user$ | async)?.profile.website }}</a>
+										" target="_blank" class="link om-transition">{{ user?.profile.website }}</a>
 								</li>
 								<li class="detail">
 									<i class="icon uil uil-calendar-alt"></i>
-									<span>{{ (user$ | async)?.created_at | date }}</span>
+									<span>{{ user?.created_at | date }}</span>
 								</li>
 							</ul>
 						</ng-template>
@@ -113,7 +113,17 @@
 						</app-workspace-card>
 					</ng-container>
 					<ng-template #noWorkspace>
-						No workspace
+						<div class="content__workspace">
+							<div class="title">
+								<h3>No tienes espacio de trabajo</h3>
+							</div>
+							<div class="body">
+								<i class="icon uil uil-store-slash"></i>
+								<button class="om-button">
+									Crear espacio
+								</button>
+							</div>
+						</div>
 					</ng-template>
 				</div>
 			</div>

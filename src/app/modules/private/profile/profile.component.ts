@@ -13,8 +13,8 @@ import { User, Workspace } from '@app/common/interfaces';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
-	private isEditingProfileSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-	private workspaceSubject$: BehaviorSubject<Workspace[]> = new BehaviorSubject<Workspace[]>([]);
+	private isEditingProfileSubject$: Subject<boolean> = new BehaviorSubject<boolean>(false);
+	private workspaceSubject$: Subject<Workspace[]> = new BehaviorSubject<Workspace[]>([]);
 
 	user$: Observable<User> = this.userService.user$;
 	subscriptions: Subscription[] = [];

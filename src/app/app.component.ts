@@ -1,5 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 
 import { RouteService, AuthorizationService } from '@app/common/services';
 
@@ -8,7 +7,8 @@ import { RouteService, AuthorizationService } from '@app/common/services';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterContentInit {
+
 	constructor(
 		private routeService: RouteService,
 		private authorizationService: AuthorizationService
@@ -16,6 +16,13 @@ export class AppComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.routeService.setRouteTitle();
-		this.authorizationService.authorizeKnownClient().subscribe();
+	}
+
+	ngAfterContentInit(): void {
+		this.authorizationService.knownToken$.subscribe(hasToken => {
+			if(!hasToken) {
+				this.authorizationService.authorizeKnownClient().subscribe();
+			}
+		});
 	}
 }

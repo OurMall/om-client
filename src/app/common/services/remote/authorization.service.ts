@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, filter, Observable, take, tap, throwError } from 'rxjs';
+import { catchError, filter, Observable, take, tap, throwError, BehaviorSubject } from 'rxjs';
 
 import { environment } from '@environment/environment';
 import { SessionStorageService } from '@app/common/services';
@@ -10,6 +10,9 @@ import { KnownToken } from '@app/common/interfaces';
 	providedIn: 'root',
 })
 export class AuthorizationService {
+
+	private _knownTokenSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 	constructor(
 		private sessionStorageService: SessionStorageService,
 		private readonly http: HttpClient
@@ -31,5 +34,14 @@ export class AuthorizationService {
 					return throwError(() => err);
 				})
 			);
+	}
+
+	hasKnownToken(): Observable<boolean> {
+		this.sessionStorageService.get('known_token') ? this._knownTokenSubject$.next(true) : this._knownTokenSubject$.next(false);
+		return this._knownTokenSubject$.asObservable();
+	}
+
+	get knownToken$(): Observable<boolean> {
+		return this.hasKnownToken();
 	}
 }

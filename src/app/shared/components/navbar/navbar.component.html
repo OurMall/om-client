@@ -61,7 +61,6 @@
 		</div>
 		<div class="header__options">
 			<ng-container *ngIf="isLoggedIn$ | async; else notLogged">
-				logged
 				<button class="om-icon-button" (click)="onLogout()">
 					<i class="icon uil uil-signout"></i>
 				</button>

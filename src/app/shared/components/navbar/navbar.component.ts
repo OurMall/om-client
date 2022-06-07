@@ -57,9 +57,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 		});
 	}
 
-	ngAfterViewInit(): void {
-		console.log('After view init');
-	}
+	ngAfterViewInit(): void {  }
 
 	ngOnDestroy(): void {
 		this.suscription.unsubscribe();

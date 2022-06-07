@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 	providedIn: 'root',
 })
 export class AuthenticationService {
+
 	private _accessToken$: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
 	constructor(
@@ -68,6 +69,7 @@ export class AuthenticationService {
 		);
 	}
 
+
 	hasAccessToken$(): Observable<boolean> {
 		this.localStorageService.get('access_token')
 			? this._accessToken$.next(true)
@@ -76,12 +78,7 @@ export class AuthenticationService {
 	}
 
 	hasAccessToken(): boolean {
-		if (!this.localStorageService.get('access_token')) {
-			this._accessToken$.next(false);
-			return false;
-		}
-		this._accessToken$.next(true);
-		return true;
+		return !!this.localStorageService.get("access_token");
 	}
 
 	get accessToken$(): Observable<boolean> {
