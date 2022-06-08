@@ -10,11 +10,12 @@ import { MessageService } from '@app/common/services';
 	providedIn: 'root',
 })
 export class UserService {
-	@Output() toggle: EventEmitter<boolean> = new EventEmitter();
+
 	private readonly prefix: string = 'user';
-	private isOpen: boolean = false;
 	private userSubject$: Subject<User> = new Subject<User>();
-	user$: Observable<User> = this.userSubject$.asObservable();
+	private isOpen: boolean = false;
+
+	@Output() toggle: EventEmitter<boolean> = new EventEmitter();
 
 	constructor(
 		private readonly http: HttpClient,
@@ -26,7 +27,6 @@ export class UserService {
 		return this.http.get<User>(`${this.prefix}/account/`).pipe(
 			tap({
 				next: (user) => {
-					console.log(user);
 					this.userSubject$.next(user);
 				},
 			}),
@@ -36,8 +36,17 @@ export class UserService {
 		);
 	}
 
+	specific_account(id: string): Observable<User> {
+		return this.http.get<User>(`${this.prefix}/account/${id}`).pipe(
+			take(1),
+			catchError((err: HttpErrorResponse) => {
+				this.message.error("No se encontró el perfil");
+				return throwError(() => err);
+			})
+		)
+	}
+
 	editAccount(id: string, account: User): Observable<any> {
-		console.log(account);
 		return this.http.patch(`${this.prefix}/account/${id}`, account, {
 		}).pipe(
 			tap({
@@ -58,14 +67,14 @@ export class UserService {
 	addGroupToUser(code_name: string): Observable<any> {
 		return this.http.post(`${this.prefix}/group`, code_name).pipe(
 			take(1),
-			tap((response) => {
-				console.log(response);
-			}),
 			catchError((err: HttpErrorResponse) => {
-				console.log(err);
 				return throwError(() => err);
 			})
 		);
+	}
+
+	sendAccountVerification(email: string): Observable<ApiResponse> {
+		return this.http.post<ApiResponse>(`${this.prefix}/account/sendVerification`, email);
 	}
 
 	verifyAccount(token: string): Observable<any> {
@@ -90,5 +99,9 @@ export class UserService {
 	toggleAccount(): void {
 		this.isOpen = !this.isOpen;
 		this.toggle.emit(this.isOpen);
+	}
+
+	get user$(): Observable<User> {
+		return this.userSubject$.asObservable();
 	}
 }

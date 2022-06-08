@@ -1,0 +1,104 @@
+@use "~src/assets/sass/variables";
+
+.account {
+	height: 100%;
+	display: block;
+	//flex-direction: column;
+	padding: 1rem 2.25rem;
+	overflow: hidden;
+
+	&__information {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+
+		.picture {
+			display: block;
+			width: 280px;
+			height: 280px;
+			//max-width: 280px;
+			//max-height: 280px;
+
+			img {
+				width: 100%;
+				height: 100%;
+				max-width: 280px;
+				max-height: 280px;
+				object-fit: cover;
+				border: 5px double rgba($color: variables.$nord-dark-alt-color, $alpha: 1);
+				border-radius: 50%;
+				overflow: hidden;
+			}
+		}
+
+		.user {
+			max-width: 300px;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			font-family: "Ubuntu", sans-serif;
+
+			&__data {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				padding: 1rem 0 0 0;
+
+				.userinfo {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					margin: 0 0 0.75rem 0;
+					text-align: center;
+
+					.name {
+						max-width: 200px;
+						line-height: 1.25;
+					}
+
+					.username {
+						max-width: 200px;
+						font-size: 1.25rem;
+						color: var(--nord-light-color);
+					}
+				}
+
+				.biography {
+					max-height: 70px;
+					font-size: 14px;
+					margin: 0.35rem 0;
+					overflow: auto;
+				}
+			}
+
+			.details {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				justify-content: center;
+				font-size: 15px;
+				margin-top: 0.35rem;
+
+				.detail {
+					display: flex;
+					align-items: center;
+					max-width: 300px;
+
+					.icon {
+						padding: 0.15rem 0.5rem;
+					}
+
+					.link {
+						color: variables.$light-color;
+
+						&:hover {
+							color: variables.$main-color;
+							text-decoration: underline;
+						}
+					}
+				}
+			}
+		}
+	}
+}

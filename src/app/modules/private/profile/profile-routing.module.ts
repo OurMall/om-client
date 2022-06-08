@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ProfileComponent } from './profile.component';
-import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import { VerifyAccountComponent } from './components';
 
 const routes: Routes = [
 	{
@@ -21,7 +21,7 @@ const routes: Routes = [
 		data: {
 			title: 'Perfil'
 		},
-		component: ProfileComponent
+		loadChildren: () => import('./specific-profile/specific-profile.module').then(m => m.SpecificProfileModule)
 	}
 ];
 

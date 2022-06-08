@@ -110,7 +110,7 @@
 				class="picture"
 				[src]="
 					(isLoggedIn$ | async)
-						? (user$ | async)?.profile.picture
+						? (user$ | async)?.profile?.picture
 						: 'assets/images/profile.png'
 				"
 				alt="{{

@@ -1,0 +1,44 @@
+<div class="account">
+	<div class="account__information">
+		<div class="picture">
+			<img [src]="user?.profile?.picture" alt="{{user?.name}} picture" />
+		</div>
+		<div class="user">
+			<div class="user__data">
+				<h1 class="userinfo">
+					<span class="name om-no-break-text">{{ user?.name }}</span>
+					<span class="username om-no-break-text">{{ user?.email }}</span>
+				</h1>
+				<p class="biography">
+					{{ user?.profile?.biography }}
+				</p>
+				<!-- CONTENT FROM PARENT COMPONENT -->
+				<ng-content select="[profile-info-option]"></ng-content>
+				<!-- CONTENT FROM PARENT COMPONENT -->
+			</div>
+			<ng-container *ngIf="!isEditingProfile">
+				<ul class="details">
+					<ng-container [ngSwitch]="user?.gender">
+						<li class="detail">
+							<i class="icon uil uil-user-circle"></i>
+							<span *ngSwitchCase="'male'">Masculino</span>
+							<span *ngSwitchCase="'female'">Femenino</span>
+							<span *ngSwitchCase="'other'">Otro</span>
+						</li>
+					</ng-container>
+					<li class="detail" *ngIf="user?.profile?.website != null">
+						<i class="icon uil uil-paperclip"></i>
+						<a [href]="secureRedirection(user?.profile?.website)"
+							target="_blank" class="link om-transition">
+							{{ user?.profile?.website }}
+						</a>
+					</li>
+					<li class="detail">
+						<i class="icon uil uil-calendar-alt"></i>
+						<span>{{ user?.created_at | date }}</span>
+					</li>
+				</ul>
+			</ng-container>
+		</div>
+	</div>
+</div>

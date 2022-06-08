@@ -1,108 +1,70 @@
 <section class="profile om-section">
 	<div class="profile__container">
 		<aside class="profile__container__sidebar">
-			<div class="account" *ngIf="user$|async; let user">
-				<div class="account__information">
-					<div class="picture">
-						<img [src]="user?.profile?.picture" alt="{{user?.name}} picture" />
-					</div>
-					<div class="user">
-						<div class="user__data">
-							<h1 class="userinfo">
-								<span class="name om-no-break-text">{{ user?.name }}</span>
-								<span class="username om-no-break-text">{{ user?.email }}</span>
-							</h1>
-							<p class="biography">
-								{{ user?.profile?.biography }}
-							</p>
-							<button *ngIf="!(isEditingProfile$|async)" class="om-button om-transition"
-								(click)="changeEditProfileStatus(isEditingProfile)">
-								Actualizar perfil
-							</button>
-						</div>
-						<ng-container *ngIf="(isEditingProfile$ | async); else noEditingProfile">
-							<form [formGroup]="accountForm" class="user__edit" (ngSubmit)="onSubmit()">
-								<ng-container formGroupName="profile">
-									<div class="om-field-group">
-										<div class="om-field">
-											<label for="picture" class="om-field-label">
-												Foto de perfil
-											</label>
-											<input formControlName="picture" type="url" id="picture" class="om-input"
-												placeholder="https://example.com/picture.png" [value]="user?.profile?.picture">
-										</div>
-									</div>
-									<div class="om-field">
-										<label for="biography" class="om-field-label om-optional-label">
-											Biograf&iacute;a
-										</label>
-										<textarea formControlName="biography" id="biography" cols="10" rows="5"
-											class="om-input" style="resize: none;"
-											placeholder="Describete a ti y lo que haces"
-											[value]="user?.profile?.biography"></textarea>
-										<div class="om-field-error"
-											*ngIf="biography?.invalid && (biography?.touched || biography?.dirty)">
-											<small class="om-error-text" *ngIf="biography?.errors?.['maxlength']">
-												M&aacute;ximo 500 caracteres
-											</small>
-											<small class="om-error-text" *ngIf="biography?.errors?.['minlength']">
-												M&iacute;nimo 10 caracteres
-											</small>
-										</div>
-									</div>
-									<div class="om-field-group">
-										<div class="om-field">
-											<label for="website" class="om-field-label om-optional-label">
-												Sitio web
-											</label>
-											<input formControlName="website" type="url" id="website" class="om-input"
-												placeholder="https://example.com" [value]="user?.profile?.website">
-										</div>
-									</div>
-								</ng-container>
+			<app-profile-info [user]="(user$|async)!" [isEditingProfile]="isEditingProfile">
+				<div class="edit__profile" profile-info-option *ngIf="user$|async; let user">
+					<button *ngIf="!(isEditingProfile$|async)" class="main-button om-button" (click)="changeEditProfileStatus(isEditingProfile)">
+						Actualizar Perfil
+					</button>
+					<ng-container *ngIf="(isEditingProfile$ | async)">
+						<form [formGroup]="accountForm" class="user__edit" (ngSubmit)="onSubmit()">
+							<ng-container formGroupName="profile">
 								<div class="om-field-group">
 									<div class="om-field">
-										<button class="om-button {{!accountForm.valid ? 'om-button-disabled' : ''}}"
-											role="button" [disabled]="!accountForm.valid">
-											Guardar
-										</button>
-									</div>
-									<div class="om-field">
-										<button class="om-button" role="button" type="button"
-											(click)="changeEditProfileStatus(isEditingProfile)">
-											Cancelar
-										</button>
+										<label for="picture" class="om-field-label">
+											Foto de perfil
+										</label>
+										<input formControlName="picture" type="url" id="picture" class="om-input"
+											placeholder="https://example.com/picture.png"
+											[value]="user?.profile?.picture">
 									</div>
 								</div>
-							</form>
-						</ng-container>
-						<ng-template #noEditingProfile>
-							<ul class="details">
-								<ng-container [ngSwitch]="user?.gender">
-									<li class="detail">
-										<i class="icon uil uil-user-circle"></i>
-										<span *ngSwitchCase="'male'">Masculino</span>
-										<span *ngSwitchCase="'female'">Femenino</span>
-										<span *ngSwitchCase="'other'">Otro</span>
-									</li>
-								</ng-container>
-								<li class="detail" *ngIf="user?.profile?.website != null">
-									<i class="icon uil uil-paperclip"></i>
-									<a [href]="
-											secureRedirection(
-												user?.profile?.website
-											)
-										" target="_blank" class="link om-transition">{{ user?.profile?.website }}</a>
-								</li>
-								<li class="detail">
-									<i class="icon uil uil-calendar-alt"></i>
-									<span>{{ user?.created_at | date }}</span>
-								</li>
-							</ul>
-						</ng-template>
-					</div>
+								<div class="om-field">
+									<label for="biography" class="om-field-label om-optional-label">
+										Biograf&iacute;a
+									</label>
+									<textarea formControlName="biography" id="biography" cols="10" rows="5"
+										class="om-input" style="resize: none;"
+										placeholder="Describete a ti y lo que haces"
+										[value]="user?.profile?.biography"></textarea>
+									<div class="om-field-error"
+										*ngIf="biography?.invalid && (biography?.touched || biography?.dirty)">
+										<small class="om-error-text" *ngIf="biography?.errors?.['maxlength']">
+											M&aacute;ximo 500 caracteres
+										</small>
+										<small class="om-error-text" *ngIf="biography?.errors?.['minlength']">
+											M&iacute;nimo 10 caracteres
+										</small>
+									</div>
+								</div>
+								<div class="om-field-group">
+									<div class="om-field">
+										<label for="website" class="om-field-label om-optional-label">
+											Sitio web
+										</label>
+										<input formControlName="website" type="url" id="website" class="om-input"
+											placeholder="https://example.com" [value]="user?.profile?.website">
+									</div>
+								</div>
+							</ng-container>
+							<div class="om-field-group">
+								<div class="om-field">
+									<button class="om-button form-button {{!accountForm.valid ? 'om-button-disabled' : ''}}"
+										role="button" [disabled]="!accountForm.valid">
+										Guardar
+									</button>
+								</div>
+								<div class="om-field">
+									<button class="om-button form-button" role="button" type="button"
+										(click)="changeEditProfileStatus(isEditingProfile)">
+										Cancelar
+									</button>
+								</div>
+							</div>
+						</form>
+					</ng-container>
 				</div>
-			</div>
+			</app-profile-info>
 		</aside>
 		<div class="profile__container__content" id="profile-content">
 			<div class="user-workspaces">

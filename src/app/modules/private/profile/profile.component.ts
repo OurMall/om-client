@@ -23,7 +23,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	user_id!: string;
 
 	constructor(
-		private readonly sanitizer: DomSanitizer,
 		private readonly fb: FormBuilder,
 		private userService: UserService,
 		private message: MessageService
@@ -43,11 +42,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 				website: [null, []]
 			})
 		});
-	}
-
-	secureRedirection(url?: string): string {
-		const secure = this.sanitizer.bypassSecurityTrustUrl(url!);
-		return secure as string;
 	}
 
 	changeEditProfileStatus(currentStatus: boolean): void {

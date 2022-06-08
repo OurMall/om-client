@@ -9,6 +9,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { AccountComponent } from './components/account/account.component';
 import { AlertMessageComponent } from './components/alert-message/alert-message.component';
 import { WorkspaceCardComponent } from './components/workspace-card/workspace-card.component';
+import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
 
 @NgModule({
 	declarations: [
@@ -18,6 +19,7 @@ import { WorkspaceCardComponent } from './components/workspace-card/workspace-ca
 		AccountComponent,
 		AlertMessageComponent,
 		WorkspaceCardComponent,
+		ProfileInfoComponent
 	],
 	imports: [CommonModule, RouterModule, KeyFilterModule],
 	exports: [
@@ -27,6 +29,7 @@ import { WorkspaceCardComponent } from './components/workspace-card/workspace-ca
 		AccountComponent,
 		AlertMessageComponent,
 		WorkspaceCardComponent,
+		ProfileInfoComponent
 	],
 })
 export class SharedModule {}
