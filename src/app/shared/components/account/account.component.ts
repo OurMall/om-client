@@ -37,9 +37,4 @@ export class AccountComponent implements OnInit {
 	logout(): void {
 		this.authenticationService.logOut();
 	}
-
-	@HostListener('window:scroll', ['$event'])
-	onScroll($event: Event): void {
-		//console.log($event);
-	}
 }

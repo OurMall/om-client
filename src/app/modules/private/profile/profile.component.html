@@ -70,8 +70,8 @@
 			<div class="user-workspaces">
 				<h2 class="title">Espacios de trabajo</h2>
 				<div class="content">
-					<ng-container *ngIf="(user$|async)?.workspaces!.length >= 1; else noWorkspace">
-						<app-workspace-card *ngFor="let workspace of (workspaces$|async)" [workspace$]="workspace">
+					<ng-container *ngIf="(workspaces$|async)!.length >= 1; else noWorkspace">
+						<app-workspace-card *ngFor="let workspace of (workspaces$|async)" [workspace]="workspace">
 						</app-workspace-card>
 					</ng-container>
 					<ng-template #noWorkspace>

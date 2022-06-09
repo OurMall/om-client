@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 
 import { Category } from '@app/common/interfaces';
-import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class CategoryService {
+
 	private categoriesSubject$: BehaviorSubject<Category[]> = new BehaviorSubject<
 		Category[]
 	>([]);
-	categories$: Observable<Category[]> = this.categoriesSubject$.asObservable();
 
 	constructor(private readonly http: HttpClient) {}
 
 	categories(): Observable<Category[]> {
 		return this.http.get<Category[]>('category').pipe(
 			tap({
-				next: (response) => {
-					this.categoriesSubject$.next(response);
+				next: (categories) => {
+					console.log(categories);
+					this.categoriesSubject$.next(categories);
 				},
 			}),
 			catchError((err: HttpErrorResponse) => {
@@ -29,4 +30,8 @@ export class CategoryService {
 	}
 
 	category(id: string): void {}
+
+	get categories$(): Observable<Category[]> {
+		return this.categoriesSubject$.asObservable();
+	}
 }

@@ -1,70 +1,66 @@
 @use "~src/assets/sass/variables";
 
-.support {
-	height: 85vh;
+.support__section {
 
 	.container {
+		max-width: 80%;
+		width: 100%;
 		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
+		margin: 0 auto;
 		padding: 0 1.5rem;
+		display: flex;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
 
-		.header {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
+		.ilustration {
+			max-width: 600px;
+			width: 50%;
+			//height: 400px;
+			justify-self: center;
 
-			.heading {
-				font-size: 3rem;
-				font-weight: 800;
-				letter-spacing: 1px;
-				margin-bottom: 0.5rem;
-
-				&::selection {
-					color: var(--main-color);
-				}
-			}
-
-			.subheading {
-				text-align: center;
-				letter-spacing: 1px;
-				font-size: 1.5rem;
-				margin-bottom: 1rem;
-				color: rgba($color: variables.$nord-light-color, $alpha: 0.5);
+			&__image {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
 			}
 		}
 
 		.content {
+			width: 40%;
+			max-width: 500px;
 			display: flex;
+			padding: 0 1rem 0 2rem;
 			flex-direction: column;
-			max-width: 80%;
-			padding: 1.5rem 0;
+			justify-content: flex-start;
 
-			.description {
-				font-size: 18px;
+			.subtitle {
+				font-size: 1.25rem;
+				margin-bottom: .35rem;
 			}
 
-			.help {
+			.title {
+				font-size: 3.25rem;
+				line-height: 50px;
+			}
+
+			.description {
+				padding: 1rem 0;
+				font-size: 14px;
+			}
+
+			.wrapper {
 				display: flex;
 				flex-direction: row;
 				flex-wrap: wrap;
 				align-items: center;
-				justify-content: center;
-				padding: 0.5rem 0.5rem;
-				margin-top: 1.5rem;
+				justify-content: space-between;
 
-				.separator {
-					margin: 0 1.5rem;
+				button {
+					min-width: 150px;
+					width: 40%;
 				}
 			}
-		}
-
-		.footer {
-			width: 50%;
-			display: flex;
-			flex-direction: column;
 		}
 	}
 }

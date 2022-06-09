@@ -1,6 +1,6 @@
-<div class="account" (scroll)="onScroll($event)">
+<div class="account">
 	<div class="account__container">
-		<div class="account__container__content">
+		<div class="account__container__content" *ngIf="user$|async; let user">
 			<div class="heading">
 				<div class="heading__info">
 					<div class="image">
@@ -8,19 +8,19 @@
 							class="picture"
 							[src]="
 								(isLoggedIn$ | async)
-									? (user$ | async)?.profile?.picture
+									? user?.profile?.picture
 									: 'assets/images/profile.png'
 							"
-							[alt]="(user$ | async)?.name"
+							[alt]="user.name"
 						/>
 					</div>
 					<div class="profile">
 						<h3 class="name om-no-break-text">
-							{{ (isLoggedIn$ | async) ? (user$ | async)?.name : "Cuenta" }}
+							{{ (isLoggedIn$ | async) ? user.name : "Cuenta" }}
 						</h3>
 						<ng-container *ngIf="isLoggedIn$ | async">
 							<span class="identifier om-no-break-text">
-								{{ (user$|async)?.id }}
+								{{ user.groups![0]?.name }}
 							</span>
 						</ng-container>
 					</div>
@@ -33,6 +33,12 @@
 			</div>
 			<div class="body">
 				<ng-container *ngIf="isLoggedIn$ | async; else notLogged">
+					<a [routerLink]="'support'" routerLinkActive="item-link-active" class="item-link">
+						<div class="icon">
+							<i class="uil uil-box"></i>
+						</div>
+						<span class="text">Soporte</span>
+					</a>
 					<a class="item-link" (click)="logout()">
 						<div class="icon">
 							<i class="uil uil-box"></i>

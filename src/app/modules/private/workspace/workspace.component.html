@@ -1,0 +1,27 @@
+<section class="workspaces__section om-section">
+	<div class="content">
+		<div class="om-container">
+			<aside class="side__panel">
+				<div class="side__panel__content">
+					<div class="panel__card">
+						<div class="head">
+							<h3>Categor&iacute;as ({{(categories$|async)?.length}})</h3>
+						</div>
+						<ul class="body">
+							<li class="body__element" *ngFor="let category of (categories$|async)">
+								<a class="om-link" routerLinkActive="om-link-active" [routerLink]="['./']" [queryParams]="{ category: category.code_name}" (click)="filterByCategory()">
+									{{category.name}}
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</aside>
+			<div class="wrapper">
+				<div class="wrapper__content">
+					<app-workspace-card *ngFor="let workspace of (workspaces$|async)" [workspace]="workspace"></app-workspace-card>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

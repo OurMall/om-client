@@ -1,19 +1,19 @@
 <div class="workspace__card om-shadow">
 	<div class="content">
 		<figure class="content__header">
-			<img class="content__header__image" [src]="workspace$?.profile?.logo" [alt]="workspace$?.profile?.name">
-			<figcaption class="om-no-break-text" [title]="workspace$?.profile?.slogan">
-				{{workspace$?.profile?.slogan}}
+			<img class="content__header__image" [src]="workspace?.profile?.logo != null ? workspace?.profile?.logo : 'https://png.pngtree.com/png-vector/20190511/ourmid/pngtree-workspace-design-png-image_1007618.jpg'" [alt]="workspace?.profile?.name">
+			<figcaption class="om-no-break-text" [title]="workspace?.profile?.slogan">
+				{{workspace?.profile?.slogan}}
 			</figcaption>
 		</figure>
 		<div class="content__body">
 			<div class="container">
 				<h2>
-					<span class="category">{{workspace$?.category.name}}</span>
-					<span class="name">{{workspace$?.profile?.name}}</span>
+					<span class="category">{{workspace?.category.name}}</span>
+					<span class="name">{{workspace?.profile?.name}}</span>
 				</h2>
 				<p class="description">
-					{{workspace$?.profile?.description}}
+					{{workspace?.profile?.description}}
 				</p>
 				<div class="rating">
 					<i class="uil uil-star"></i>
@@ -25,7 +25,7 @@
 			</div>
 			<div class="footer">
 				<ul class="tags">
-					<li class="tag om-no-break-text om-transition" *ngFor="let tag of workspace$?.tags">
+					<li class="tag om-no-break-text om-transition" *ngFor="let tag of workspace?.tags">
 						<span class="tag__text">{{tag}}</span>
 					</li>
 				</ul>
@@ -33,16 +33,11 @@
 					<a class="rounded-button om-button">
 						<i class="uil uil-info-circle"></i>
 					</a>
-					<a [routerLink]="'/workspace/' + workspace$?.profile?.name" class="rounded-button om-button" style="margin-right: .25rem;">
+					<a [routerLink]="'/workspaces/' + workspace?.id" class="rounded-button om-button" style="margin-right: .25rem;">
 						<i class="uil uil-eye"></i>
 					</a>
 				</div>
 			</div>
 		</div>
-		<!--<div class="content__footer">
-			<button class="button">
-				i.uil.uil-
-			</button>
-		</div>-->
 	</div>
 </div>

@@ -1,4 +1,4 @@
-import { Workspace } from "./workspace.interface";
+import { Workspace, Permission, Group } from './';
 
 export interface UserLogin {
 	email: string;
@@ -36,6 +36,8 @@ export interface User extends UserSignup {
 	name: string;
 	profile: Profile;
 	workspaces: Workspace[];
+	permissions: Permission[];
+	groups: Group[];
 	created_at: Date;
 	updated_at: Date;
 }

@@ -17,6 +17,7 @@ export interface WorkspaceCreate {
 }
 
 export interface Workspace extends WorkspaceCreate {
+	id: string;
 	suscribers: any[];
 	products: any[];
 	notifications: any[];

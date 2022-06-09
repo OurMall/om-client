@@ -113,6 +113,7 @@
 							margin-left: 1rem;
 						}
 
+						&-active,
 						&:hover {
 							background-color: rgba(
 								$color: variables.$nord-dark-color,
