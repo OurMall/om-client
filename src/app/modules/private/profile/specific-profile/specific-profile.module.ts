@@ -12,7 +12,7 @@ import { SharedModule } from '@app/shared/shared.module';
   imports: [
     CommonModule,
     SpecificProfileRoutingModule,
-	SharedModule
+	SharedModule,
   ]
 })
 export class SpecificProfileModule { }

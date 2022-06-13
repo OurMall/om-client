@@ -19,7 +19,6 @@ export class CategoryService {
 		return this.http.get<Category[]>('category').pipe(
 			tap({
 				next: (categories) => {
-					console.log(categories);
 					this.categoriesSubject$.next(categories);
 				},
 			}),

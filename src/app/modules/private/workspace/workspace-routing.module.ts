@@ -5,11 +5,14 @@ import { WorkspaceComponent } from './workspace.component';
 const routes: Routes = [
 	{
 		path: '',
+		data: {
+			title: 'Espacios de trabajo'
+		},
 		component: WorkspaceComponent
 	},
 	{
 		path: ':id',
-		component: WorkspaceComponent
+		loadChildren: () => import('./specific-workspace/specific-workspace.module').then(m => m.SpecificWorkspaceModule)
 	}
 ];
 

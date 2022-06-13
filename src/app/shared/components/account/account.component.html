@@ -1,6 +1,6 @@
 <div class="account">
 	<div class="account__container">
-		<div class="account__container__content" *ngIf="user$|async; let user">
+		<div class="account__container__content">
 			<div class="heading">
 				<div class="heading__info">
 					<div class="image">
@@ -8,17 +8,17 @@
 							class="picture"
 							[src]="
 								(isLoggedIn$ | async)
-									? user?.profile?.picture
+									? (user$|async)?.profile?.picture
 									: 'assets/images/profile.png'
 							"
-							[alt]="user.name"
+							[alt]="(user$|async)?.name"
 						/>
 					</div>
 					<div class="profile">
 						<h3 class="name om-no-break-text">
-							{{ (isLoggedIn$ | async) ? user.name : "Cuenta" }}
+							{{ (isLoggedIn$ | async) ? (user$|async)?.name : "Cuenta" }}
 						</h3>
-						<ng-container *ngIf="isLoggedIn$ | async">
+						<ng-container *ngIf="(isLoggedIn$ | async) && (user$ | async); let user">
 							<span class="identifier om-no-break-text">
 								{{ user.groups![0]?.name }}
 							</span>

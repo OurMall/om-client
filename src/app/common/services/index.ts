@@ -10,3 +10,4 @@ export {
 	UserService,
 	WorkspaceService,
 } from './remote';
+export { WorkspaceNamespace } from './sockets';

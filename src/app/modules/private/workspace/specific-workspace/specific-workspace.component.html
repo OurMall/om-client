@@ -1,0 +1,75 @@
+<main class="workspace__content om-section">
+	<div class="wrapper">
+		<div class="layout om-container">
+			<aside class="layout__sidebar" role="navigation">
+				<div class="sidebar__container">
+					<div class="workspace__info" *ngIf="workspace$|async; let workspace">
+						<div class="options">
+							<a role="button" class="go_back om-transition" (click)="leftFromWorkspace(workspace.id)" [title]="'Salir'">
+								<i class="uil uil-arrow-left"></i>
+							</a>
+							<span class="category">
+								{{workspace.category.name}}
+							</span>
+						</div>
+						<div class="brand">
+							<div class="brand__logo">
+								<img class="logo" [src]="workspace.profile.logo" [alt]="workspace.profile.name + ' logo'">
+							</div>
+							<div class="brand__name">
+								<h1 class="name om-no-break-text" role="heading" [title]="workspace.profile.name">{{ workspace.profile.name }}</h1>
+								<h3 class="slogan">{{ workspace.profile.slogan }}</h3>
+								<button type="submit" class="subscribe om-base-button" role="button">
+									Subscribe
+								</button>
+							</div>
+						</div>
+						<div class="description">
+							<span>
+								{{ workspace.profile.description }}
+							</span>
+						</div>
+						<div class="accesibility">
+							<h4>Acceso directo</h4>
+							<ul class="shortcuts">
+								<li class="shortcuts__element">
+									<a class="shortcut om-transition" [routerLink]="'./overview'" routerLinkActive="shortcut-active" role="link">
+										<i class="shortcut__icon uil uil-eye"></i>
+										<span>Overview</span>
+									</a>
+								</li>
+								<li class="shortcuts__element">
+									<a class="shortcut om-transition" [routerLink]="'./products'" routerLinkActive="shortcut-active" role="link">
+										<i class="shortcut__icon uil uil-shopping-bag"></i>
+										<span>Products</span>
+									</a>
+								</li>
+								<li class="shortcuts__element">
+									<a class="shortcut om-transition" [routerLink]="'./posts'" routerLinkActive="shortcut-active" role="link">
+										<i class="shortcut__icon uil uil-apps"></i>
+										<span>Posts</span>
+									</a>
+								</li>
+								<li class="shortcuts__element">
+									<a class="shortcut om-transition" [routerLink]="'./cashRegister'" routerLinkActive="shortcut-active" role="link">
+										<i class="shortcut__icon uil uil-money-withdrawal"></i>
+										<span>Cash register</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="sidebar__footer">
+						footer
+					</div>
+				</div>
+			</aside>
+			<section class="layout__main" role="main">
+				<router-outlet></router-outlet>
+			</section>
+			<div class="layout__panel" role="tab">
+				right
+			</div>
+		</div>
+	</div>
+</main>

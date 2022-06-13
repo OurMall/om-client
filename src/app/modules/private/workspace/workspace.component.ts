@@ -28,6 +28,7 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
 			this.workspaceService.workspaces().subscribe(),
 			this.categoryService.categories().subscribe()
 		);
+		this.filterByCategory();
 	}
 
 	filterByCategory(): void {

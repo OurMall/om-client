@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ToastrModule } from 'ngx-toastr';
+import { SocketIoModule } from 'ngx-socket-io';
 
 import { environment } from '@environment/environment';
 import { SharedModule } from '@shared/shared.module';
@@ -11,6 +12,7 @@ import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { EndpointInterceptor } from '@app/common/interceptors';
 import { LoggedInGuard, NotLoggedGuard } from '@app/common/guards';
+import { WorkspaceNamespace } from '@app/common/services';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -37,10 +39,12 @@ import { LoggedInGuard, NotLoggedGuard } from '@app/common/guards';
 			enabled: environment.production,
 			registrationStrategy: 'registerWhenStable:30000',
 		}),
+		SocketIoModule
 	],
 	providers: [
 		LoggedInGuard,
 		NotLoggedGuard,
+		WorkspaceNamespace,
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: EndpointInterceptor,

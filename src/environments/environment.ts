@@ -6,6 +6,7 @@ export const environment = {
 	production: false,
 	authorizationServer: {
 		endpoint: `http://localhost:8000`,
+		websocket_endpoint: `http://localhost:8000`,
 		application_id: 'well-known-client',
 		application_secret: '03072004',
 	},

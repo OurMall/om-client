@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, filter, Observable, Subject, take, tap, throwError } from 'rxjs';
+import { catchError, filter, map, Observable, Subject, take, tap, throwError } from 'rxjs';
 
 import { ApiResponse, User } from '@app/common/interfaces';
 import { MessageService } from '@app/common/services';
@@ -94,6 +94,15 @@ export class UserService {
 				return throwError(() => err);
 			})
 		);
+	}
+
+	hasGroup(code_name: string) {
+		this.user$.pipe(
+			map((user) => {
+				console.log(user.groups);
+			})
+		);
+		this.user$.subscribe();
 	}
 
 	toggleAccount(): void {

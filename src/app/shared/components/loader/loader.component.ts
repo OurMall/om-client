@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Component({
 	selector: 'app-loader',
 	template: `
-		<div class="progress__container om-transition">
+		<div class="progress__container om-transition" role="progressbar">
 			<div class="progress__container__loader" *ngIf="isLoading$ | async"></div>
 		</div>
 	`,

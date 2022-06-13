@@ -3,8 +3,9 @@
 :host {
 	.account {
 		display: none;
-		max-width: 300px;
-		max-height: 300px;
+		max-width: 320px;
+		max-height: 320px;
+		min-width: 280px;
 		position: absolute;
 		right: 0;
 		top: 50px;
@@ -42,8 +43,8 @@
 						justify-content: space-evenly;
 
 						.image {
-							width: 20%;
-							height: auto;
+							width: 50px;
+							height: 50px;
 							display: flex;
 							justify-content: center;
 

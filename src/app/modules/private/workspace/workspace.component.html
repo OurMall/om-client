@@ -19,7 +19,12 @@
 			</aside>
 			<div class="wrapper">
 				<div class="wrapper__content">
-					<app-workspace-card *ngFor="let workspace of (workspaces$|async)" [workspace]="workspace"></app-workspace-card>
+					<ng-container *ngIf="(workspaces$|async)!.length >= 1; else notWorkspacesResults">
+						<app-workspace-card *ngFor="let workspace of (workspaces$|async)" [workspace]="workspace"></app-workspace-card>
+					</ng-container>
+					<ng-template #notWorkspacesResults>
+						No hay espacios de trabajo
+					</ng-template>
 				</div>
 			</div>
 		</div>

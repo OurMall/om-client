@@ -1,3 +1,5 @@
+import { Category } from './';
+
 export interface WorkspaceProfile {
 	name: string;
 	description: string;
@@ -18,6 +20,7 @@ export interface WorkspaceCreate {
 
 export interface Workspace extends WorkspaceCreate {
 	id: string;
+	category: Category;
 	suscribers: any[];
 	products: any[];
 	notifications: any[];

@@ -5,7 +5,7 @@ import {
 	OnInit,
 	OnDestroy,
 } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { User } from '@app/common/interfaces';
 import { AuthenticationService, UserService } from '@app/common/services';
@@ -17,11 +17,13 @@ import { AuthenticationService, UserService } from '@app/common/services';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
+
 	isLoggedIn$: Observable<boolean> = this.authenticationService.accessToken$;
 	user$: Observable<User> = this.userService.user$;
+
+	active: boolean = false;
 	suscription!: Subscription;
 	links!: any;
-	active: boolean = false;
 
 	constructor(
 		private authenticationService: AuthenticationService,
@@ -36,7 +38,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 			{
 				route: 'workspaces',
 				tooltip: 'Workspaces',
-				icon: 'uil uil-newspaper',
+				icon: 'uil uil-apps',
 			},
 			{
 				route: 'help',

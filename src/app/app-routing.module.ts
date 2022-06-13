@@ -48,9 +48,6 @@ const routes: Routes = [
 	},
 	{
 		path: 'workspaces',
-		data: {
-			title: 'Espacios de trabajo'
-		},
 		loadChildren: () => import('./modules/private/workspace/workspace.module').then(m => m.WorkspaceModule)
 	},
 	{

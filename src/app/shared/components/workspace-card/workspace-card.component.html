@@ -9,7 +9,7 @@
 		<div class="content__body">
 			<div class="container">
 				<h2>
-					<span class="category">{{workspace?.category.name}}</span>
+					<span class="category">{{workspace?.category?.name}}</span>
 					<span class="name">{{workspace?.profile?.name}}</span>
 				</h2>
 				<p class="description">
@@ -33,7 +33,7 @@
 					<a class="rounded-button om-button">
 						<i class="uil uil-info-circle"></i>
 					</a>
-					<a [routerLink]="'/workspaces/' + workspace?.id" class="rounded-button om-button" style="margin-right: .25rem;">
+					<a [routerLink]="'/workspaces/' + workspace?.id" class="rounded-button om-button" style="margin-right: .25rem;" (click)="joinWorkspace(workspace.id)">
 						<i class="uil uil-eye"></i>
 					</a>
 				</div>

@@ -1,0 +1,196 @@
+@use "~src/assets/sass/variables";
+
+.workspace__content {
+	//height: 100vh;
+	//overflow: hidden;
+
+	.wrapper {
+		max-width: 2200px;
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+
+		.layout {
+			width: 100%;
+			height: 100%;
+			flex-wrap: nowrap;
+			flex-basis: 1;
+			justify-content: center;
+			background-color: variables.$nord-dark-alt-color;
+
+			&__sidebar {
+				width: 25%;
+				height: 100%;
+				display: block;
+				position: sticky;
+				top: 0;
+				left: 0;
+				outline: red 1px solid;
+				background-color: variables.$nord-dark-color;
+				overflow: hidden;
+
+				.sidebar__container {
+					height: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					overflow-y: auto;
+
+					.workspace__info {
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						padding: .5rem;
+
+						.options {
+							padding: 0 1.5rem;
+							position: relative;
+							display: flex;
+							flex-direction: row;
+							align-items: center;
+
+							.go_back {
+								width: 50%;
+
+								&:hover {
+									transform: translateX(-5px);
+									cursor: pointer;
+								}
+							}
+
+							.category {
+								width: 50%;
+							}
+						}
+
+						.brand {
+							width: 100%;
+							display: flex;
+							flex-direction: row;
+							justify-content: center;
+							align-items: center;
+							align-content: center;
+							margin: 0 auto;
+							padding: .85rem 1rem;
+
+							&__logo {
+								width: 30%;
+								display: flex;
+								justify-self: center;
+								justify-content: center;
+								margin: 0 auto;
+								padding: 0 .5rem 0 0;
+
+								.logo {
+									width: 70px;
+									height: 70px;
+									object-fit: cover;
+									border-radius: 50%;
+									border: 2px solid rgba($color: variables.$light-alt-color, $alpha: 1.0);
+								}
+							}
+
+							&__name {
+								width: 70%;
+								display: flex;
+								text-align: center;
+								flex-direction: column;
+								justify-content: center;
+
+								.name {
+									font-size: 1.25rem;
+								}
+
+								.slogan {
+									font-size: 80%;
+								}
+
+								.subscribe {
+									font-size: 14px;
+									align-items: center;
+									justify-content: center;
+									margin-top: .25rem;
+									border-radius: 5px;
+									color: variables.$main-color;
+									font-weight: 700;
+									border: 1px solid variables.$main-color;
+									background-color: transparent;
+								}
+							}
+						}
+
+						.description {
+							font-size: 14px;
+							text-align: center;
+							padding: 0 .85rem .5rem .85rem;
+						}
+
+						.accesibility {
+							display: flex;
+							flex-direction: column;
+							margin: .5rem 0 0 0;
+							padding: 0 .85rem;
+
+							h4 {
+								text-align: start;
+							}
+
+							.shortcuts {
+								display: flex;
+								flex-direction: column;
+								justify-content: center;
+								margin: .5rem 0 0 0;
+
+								&__element {
+									width: 100%;
+									display: flex;
+
+									.shortcut {
+										width: 100%;
+										display: flex;
+										align-items: center;
+										padding: .65rem .85rem;
+										margin: 0 0 .25rem 0;
+										border-radius: 5px;
+										color: variables.$main-color;
+										background-color: rgba($color: variables.$nord-dark-alt-color, $alpha: 0.5);
+
+										&__icon {
+											width: 40%;
+											font-size: 28px;
+											text-align: center;
+										}
+
+										span {
+											width: 60%;
+											font-weight: 700;
+											font-size: 15px;
+										}
+
+										&-active,
+										&:hover {
+											color: white;
+											background-color: rgba($color: variables.$main-color, $alpha: 1);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			&__main {
+				width: 50%;
+				height: 100%;
+				margin: 0 .85rem;
+				outline: blue 1px solid;
+			}
+
+			&__panel {
+				width: 25%;
+				outline: yellow 1px solid;
+			}
+		}
+	}
+}
