@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProductService } from '@app/common/services';
+import { Subscription } from 'rxjs';
+
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+	selector: 'app-product',
+	templateUrl: './product.component.html',
+	styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
 
-  constructor() { }
+	subscriptions: Subscription[] = [];
 
-  ngOnInit(): void {
-  }
+	constructor(
+		private productService: ProductService
+	) { }
+
+	ngOnInit(): void {
+		this.subscriptions.push();
+	}
 
 }

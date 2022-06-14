@@ -92,26 +92,9 @@
 						padding: 0.5rem 1rem;
 						color: rgba($color: variables.$light-color, $alpha: 1);
 
-						.icon {
-							display: none;
-							margin: 0 0.25rem;
-							justify-content: center;
-							align-items: center;
-							border-radius: 50%;
-							background-color: rgba(
-								$color: variables.$nord-dark-color,
-								$alpha: 1
-							);
-
-							i {
-								font-size: 2rem;
-							}
-						}
-
 						.text {
 							font-size: 14px;
 							font-weight: 700;
-							margin-left: 1rem;
 						}
 
 						&-active,

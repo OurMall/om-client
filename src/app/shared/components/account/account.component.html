@@ -34,23 +34,14 @@
 			<div class="body">
 				<ng-container *ngIf="isLoggedIn$ | async; else notLogged">
 					<a [routerLink]="'support'" routerLinkActive="item-link-active" class="item-link">
-						<div class="icon">
-							<i class="uil uil-box"></i>
-						</div>
 						<span class="text">Soporte</span>
 					</a>
 					<a class="item-link" (click)="logout()">
-						<div class="icon">
-							<i class="uil uil-box"></i>
-						</div>
 						<span class="text">Cerrar sesi&oacute;n</span>
 					</a>
 				</ng-container>
 				<ng-template #notLogged>
 					<a [routerLink]="'help'" class="item-link">
-						<div class="icon">
-							<i class="uil uil-box"></i>
-						</div>
 						<span class="text">Ayuda</span>
 					</a>
 				</ng-template>

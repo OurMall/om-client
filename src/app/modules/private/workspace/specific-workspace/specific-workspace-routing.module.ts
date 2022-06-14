@@ -26,9 +26,12 @@ const routes: Routes = [
 			},
 		]
 	},
-	{
-		path: 'settings',
-		component: SpecificWorkspaceComponent
+	{ 
+		path: 'settings', 
+		data: {
+			title: 'Configuraciones'
+		},
+		loadChildren: () => import('./workspace-settings/workspace-settings.module').then(m => m.WorkspaceSettingsModule) 
 	},
 ];
 

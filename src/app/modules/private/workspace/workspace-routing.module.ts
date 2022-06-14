@@ -13,7 +13,7 @@ const routes: Routes = [
 	{
 		path: ':id',
 		loadChildren: () => import('./specific-workspace/specific-workspace.module').then(m => m.SpecificWorkspaceModule)
-	}
+	},
 ];
 
 @NgModule({

@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 
 import { MessageService, UserService } from '@app/common/services';

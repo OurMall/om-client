@@ -9,7 +9,7 @@
 								<i class="uil uil-arrow-left"></i>
 							</a>
 							<span class="category">
-								{{workspace.category.name}}
+								{{ workspace.category.name }}
 							</span>
 						</div>
 						<div class="brand">
@@ -50,10 +50,16 @@
 										<span>Posts</span>
 									</a>
 								</li>
-								<li class="shortcuts__element">
+								<li class="shortcuts__element" *ngIf="isWorkspaceOwner | async">
 									<a class="shortcut om-transition" [routerLink]="'./cashRegister'" routerLinkActive="shortcut-active" role="link">
 										<i class="shortcut__icon uil uil-money-withdrawal"></i>
 										<span>Cash register</span>
+									</a>
+								</li>
+								<li class="shortcuts__element" *ngIf="isWorkspaceOwner | async">
+									<a class="shortcut om-transition" [routerLink]="'./settings'">
+										<i class="shortcut__icon uil uil-cog"></i>
+										<span>Settings</span>
 									</a>
 								</li>
 							</ul>

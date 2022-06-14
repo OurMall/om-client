@@ -9,5 +9,6 @@ export {
 	ServiceService,
 	UserService,
 	WorkspaceService,
+	ProductService
 } from './remote';
 export { WorkspaceNamespace } from './sockets';

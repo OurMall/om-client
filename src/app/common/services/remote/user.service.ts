@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, filter, map, Observable, Subject, take, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, filter, map, Observable, Subject, take, tap, throwError } from 'rxjs';
 
 import { ApiResponse, User } from '@app/common/interfaces';
 import { MessageService } from '@app/common/services';
@@ -12,6 +12,7 @@ import { MessageService } from '@app/common/services';
 export class UserService {
 
 	private readonly prefix: string = 'user';
+	private userIsWorkspaceOwnerSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	private userSubject$: Subject<User> = new Subject<User>();
 	private isOpen: boolean = false;
 
@@ -105,6 +106,17 @@ export class UserService {
 		this.user$.subscribe();
 	}
 
+	isOwner(workspace_id: string): void {
+		this.account().subscribe(user => {
+			const user_workspace = user.workspaces.filter(workspace => workspace.id == workspace_id)
+			if(user_workspace.length > 0) {
+				this.userIsWorkspaceOwnerSubject$.next(true);
+			} else {
+				this.userIsWorkspaceOwnerSubject$.next(false);
+			}
+		});
+	}
+
 	toggleAccount(): void {
 		this.isOpen = !this.isOpen;
 		this.toggle.emit(this.isOpen);
@@ -112,5 +124,9 @@ export class UserService {
 
 	get user$(): Observable<User> {
 		return this.userSubject$.asObservable();
+	}
+
+	get userIsWorkspaceOwner$(): Observable<boolean> {
+		return this.userIsWorkspaceOwnerSubject$.asObservable();
 	}
 }
