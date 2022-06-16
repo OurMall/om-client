@@ -17,16 +17,28 @@
                 <div class="sidebar__content">
                     <ul class="options">
                         <li class="options__link">
-                            <a class="hyperlink om-transition">
+                            <a [routerLink]="'./general'" class="hyperlink om-transition">
                                 <i class="hyperlink__icon uil uil-cog"></i>
                                 <span class="hyperlink__text">Global</span>
+                            </a>
+                        </li>
+                        <hr class="divider">
+                        <li class="options__title">
+                            <h4>Servicios</h4>
+                        </li>
+                        <li class="options__link">
+                            <a [routerLink]="'./products'" class="hyperlink om-transition">
+                                <i class="hyperlink__icon uil uil-shopping-bag"></i>
+                                <span class="hyperlink__text">Productos</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </aside>
             <div class="wrapper">
-                content
+                <div class="wrapper__content">
+                    <router-outlet></router-outlet>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,38 @@
+<form [formGroup]="productForm" class="product__form">
+    <div class="om-field">
+        <label for="name" class="om-field-label">Nombre</label>
+        <input type="text" class="om-input" id="name" placeholder="Example: Shirt">
+    </div>
+    <div class="om-field">
+        <label for="detail" class="om-field-label">Detalles</label>
+        <textarea class="om-input" id="detail" cols="30" rows="10" placeholder="White clothe" style="resize: none;"></textarea>
+    </div>
+    <div class="om-field-group">
+        <div class="om-field">
+            <label for="price" class="om-field-label">Precio</label>
+            <input type="number" class="om-input" id="price" placeholder="$50.000">
+        </div>
+        <div class="om-field">
+            <label for="stock" class="om-field-label">Stock</label>
+            <input type="number" class="om-input" id="stock" placeholder="19">
+        </div>
+    </div>
+    <div class="om-field">
+        <label for="status" class="om-field-label">Estado</label>
+        <select class="om-input" id="status">
+            <option value="">Nuevo</option>
+            <option value="">Usado</option>
+        </select>
+    </div>
+    <div class="om-field">
+        <div class="check-field">
+            <input type="checkbox" id="available">
+            <label for="available">Disponible</label>
+        </div>
+    </div>
+    <div class="om-field">
+        <button class="om-button">
+            Crear
+        </button>
+    </div>
+</form>

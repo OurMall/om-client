@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SpecificWorkspaceRoutingModule } from './specific-workspace-routing.module';
 import { SpecificWorkspaceComponent } from './specific-workspace.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,8 @@ import { SpecificWorkspaceComponent } from './specific-workspace.component';
   ],
   imports: [
     CommonModule,
+	FormsModule,
+	ReactiveFormsModule,
     SpecificWorkspaceRoutingModule
   ]
 })
