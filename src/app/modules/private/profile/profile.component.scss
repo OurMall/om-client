@@ -20,6 +20,25 @@
 			align-items: center;
 			align-content: center;
 
+			.alert__container {
+				max-width: 80%;
+				width: 100%;
+
+				.alert__content {
+					display: flex;
+
+					&__link {
+						font-size: 14px;
+
+						&:hover {
+							cursor: pointer;
+							color: variables.$nord-light-color;
+							text-decoration: underline;
+						}
+					}
+				}
+			}
+
 			.edit__profile {
 				width: 100%;
 				display: flex;

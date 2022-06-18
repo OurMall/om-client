@@ -13,7 +13,7 @@ export class UserService {
 
 	private readonly prefix: string = 'user';
 	private userIsWorkspaceOwnerSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-	private userSubject$: Subject<User> = new Subject<User>();
+	private userSubject$: Subject<User> = new BehaviorSubject<User>(null!);
 	private isOpen: boolean = false;
 
 	@Output() toggle: EventEmitter<boolean> = new EventEmitter();
@@ -75,7 +75,15 @@ export class UserService {
 	}
 
 	sendAccountVerification(email: string): Observable<ApiResponse> {
-		return this.http.post<ApiResponse>(`${this.prefix}/account/sendVerification`, email);
+		return this.http.post<ApiResponse>(`${this.prefix}/account/sendVerification`, email).pipe(
+			take(1),
+			tap(response => {
+				console.log(response);
+			}),
+			catchError((err: HttpErrorResponse) => {
+				return throwError(() => err);
+			})
+		);
 	}
 
 	verifyAccount(token: string): Observable<any> {

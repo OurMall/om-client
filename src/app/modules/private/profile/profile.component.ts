@@ -53,6 +53,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		this.isEditingProfileSubject$.next(this.isEditingProfile);
 	}
 
+	sendAccountVerification(): void {
+		this.subscriptions.push(
+			this.userService.account().subscribe(user => {
+				console.log(user);
+					this.userService.sendAccountVerification(user.email).subscribe({
+						complete: () => {
+							this.message.success("Enviamos una verificaci&oacute;n a tu correo");
+						},
+						error: (err) => {
+							console.log(err);
+							this.message.error("No pudimos enviar la verificaci&oacute;n", "Reintenta")
+						}
+					});
+				}
+			)
+		);
+	}
+
 	onSubmit(): void {
 		if(!this.accountForm.valid) {
 			this.message.error("Rellena la información requerida");

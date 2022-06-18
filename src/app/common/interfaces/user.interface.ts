@@ -28,7 +28,7 @@ export interface UserSignup extends UserLogin {
 	phone_number: string;
 	birthdate: string | Date;
 	gender: Gender;
-	accept_terms: boolean;
+	accept_terms?: boolean;
 }
 
 export interface User extends UserSignup {
@@ -40,4 +40,8 @@ export interface User extends UserSignup {
 	groups: Group[];
 	created_at: Date;
 	updated_at: Date;
+	email_verified: boolean;
+	phone_number_verified: boolean;
+	is_blocked: boolean;
+	is_disabled: boolean;
 }

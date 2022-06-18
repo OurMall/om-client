@@ -1,37 +1,70 @@
-<form [formGroup]="productForm" class="product__form">
+<form [formGroup]="productForm" class="product__form" (ngSubmit)="onSubmit()">
     <div class="om-field">
         <label for="name" class="om-field-label">Nombre</label>
-        <input type="text" class="om-input" id="name" placeholder="Example: Shirt">
+        <input formControlName="name" type="text" class="om-input" id="name" placeholder="Example: Shirt">
+		<div class="om-field-error" *ngIf="name?.invalid && (name?.touched || name?.dirty)">
+			<small class="om-error-text" *ngIf="name?.errors?.['required']">
+				El campo es requerido
+			</small>
+		</div>
     </div>
     <div class="om-field">
         <label for="detail" class="om-field-label">Detalles</label>
-        <textarea class="om-input" id="detail" cols="30" rows="10" placeholder="White clothe" style="resize: none;"></textarea>
+        <textarea formControlName="detail" class="om-input" id="detail" cols="30" rows="10" placeholder="White clothe" style="resize: none;"></textarea>
+		<div class="om-field-error" *ngIf="detail?.invalid && (detail?.touched || detail?.dirty)">
+			<small class="om-error-text" *ngIf="detail?.errors?.['required']">
+				El campo es requerido
+			</small>
+			<small class="om-error-text" *ngIf="detail?.errors?.['maxlength']">
+				M&aacute;ximo 2000 caracteres
+			</small>
+		</div>
     </div>
     <div class="om-field-group">
         <div class="om-field">
             <label for="price" class="om-field-label">Precio</label>
-            <input type="number" class="om-input" id="price" placeholder="$50.000">
+            <input formControlName="price" type="number" class="om-input" id="price" placeholder="$50.000">
+			<div class="om-field-error" *ngIf="price?.invalid && (price?.touched || price?.dirty)">
+				<small class="om-error-text" *ngIf="price?.errors?.['required']">
+					El campo es requerido
+				</small>
+			</div>
         </div>
         <div class="om-field">
             <label for="stock" class="om-field-label">Stock</label>
-            <input type="number" class="om-input" id="stock" placeholder="19">
+            <input formControlName="stock" type="number" class="om-input" id="stock" placeholder="19">
+			<div class="om-field-error" *ngIf="stock?.invalid && (stock?.touched || stock?.dirty)">
+				<small class="om-error-text" *ngIf="stock?.errors?.['required']">
+					El campo es requerido
+				</small>
+			</div>
         </div>
     </div>
     <div class="om-field">
         <label for="status" class="om-field-label">Estado</label>
-        <select class="om-input" id="status">
-            <option value="">Nuevo</option>
-            <option value="">Usado</option>
+        <select formControlName="status" class="om-input" id="status">
+			<option disabled selected>Seleccionar estado</option>
+			<option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
         </select>
+		<div class="om-field-error" *ngIf="status?.invalid && (status?.touched || status?.dirty)">
+			<small class="om-error-text" *ngIf="status?.errors?.['required']">
+				El campo es requerido
+			</small>
+		</div>
     </div>
     <div class="om-field">
         <div class="check-field">
-            <input type="checkbox" id="available">
+            <input formControlName="is_available" type="checkbox" id="available">
             <label for="available">Disponible</label>
         </div>
+		<div class="om-field-error" *ngIf="is_available?.invalid && (is_available?.touched || is_available?.dirty)">
+			<small class="om-error-text" *ngIf="is_available?.errors?.['required']">
+				El campo es requerido
+			</small>
+		</div>
     </div>
     <div class="om-field">
-        <button class="om-button">
+        <button class="om-button {{!productForm.valid ? 'om-button-disabled' : ''}}" [disabled]="!productForm.valid">
             Crear
         </button>
     </div>

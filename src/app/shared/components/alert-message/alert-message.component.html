@@ -13,6 +13,7 @@
 			<span class="description">
 				{{ description }}
 			</span>
+			<ng-content select="[alert-content]"></ng-content>
 		</div>
 		<div class="closable" *ngIf="closable">
 			<span (click)="onClose()" aria-label="close">&times;</span>

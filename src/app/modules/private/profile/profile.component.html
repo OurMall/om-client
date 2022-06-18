@@ -1,6 +1,15 @@
 <section class="profile om-section">
 	<div class="profile__container">
 		<aside class="profile__container__sidebar">
+			<div class="alert__container">
+				<app-alert-message [severity]="'warning'" *ngIf="!(user$|async)?.email_verified">
+					<div class="alert__content" alert-content>
+						<a class="alert__content__link" (click)="sendAccountVerification()" role="link">
+							Verificar cuenta
+						</a>
+					</div>
+				</app-alert-message>
+			</div>
 			<app-profile-info [user]="(user$|async)!" [isEditingProfile]="isEditingProfile">
 				<div class="edit__profile" profile-info-option *ngIf="user$|async; let user">
 					<button *ngIf="!(isEditingProfile$|async)" class="main-button om-button" (click)="changeEditProfileStatus(isEditingProfile)">
