@@ -40,6 +40,7 @@ export class WorkspaceService {
 
 	workspace(id: string): Observable<Workspace> {
 		return this.http.get<Workspace>(`workspace/${id}`).pipe(
+			take(1),
 			catchError((err: HttpErrorResponse) => {
 				console.log(err)
 				return throwError(() => err);
@@ -50,8 +51,7 @@ export class WorkspaceService {
 	createWorkspace(workspace: WorkspaceCreate): Observable<ApiResponse> {
 		return this.http.post<ApiResponse>('workspace', workspace).pipe(
 			take(1),
-			tap((response) => {
-				console.log(response);
+			tap((_) => {
 				this.message.success(
 					'Hemos creado el espacio de trabajo',
 					'Felicidades!'

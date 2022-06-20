@@ -37,6 +37,8 @@
                 &__information {
                     display: flex;
                     flex-direction: column;
+					justify-content: center;
+					margin: 0 0 0 .5rem;
 
                     .name {
                         font-size: 1.25rem;
@@ -95,10 +97,11 @@
                                 width: 60%;
                             }
 
+							&-active,
                             &:hover {
                                 cursor: pointer;
                                 border-radius: 5px;
-                                background-color: variables.$dark-color;
+                                background-color: variables.$main-color;
                             }
                         }
                     }
@@ -111,6 +114,7 @@
 
                     &__title {
                         display: flex;
+						padding: .25rem 0;
 
                         h4 {
                             font-size: .85rem;

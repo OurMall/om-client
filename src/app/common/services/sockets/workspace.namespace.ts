@@ -34,7 +34,13 @@ export class WorkspaceNamespace extends Socket {
 		});
 	}
 
-	subscribe(): void {  }
+	subscribe(data: any): void {
+		this.emit('subscribe_workspace', data);
+	}
+
+	isSubscribed(data: any): void {
+		this.emit('is_subscribed_workspace', data);
+	}
 
 	unsubscribe(): void {  }
 
@@ -50,6 +56,22 @@ export class WorkspaceNamespace extends Socket {
 
 	onJoined(): Observable<ApiResponse> {
 		return this.fromEvent<ApiResponse>('joined');
+	}
+
+	onSubscribed(): Observable<ApiResponse> {
+		return this.fromEvent<ApiResponse>('subscribed');
+	}
+
+	onSubscriptionStatus(): Observable<ApiResponse> {
+		return this.fromEvent<ApiResponse>('subscription_status');
+	}
+
+	onNotToken(): Observable<ApiResponse> {
+		return this.fromEvent<ApiResponse>('not_token');
+	}
+
+	onAlreadySubscribed(): Observable<ApiResponse> {
+		return this.fromEvent<ApiResponse>('already_subscribed');
 	}
 
 	onLeft(): Observable<ApiResponse> {

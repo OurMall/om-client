@@ -21,11 +21,11 @@
 		</div>
     </div>
     <div class="om-field-group">
-        <div class="om-field">
+        <div class="om-field" formGroupName="price">
             <label for="price" class="om-field-label">Precio</label>
-            <input formControlName="price" type="number" class="om-input" id="price" placeholder="$50.000">
-			<div class="om-field-error" *ngIf="price?.invalid && (price?.touched || price?.dirty)">
-				<small class="om-error-text" *ngIf="price?.errors?.['required']">
+            <input formControlName="value" type="number" class="om-input" id="price" placeholder="$50.000">
+			<div class="om-field-error" *ngIf="value?.invalid && (value?.touched || value?.dirty)">
+				<small class="om-error-text" *ngIf="value?.errors?.['required']">
 					El campo es requerido
 				</small>
 			</div>

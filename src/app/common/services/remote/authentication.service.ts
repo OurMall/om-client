@@ -55,6 +55,7 @@ export class AuthenticationService {
 	logOut(): void {
 		this.localStorageService.remove('access_token');
 		this.localStorageService.remove('refresh_token');
+		this.localStorageService.remove('user_id');
 		this._accessToken$.next(false);
 		this.router.navigate(['login']);
 	}

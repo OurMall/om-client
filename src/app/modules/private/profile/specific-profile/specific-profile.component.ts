@@ -29,7 +29,6 @@ export class SpecificProfileComponent implements OnInit, OnDestroy {
 					this.userService.specific_account(params['id']).subscribe({
 						next: (user) => {
 							this.userProfileSubject$.next(user);
-							console.log(user);
 						},
 						error: () => {
 							this.router.navigateByUrl('404');

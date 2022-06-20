@@ -6,4 +6,4 @@ export { Service, ServiceCreate } from './service.interface';
 export { WorkspaceCreate, WorkspaceProfile, Workspace } from './workspace.interface';
 export { Permission } from './permissions.interface';
 export { Group } from './group.interface';
-export { ProducCreate, ProductStatus } from './product.interface';
+export { ProductCreate, ProductStatus, Product } from './product.interface';

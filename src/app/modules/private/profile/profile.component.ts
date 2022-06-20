@@ -56,14 +56,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	sendAccountVerification(): void {
 		this.subscriptions.push(
 			this.userService.account().subscribe(user => {
-				console.log(user);
 					this.userService.sendAccountVerification(user.email).subscribe({
 						complete: () => {
-							this.message.success("Enviamos una verificaci&oacute;n a tu correo");
+							this.message.success("Enviamos una verificación a tu correo");
 						},
-						error: (err) => {
-							console.log(err);
-							this.message.error("No pudimos enviar la verificaci&oacute;n", "Reintenta")
+						error: (_) => {
+							this.message.error("No pudimos enviar la verificación", "Reintenta")
 						}
 					});
 				}

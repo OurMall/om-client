@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, filter, map, Observable, Subject, take, tap, throwError } from 'rxjs';
 
 import { ApiResponse, User } from '@app/common/interfaces';
-import { MessageService } from '@app/common/services';
+import { MessageService, LocalStorageService } from '@app/common/services';
 
 @Injectable({
 	providedIn: 'root',
@@ -21,6 +21,7 @@ export class UserService {
 	constructor(
 		private readonly http: HttpClient,
 		private readonly router: Router,
+		private localStorageService: LocalStorageService,
 		private message: MessageService
 	) {}
 
@@ -29,6 +30,7 @@ export class UserService {
 			tap({
 				next: (user) => {
 					this.userSubject$.next(user);
+					this.localStorageService.set("user_id", user.id);
 				},
 			}),
 			catchError((err: HttpErrorResponse) => {
@@ -124,6 +126,8 @@ export class UserService {
 			}
 		});
 	}
+
+	isSubscribed(workspace_id: string): void {}
 
 	toggleAccount(): void {
 		this.isOpen = !this.isOpen;

@@ -1,0 +1,10 @@
+<div class="products__container">
+	<div class="products">
+		<ng-container *ngIf="(products$|async)!.length > 0; else noProducts">
+			<app-product-card *ngFor="let product of (products$|async)" [product]="product"></app-product-card>
+		</ng-container>
+		<ng-template #noProducts>
+			No hay productos
+		</ng-template>
+	</div>
+</div>

@@ -12,9 +12,7 @@
 				<p class="biography">
 					{{ user?.profile?.biography }}
 				</p>
-				<!-- CONTENT FROM PARENT COMPONENT -->
 				<ng-content select="[profile-info-option]"></ng-content>
-				<!-- CONTENT FROM PARENT COMPONENT -->
 			</div>
 			<ng-container *ngIf="!isEditingProfile">
 				<ul class="details">

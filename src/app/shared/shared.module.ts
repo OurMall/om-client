@@ -10,6 +10,7 @@ import { AccountComponent } from './components/account/account.component';
 import { AlertMessageComponent } from './components/alert-message/alert-message.component';
 import { WorkspaceCardComponent } from './components/workspace-card/workspace-card.component';
 import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
 	declarations: [
@@ -19,7 +20,8 @@ import { ProfileInfoComponent } from './components/profile-info/profile-info.com
 		AccountComponent,
 		AlertMessageComponent,
 		WorkspaceCardComponent,
-		ProfileInfoComponent
+		ProfileInfoComponent,
+		ProductCardComponent
 	],
 	imports: [CommonModule, RouterModule, KeyFilterModule],
 	exports: [
@@ -29,7 +31,8 @@ import { ProfileInfoComponent } from './components/profile-info/profile-info.com
 		AccountComponent,
 		AlertMessageComponent,
 		WorkspaceCardComponent,
-		ProfileInfoComponent
+		ProfileInfoComponent,
+		ProductCardComponent
 	],
 })
 export class SharedModule {}

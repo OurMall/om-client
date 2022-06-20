@@ -19,9 +19,18 @@
 							<div class="brand__name">
 								<h1 class="name om-no-break-text" role="heading" [title]="workspace.profile.name">{{ workspace.profile.name }}</h1>
 								<h3 class="slogan">{{ workspace.profile.slogan }}</h3>
-								<button type="submit" class="subscribe om-base-button" role="button">
-									Subscribe
-								</button>
+								<ng-container *ngIf="!(isWorkspaceOwner$|async)">
+									<ng-container *ngIf="!(isSubscribed$|async); else notSubscribed">
+										<button type="submit" class="subscribe om-base-button" role="button" (click)="subscribeToWorkspace()">
+											Suscribirse
+										</button>
+									</ng-container>
+									<ng-template #notSubscribed>
+										<button type="submit" class="unsubscribe om-base-button" role="button" (click)="unSubscribeFromWorkspace()">
+											Anular suscripci&oacute;n
+										</button>
+									</ng-template>
+								</ng-container>
 							</div>
 						</div>
 						<div class="description">
@@ -35,46 +44,51 @@
 								<li class="shortcuts__element">
 									<a class="shortcut om-transition" [routerLink]="'./overview'" routerLinkActive="shortcut-active" role="link">
 										<i class="shortcut__icon uil uil-eye"></i>
-										<span>Overview</span>
+										<span>Resumen</span>
 									</a>
 								</li>
 								<li class="shortcuts__element">
 									<a class="shortcut om-transition" [routerLink]="'./products'" routerLinkActive="shortcut-active" role="link">
 										<i class="shortcut__icon uil uil-shopping-bag"></i>
-										<span>Products</span>
+										<span>Productos</span>
 									</a>
 								</li>
 								<li class="shortcuts__element">
 									<a class="shortcut om-transition" [routerLink]="'./posts'" routerLinkActive="shortcut-active" role="link">
 										<i class="shortcut__icon uil uil-apps"></i>
-										<span>Posts</span>
+										<span>Publicaciones</span>
 									</a>
 								</li>
-								<li class="shortcuts__element" *ngIf="isWorkspaceOwner | async">
+								<li class="shortcuts__element" *ngIf="isWorkspaceOwner$ | async">
 									<a class="shortcut om-transition" [routerLink]="'./cashRegister'" routerLinkActive="shortcut-active" role="link">
 										<i class="shortcut__icon uil uil-money-withdrawal"></i>
-										<span>Cash register</span>
+										<span>Caja</span>
 									</a>
 								</li>
-								<li class="shortcuts__element" *ngIf="isWorkspaceOwner | async">
+								<li class="shortcuts__element" *ngIf="isWorkspaceOwner$ | async">
 									<a class="shortcut om-transition" [routerLink]="'./settings'">
 										<i class="shortcut__icon uil uil-cog"></i>
-										<span>Settings</span>
+										<span>Configuraciones</span>
 									</a>
 								</li>
 							</ul>
 						</div>
 					</div>
-					<div class="sidebar__footer">
+					<!--<div class="sidebar__footer">
 						footer
-					</div>
+					</div>-->
 				</div>
 			</aside>
 			<section class="layout__main" role="main">
 				<router-outlet></router-outlet>
 			</section>
 			<div class="layout__panel" role="tab">
-				right
+				<div class="content">
+					<div class="content__subscribers">
+						<h2>Suscriptores</h2>
+						<span>{{ (workspace$|async)?.suscribers!.length }}</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

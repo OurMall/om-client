@@ -1,0 +1,46 @@
+<div class="product__card om-shadow">
+	<div class="product__card__container" [@flipState]="flip">
+		<a class="flip__button om-transition" (click)="toggleFlip()">
+			<i class="uil uil-rotate-360"></i>
+		</a>
+		<div class="side card__front">
+			<figure class="header">
+				<img class="header__image" [src]="product.images!.length > 0 ? product.images![0] : 'https://actoiran.com/files/no-product-image.png'" [alt]="product.name" role="img" loading="lazy">
+				<figcaption class="header__description" [ngSwitch]="product.status">
+					<span class="badge badge-{{product.status}}" *ngSwitchCase="'new'">
+						Nuevo
+					</span>
+					<span class="badge badge-{{product.status}}" *ngSwitchCase="'used'">
+						Usado
+					</span>
+					<span class="badge badge-{{product.status}}" *ngSwitchCase="'refurbished'">
+						Reacondicionado
+					</span>
+				</figcaption>
+			</figure>
+			<div class="body">
+				<h2 class="name">{{ product.name | titlecase }}</h2>
+				<div class="price">
+					<span class="value">{{ product.price.value | currency }}</span>
+					<span class="currency">{{ product.price.currency }}</span>
+				</div>
+
+			</div>
+			<div class="footer" role="complementary">
+				<span class="stock__container" title="Stock">
+					<i class="uil uil-books"></i>
+					{{ product.stock }}
+				</span>
+				<span class="created_at" title="">
+					<i class="uil uil-calender"></i>
+					{{ product.created_at | date }}
+				</span>
+			</div>
+		</div>
+		<div class="side card__back">
+			<p class="detail">
+				{{ product.detail }}
+			</p>
+		</div>
+	</div>
+</div>
