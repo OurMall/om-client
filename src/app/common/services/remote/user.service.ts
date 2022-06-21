@@ -107,6 +107,17 @@ export class UserService {
 		);
 	}
 
+	forgotPassword(email: string): Observable<ApiResponse> {
+		return this.http.post<ApiResponse>(`${this.prefix}/account/forgotPassword`, email).pipe(
+			take(1),
+			filter(response => response && !!response),
+			catchError((err: HttpErrorResponse) => {
+				console.log(err);
+				return throwError(() => err);
+			})
+		)
+	}
+
 	hasGroup(code_name: string) {
 		this.user$.pipe(
 			map((user) => {
