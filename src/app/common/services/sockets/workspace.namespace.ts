@@ -38,11 +38,19 @@ export class WorkspaceNamespace extends Socket {
 		this.emit('subscribe_workspace', data);
 	}
 
+	workspaceSubscribers(workspace: string): void {
+		this.emit('workspace_subscribers', {
+			workspace
+		});
+	}
+
 	isSubscribed(data: any): void {
 		this.emit('is_subscribed_workspace', data);
 	}
 
-	unsubscribe(): void {  }
+	unsubscribe(data: any): void {
+		this.emit('unsubscribe_workspace', data);
+	}
 
 	leaveWorkspace(workspace: string): void {
 		this.emit('leave_workspace', {
@@ -60,6 +68,14 @@ export class WorkspaceNamespace extends Socket {
 
 	onSubscribed(): Observable<ApiResponse> {
 		return this.fromEvent<ApiResponse>('subscribed');
+	}
+
+	onUnsubscribed(): Observable<ApiResponse> {
+		return this.fromEvent<ApiResponse>('unsubscribed');
+	}
+
+	onSubscribersList(): Observable<ApiResponse> {
+		return this.fromEvent<ApiResponse>('subscribers_list');
 	}
 
 	onSubscriptionStatus(): Observable<ApiResponse> {

@@ -4,7 +4,14 @@
 			<app-product-card *ngFor="let product of (products$|async)" [product]="product"></app-product-card>
 		</ng-container>
 		<ng-template #noProducts>
-			No hay productos
+			<div class="not__products">
+				<div class="not__products__card om-shadow">
+					<div class="body">
+						<h3>No hay productos</h3>
+						<i class="icon uil uil-store-slash"></i>
+					</div>
+				</div>
+			</div>
 		</ng-template>
 	</div>
 </div>

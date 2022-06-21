@@ -46,6 +46,7 @@ export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnD
 					}
 				})
 				this.workspaceNamespace.joinWorkspace(params['id']);
+				this.workspaceNamespace.workspaceSubscribers(params['id']);
 				this.userService.isOwner(params['id']);
 			}),
 			/*this.workspaceNamespace.onJoined().subscribe(response => {
@@ -56,10 +57,14 @@ export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnD
 
 	ngAfterContentInit(): void {
 		this.subscriptions.push(
-			this.workspaceNamespace.onSubscriptionStatus().subscribe(response => {
-				this.isSubscribedSubject$.next(response.response.subscribed);
+			this.workspaceNamespace.onSubscriptionStatus().subscribe(data => {
+				this.isSubscribedSubject$.next(data.response.subscribed);
+			}),
+			this.workspaceNamespace.onSubscribersList().subscribe(data => {
+				this.subscribersSubject$.next(data.response.subscribers);
 			}),
 			this.workspaceNamespace.onSubscribed().subscribe(_ => this.message.success("Te haz suscrito al espacio de trabajo")),
+			this.workspaceNamespace.onUnsubscribed().subscribe(_ => this.message.info("Cancelaste la subscripción al espacio de trabajo")),
 			this.workspaceNamespace.onAlreadySubscribed().subscribe(_ => this.message.warning("Ya estás suscrito a este espacio de trabajo")),
 			this.workspaceNamespace.onWorkspaceError().subscribe(_ => this.message.error("Algo salio mal", "Reintenta")),
 			this.workspaceNamespace.onNotToken().subscribe(_ => {
@@ -79,7 +84,12 @@ export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnD
 	}
 
 	unSubscribeFromWorkspace(): void {
-
+		const data: any = {
+			workspace: this.workspace,
+			user: this.localStorageService.get("user_id")
+		};
+		this.workspaceNamespace.unsubscribe(data);
+		this.isSubscribedSubject$.next(false);
 	}
 
 	leftFromWorkspace(workspace_id: string): void {

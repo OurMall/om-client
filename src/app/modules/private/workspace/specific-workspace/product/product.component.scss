@@ -18,5 +18,32 @@
 		flex-wrap: wrap;
 		//align-items: center;
 		justify-content: space-around;
+
+		.not__products {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			&__card {
+				background-color: variables.$nord-dark-color;
+				padding: 2rem;
+				border: 1px solid rgba($color: variables.$nord-light-color, $alpha: 0.25);
+				border-radius: 10px;
+
+				.body {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+
+					.icon {
+						margin-top: .5rem;
+						font-size: 2.5rem;
+					}
+				}
+			}
+		}
 	}
 }

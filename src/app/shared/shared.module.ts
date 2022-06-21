@@ -11,6 +11,7 @@ import { AlertMessageComponent } from './components/alert-message/alert-message.
 import { WorkspaceCardComponent } from './components/workspace-card/workspace-card.component';
 import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { UploaderComponent } from './components/uploader/uploader.component';
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 		AlertMessageComponent,
 		WorkspaceCardComponent,
 		ProfileInfoComponent,
-		ProductCardComponent
+		ProductCardComponent,
+  UploaderComponent
 	],
 	imports: [CommonModule, RouterModule, KeyFilterModule],
 	exports: [
