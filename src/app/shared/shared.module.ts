@@ -12,6 +12,7 @@ import { WorkspaceCardComponent } from './components/workspace-card/workspace-ca
 import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { UploaderComponent } from './components/uploader/uploader.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
 	declarations: [
@@ -23,7 +24,8 @@ import { UploaderComponent } from './components/uploader/uploader.component';
 		WorkspaceCardComponent,
 		ProfileInfoComponent,
 		ProductCardComponent,
-  UploaderComponent
+		UploaderComponent,
+		FooterComponent
 	],
 	imports: [CommonModule, RouterModule, KeyFilterModule],
 	exports: [
@@ -34,7 +36,9 @@ import { UploaderComponent } from './components/uploader/uploader.component';
 		AlertMessageComponent,
 		WorkspaceCardComponent,
 		ProfileInfoComponent,
-		ProductCardComponent
+		ProductCardComponent,
+		UploaderComponent,
+		FooterComponent
 	],
 })
 export class SharedModule {}

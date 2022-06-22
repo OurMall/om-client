@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, filter, map, Observable, Subject, take, tap, throwError } from 'rxjs';
 
-import { ApiResponse, User } from '@app/common/interfaces';
+import { ApiResponse, User, UserResetPassword } from '@app/common/interfaces';
 import { MessageService, LocalStorageService } from '@app/common/services';
 
 @Injectable({
@@ -113,6 +113,22 @@ export class UserService {
 			filter(response => response && !!response),
 			catchError((err: HttpErrorResponse) => {
 				console.log(err);
+				return throwError(() => err);
+			})
+		)
+	}
+
+	resetPassword(password_credentials: UserResetPassword): Observable<ApiResponse> {
+		return this.http.post<ApiResponse>(`${this.prefix}/account/resetPassword`, password_credentials).pipe(
+			take(1),
+			filter(response => response && !!response),
+			tap({
+				next: (_) => {
+					this.message.success("Hemos restaurado la contraseña de tu cuenta", "Correcto");
+				},
+			}),
+			catchError((err: HttpErrorResponse) => {
+				this.message.error("Algo salió mal", "Reintenta");
 				return throwError(() => err);
 			})
 		)

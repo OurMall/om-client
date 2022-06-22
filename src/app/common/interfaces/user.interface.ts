@@ -45,3 +45,9 @@ export interface User extends UserSignup {
 	is_blocked: boolean;
 	is_disabled: boolean;
 }
+
+export interface UserResetPassword {
+	new_password: string;
+	confirm_password: string;
+	token: string;
+}

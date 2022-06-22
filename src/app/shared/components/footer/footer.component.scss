@@ -1,0 +1,104 @@
+@use "~src/assets/sass/variables";
+
+.footer {
+	background-color: rgba($color: variables.$dark-alt-color, $alpha: 1);
+	opacity: .85;
+	color: white;
+	line-height: 1;
+	z-index: 1;
+
+	&__content {
+		max-width: 1440px;
+		margin: 0 auto;
+
+		.social {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 1rem 0;
+			border-bottom: 1px solid #fff;
+
+			&__links {
+				width: 50%;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+
+				i {
+					margin-left: 1rem;
+					transition: all 0.3s;
+					font-size: 55px;
+				}
+			}
+		}
+
+		.container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 3rem;
+			padding: 1.5rem 1rem;
+
+			.logo {
+				width: 20%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				img {
+					width: 80%;
+					height: 80%;
+					object-fit: cover;
+				}
+			}
+
+			.section {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				width: 40%;
+
+				.links {
+					width: 50%;
+					display: flex;
+					flex-direction: column;
+
+					p {
+						font-size: 1.2rem;
+						font-weight: 500;
+						margin-bottom: 2rem;
+					}
+
+					a {
+						text-decoration: none;
+						color: gray;
+						font-size: 1.1rem;
+						font-weight: 400;
+						margin-bottom: 0.5rem;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 1000px) {
+	.container {
+		flex-direction: column;
+	}
+
+	.section {
+		justify-content: space-between;
+		width: 70%;
+	}
+}
+
+@media (max-width: 540px) {
+	.section {
+		flex-direction: column;
+	}
+
+	.links p {
+		margin-top: 2rem;
+	}
+}

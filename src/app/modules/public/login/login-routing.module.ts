@@ -9,7 +9,17 @@ const routes: Routes = [
 	},
 	{
 		path: 'forgotPassword',
+		data: {
+			title: 'Recuperación de contraseña'
+		},
 		loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
+	},
+	{
+		path: 'resetPassword',
+		data: {
+			title: 'Restaurar contraseña'
+		},
+		loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordModule)
 	}
 ];
 
