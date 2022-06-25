@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 
 import { Category, Service } from '@app/common/interfaces';
-import { CategoryService, ServiceService, WorkspaceService } from '@app/common/services';
+import { CategoryService, FileUploadService, ServiceService, WorkspaceService } from '@app/common/services';
 
 @Component({
 	selector: 'app-user-workspace',
@@ -26,10 +26,12 @@ export class UserWorkspaceComponent implements OnInit, OnDestroy {
 		private readonly router: Router,
 		private categoryService: CategoryService,
 		private serviceService: ServiceService,
-		private workspaceService: WorkspaceService
+		private workspaceService: WorkspaceService,
+		private fileUploadService: FileUploadService
 	) {  }
 
 	ngOnInit(): void {
+		this.userWorkspaceForm.enable();
 		this.subscriptions.push(
 			this.categoryService.categories().subscribe(),
 			this.serviceService.services().subscribe()
@@ -49,8 +51,14 @@ export class UserWorkspaceComponent implements OnInit, OnDestroy {
 		});
 	}
 
+	setWorkspaceLogo(file: any): void {
+		console.log(file);
+		this.userWorkspaceForm.patchValue({});
+	}
+
 	onSubmit(): void {
-		this.userWorkspaceForm.patchValue({
+		//this.fileUploadService.upload()
+		/*this.userWorkspaceForm.patchValue({
 			services: this.servicesList,
 		});
 		this.subscriptions.push(
@@ -59,7 +67,7 @@ export class UserWorkspaceComponent implements OnInit, OnDestroy {
 					this.router.navigateByUrl('profile');
 				},
 			})
-		);
+		);*/
 	}
 
 	addServiceToList(service: any, input: HTMLInputElement): void {

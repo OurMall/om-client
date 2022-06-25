@@ -11,4 +11,5 @@ export {
 	WorkspaceService,
 	ProductService
 } from './remote';
+export { FileUploadService } from './file-upload.service';
 export { WorkspaceNamespace } from './sockets';

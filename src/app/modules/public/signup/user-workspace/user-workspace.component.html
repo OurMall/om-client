@@ -85,7 +85,18 @@
 			</small>
 		</div>
 	</div>
-	<div class="om-field" formGroupName="profile">
+	<div class="om-field">
+		<app-uploader formControlName="logo" [label]="'Subir imagen'" [multiple]="false" (selectedFiles)="setWorkspaceLogo($event)"></app-uploader>
+		<div
+			class="om-field-error"
+			*ngIf="logo?.invalid && (logo?.touched || logo?.dirty)"
+		>
+			<small class="om-error-text" *ngIf="logo?.errors?.['required']">
+				El campo es requerido
+			</small>
+		</div>
+	</div>
+	<!--<div class="om-field" formGroupName="profile">
 		<label for="logo" class="om-field-label">Logotipo</label>
 		<input
 			formControlName="logo"
@@ -102,7 +113,7 @@
 				El campo es requerido
 			</small>
 		</div>
-	</div>
+	</div>-->
 	<div class="om-field">
 		<label for="tags" class="om-field-label om-optional-label">Etiquetas</label>
 		<input

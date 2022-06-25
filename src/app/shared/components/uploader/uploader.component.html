@@ -1,1 +1,9 @@
-<p>uploader works!</p>
+<div class="uploader">
+	<input class="hidden" id="file-uploader" type="file" [multiple]="multiple" (change)="onChangeFilesToUpload($event)">
+	<label for="file-uploader" class="uploader__label">
+		<i class="uploader__label__icon uil uil-upload om-transition"></i>
+		<span class="uploader__label__text" *ngIf="(files$|async); let files">
+			{{ files | json }}
+		</span>
+	</label>
+</div>
