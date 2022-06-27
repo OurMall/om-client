@@ -56,7 +56,6 @@ export class ResetPasswordComponent implements OnInit {
 		this.resetPasswordForm.patchValue({
 			token: this.token
 		})
-		console.log(this.resetPasswordForm.value);
 		this.subscriptions.push(
 			this.userService.resetPassword(this.resetPasswordForm.value).subscribe({
 				complete: () => {

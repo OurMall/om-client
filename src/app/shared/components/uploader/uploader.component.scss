@@ -19,7 +19,7 @@
 		align-items: center;
 		justify-content: center;
 		padding: 1.5rem .85rem;
-		border: 1px dashed rgba($color: #fff, $alpha: .25);
+		border: 1px dashed var(--border-color);
 
 		&__icon {
 			font-size: 2rem;

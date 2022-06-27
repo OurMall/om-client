@@ -1,0 +1,16 @@
+<div class="post__card">
+	<div class="content">
+		<div class="content__image">
+			<img [src]="post.image" [alt]="post.title" class="image">
+		</div>
+		<div class="content__body">
+			<h2 class="heading">
+				<span class="title">
+					{{ post.title | titlecase }}
+				</span>
+				<span class="created_at">{{ post.created_at | date }}</span>
+			</h2>
+			<div class="description" [innerHTML]="post.content"></div>
+		</div>
+	</div>
+</div>

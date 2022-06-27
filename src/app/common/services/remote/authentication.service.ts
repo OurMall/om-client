@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { tap, filter, take, catchError } from 'rxjs/operators';
 
-import { SessionStorageService, LocalStorageService } from '@app/common/services';
+import { UserService, LocalStorageService } from '@app/common/services';
 import { AccessToken, UserLogin, UserSignup } from '@app/common/interfaces';
 import { Router } from '@angular/router';
 
@@ -17,8 +17,8 @@ export class AuthenticationService {
 	constructor(
 		private readonly http: HttpClient,
 		private readonly router: Router,
-		private sessionStorageService: SessionStorageService,
-		private localStorageService: LocalStorageService
+		private localStorageService: LocalStorageService,
+		private userService: UserService
 	) {}
 
 	signUp(user: UserSignup): Observable<AccessToken> {
@@ -57,6 +57,7 @@ export class AuthenticationService {
 		this.localStorageService.remove('refresh_token');
 		this.localStorageService.remove('user_id');
 		this._accessToken$.next(false);
+		this.userService.userIsWorkspaceOwner = false;
 		this.router.navigate(['login']);
 	}
 

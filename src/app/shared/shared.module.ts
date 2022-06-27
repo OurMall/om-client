@@ -13,6 +13,8 @@ import { ProfileInfoComponent } from './components/profile-info/profile-info.com
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { PostCardComponent } from './components/post-card/post-card.component';
+import { PrimeModule } from './prime.module';
 
 @NgModule({
 	declarations: [
@@ -25,9 +27,15 @@ import { FooterComponent } from './components/footer/footer.component';
 		ProfileInfoComponent,
 		ProductCardComponent,
 		UploaderComponent,
-		FooterComponent
+		FooterComponent,
+		PostCardComponent
 	],
-	imports: [CommonModule, RouterModule, KeyFilterModule],
+	imports: [
+		CommonModule,
+		RouterModule,
+		KeyFilterModule,
+		PrimeModule,
+	],
 	exports: [
 		NavbarComponent,
 		KeyFilterModule,
@@ -38,7 +46,8 @@ import { FooterComponent } from './components/footer/footer.component';
 		ProfileInfoComponent,
 		ProductCardComponent,
 		UploaderComponent,
-		FooterComponent
+		FooterComponent,
+		PostCardComponent
 	],
 })
 export class SharedModule {}

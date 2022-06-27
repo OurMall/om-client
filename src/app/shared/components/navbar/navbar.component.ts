@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 	user$: Observable<User> = this.userService.user$;
 
 	active: boolean = false;
+	display: boolean = false;
 	suscription!: Subscription;
 	links!: any;
 
@@ -32,22 +33,22 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.links = [
 			{
 				route: 'home',
-				tooltip: 'Home',
+				tooltip: 'Inicio',
 				icon: 'uil uil-estate',
 			},
 			{
 				route: 'workspaces',
-				tooltip: 'Workspaces',
+				tooltip: 'Espacios de trabajo',
 				icon: 'uil uil-apps',
 			},
 			{
 				route: 'help',
-				tooltip: 'Help',
+				tooltip: 'Ayuda',
 				icon: 'uil uil-question',
 			},
 			{
 				route: 'login',
-				tooltip: 'Log In',
+				tooltip: 'Iniciar sesión',
 				icon: 'uil uil-signout',
 			},
 		];
@@ -72,5 +73,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 	displayAccount(): void {
 		this.active = !this.active;
 		this.userService.toggleAccount();
+	}
+
+	toggleSidebar(): void {
+		this.display = !this.display;
 	}
 }

@@ -2,20 +2,9 @@
 	<div class="om-field-group">
 		<div class="om-field">
 			<label for="name" class="om-field-label">Nombre</label>
-			<input
-				[pKeyFilter]="'alpha'"
-				formControlName="given_name"
-				class="om-input"
-				id="name"
-				type="text"
-				placeholder="Lola, Pepe.."
-				autocomplete="given-name"
-				autofocus
-			/>
-			<div
-				class="om-field-error"
-				*ngIf="given_name?.invalid && (given_name?.touched || given_name?.dirty)"
-			>
+			<input [pKeyFilter]="'alpha'" formControlName="given_name" class="om-input" id="name" type="text"
+				placeholder="Lola, Pepe.." autocomplete="given-name" autofocus />
+			<div class="om-field-error" *ngIf="given_name?.invalid && (given_name?.touched || given_name?.dirty)">
 				<small class="om-error-text" *ngIf="given_name?.errors?.['required']">
 					El campo es requerido
 				</small>
@@ -23,21 +12,11 @@
 		</div>
 		<div class="om-field">
 			<label for="lastname" class="om-field-label">Apellido</label>
-			<input
-				[pKeyFilter]="'alpha'"
-				formControlName="family_name"
-				class="om-input"
-				id="lastname"
-				type="text"
-				placeholder="Campo, Rosa"
-				autocomplete="family-name"
-			/>
-			<div
-				class="om-field-error"
-				*ngIf="
+			<input [pKeyFilter]="'alpha'" formControlName="family_name" class="om-input" id="lastname" type="text"
+				placeholder="Campo, Rosa" autocomplete="family-name" />
+			<div class="om-field-error" *ngIf="
 					family_name?.invalid && (family_name?.touched || family_name?.dirty)
-				"
-			>
+				">
 				<small class="om-error-text" *ngIf="family_name?.errors?.['required']">
 					El campo es requerido
 				</small>
@@ -46,21 +25,11 @@
 	</div>
 	<div class="om-field">
 		<label for="phone-number" class="om-field-label">Tel&eacute;fono</label>
-		<input
-			[pKeyFilter]="'pnum'"
-			formControlName="phone_number"
-			class="om-input"
-			id="phone-number"
-			type="tel"
-			placeholder="(+57) 555-677"
-			autocomplete="tel"
-		/>
-		<div
-			class="om-field-error"
-			*ngIf="
+		<input [pKeyFilter]="'pnum'" formControlName="phone_number" class="om-input" id="phone-number" type="tel"
+			placeholder="(+57) 555-677" autocomplete="tel" />
+		<div class="om-field-error" *ngIf="
 				phone_number?.invalid && (phone_number?.touched || phone_number?.dirty)
-			"
-		>
+			">
 			<small class="om-error-text" *ngIf="phone_number?.errors?.['required']">
 				El campo es requerido
 			</small>
@@ -71,19 +40,9 @@
 	</div>
 	<div class="om-field">
 		<label for="email" class="om-field-label">Correo eletr&oacute;nico</label>
-		<input
-			[pKeyFilter]="'email'"
-			formControlName="email"
-			class="om-input"
-			id="email"
-			type="email"
-			placeholder="example@mail.com"
-			autocomplete="email"
-		/>
-		<div
-			class="om-field-error"
-			*ngIf="email?.invalid && (email?.touched || email?.dirty)"
-		>
+		<input [pKeyFilter]="'email'" formControlName="email" class="om-input" id="email" type="email"
+			placeholder="example@mail.com" autocomplete="email" />
+		<div class="om-field-error" *ngIf="email?.invalid && (email?.touched || email?.dirty)">
 			<small class="om-error-text" *ngIf="email?.errors?.['required']">
 				El campo es requerido
 			</small>
@@ -95,18 +54,10 @@
 	<div class="om-field-group">
 		<div class="om-field">
 			<label for="password" class="om-field-label">Contrase&ntilde;a</label>
-			<input
-				formControlName="password"
-				class="om-input"
-				id="password"
-				type="{{ this.visiblePassword ? 'text' : 'password' }}"
-				placeholder="********"
-				autocomplete="new-password"
-			/>
-			<div
-				class="om-field-error"
-				*ngIf="password?.invalid && (password?.touched || password?.dirty)"
-			>
+			<input formControlName="password" class="om-input" id="password"
+				type="{{ this.visiblePassword ? 'text' : 'password' }}" placeholder="********"
+				autocomplete="new-password" />
+			<div class="om-field-error" *ngIf="password?.invalid && (password?.touched || password?.dirty)">
 				<small class="om-error-text" *ngIf="password?.errors?.['required']">
 					El campo es requerido
 				</small>
@@ -116,55 +67,31 @@
 			</div>
 		</div>
 		<div class="om-field">
-			<label for="confirm-password" class="om-field-label"
-				>Confirmar contrase&ntilde;a</label
-			>
-			<input
-				formControlName="confirm_password"
-				class="om-input"
-				id="confirm-password"
-				type="{{ this.visiblePassword ? 'text' : 'password' }}"
-				placeholder="********"
-				autocomplete="new-password"
-			/>
-			<div
-				class="om-field-error"
-				*ngIf="
+			<label for="confirm-password" class="om-field-label">Confirmar contrase&ntilde;a</label>
+			<input formControlName="confirm_password" class="om-input" id="confirm-password"
+				type="{{ this.visiblePassword ? 'text' : 'password' }}" placeholder="********"
+				autocomplete="new-password" />
+			<div class="om-field-error" *ngIf="
 					confirm_password?.invalid &&
 					(confirm_password?.touched || confirm_password?.dirty)
-				"
-			>
-				<small
-					class="om-error-text"
-					*ngIf="confirm_password?.errors?.['required']"
-				>
+				">
+				<small class="om-error-text" *ngIf="confirm_password?.errors?.['required']">
 					El campo es requerido
 				</small>
-				<small
-					class="om-error-text"
-					*ngIf="confirm_password?.errors?.['minlength']"
-				>
+				<small class="om-error-text" *ngIf="confirm_password?.errors?.['minlength']">
 					La contrase&ntilde;a debe tener m&iacute;nimo 8 caracteres
 				</small>
 			</div>
 		</div>
-		<div class="show-password" title="Ver contrase&ntilde;a" (click)="showPassword()">
-			<i class="icon uil uil-{{ visiblePassword ? 'eye-slash' : 'eye' }}"></i>
-		</div>
+	</div>
+	<div class="show-password om-field">
+		<input type="checkbox" id="show_password" (change)="showPassword($event)">
+		<label for="show_password">Mostrar contrase&ntilde;as</label>
 	</div>
 	<div class="om-field">
 		<label for="birthdate" class="om-field-label">Fecha de nacimiento</label>
-		<input
-			formControlName="birthdate"
-			class="om-input"
-			id="birthdate"
-			type="date"
-			autocomplete="bday"
-		/>
-		<div
-			class="om-field-error"
-			*ngIf="birthdate?.invalid && (birthdate?.touched || birthdate?.dirty)"
-		>
+		<input formControlName="birthdate" class="om-input" id="birthdate" type="date" autocomplete="bday" />
+		<div class="om-field-error" *ngIf="birthdate?.invalid && (birthdate?.touched || birthdate?.dirty)">
 			<small class="om-error-text" *ngIf="birthdate?.errors?.['required']">
 				El campo es requerido
 			</small>
@@ -199,16 +126,11 @@
 	</div>
 	<div class="privacy__section om-field">
 		<input formControlName="accept_terms" type="checkbox" id="privacy" />
-		<label for="privacy"
-			>Acepto los t&eacute;rminos y pol&iacute;ticas de privacidad</label
-		>
+		<label for="privacy">Acepto los t&eacute;rminos y pol&iacute;ticas de privacidad</label>
 	</div>
 	<div class="om-field">
-		<button
-			class="om-button {{ !signupForm.valid ? 'om-button-disabled' : '' }}"
-			type="submit"
-			[disabled]="!signupForm.valid"
-		>
+		<button class="om-button {{ !signupForm.valid ? 'om-button-disabled' : '' }}" type="submit"
+			[disabled]="!signupForm.valid">
 			Continuar
 		</button>
 	</div>

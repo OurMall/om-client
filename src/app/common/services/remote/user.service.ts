@@ -161,6 +161,10 @@ export class UserService {
 		this.toggle.emit(this.isOpen);
 	}
 
+	set userIsWorkspaceOwner(status: boolean) {
+		this.userIsWorkspaceOwnerSubject$.next(status);
+	}
+
 	get user$(): Observable<User> {
 		return this.userSubject$.asObservable();
 	}

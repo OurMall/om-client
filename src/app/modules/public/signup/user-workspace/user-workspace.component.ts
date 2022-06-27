@@ -31,7 +31,6 @@ export class UserWorkspaceComponent implements OnInit, OnDestroy {
 	) {  }
 
 	ngOnInit(): void {
-		this.userWorkspaceForm.enable();
 		this.subscriptions.push(
 			this.categoryService.categories().subscribe(),
 			this.serviceService.services().subscribe()
@@ -58,7 +57,7 @@ export class UserWorkspaceComponent implements OnInit, OnDestroy {
 
 	onSubmit(): void {
 		//this.fileUploadService.upload()
-		/*this.userWorkspaceForm.patchValue({
+		this.userWorkspaceForm.patchValue({
 			services: this.servicesList,
 		});
 		this.subscriptions.push(
@@ -67,7 +66,7 @@ export class UserWorkspaceComponent implements OnInit, OnDestroy {
 					this.router.navigateByUrl('profile');
 				},
 			})
-		);*/
+		);
 	}
 
 	addServiceToList(service: any, input: HTMLInputElement): void {

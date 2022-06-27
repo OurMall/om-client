@@ -53,7 +53,7 @@
 		</a>
 		<div class="header__search">
 			<input
-				class="search__input"
+				class="om-input search__input"
 				type="search"
 				placeholder="Buscar categor&iacute;a, espacio de trabajo, etc"
 				#search
@@ -86,8 +86,8 @@
 </header>
 <nav class="navigation">
 	<div class="menu">
-		<button class="om-icon-button">
-			<i class="icon uil uil-bars"></i>
+		<button type="button" role="button" class="om-icon-button" (click)="toggleSidebar()">
+			<i class="icon uil uil-{{ !display ? 'bars' : 'times'}}"></i>
 		</button>
 	</div>
 	<div class="navigation__links">
@@ -101,10 +101,12 @@
 	</div>
 	<div class="toolbar">
 		<a
+			pRipple
 			class="profile {{ active ? 'om-active-button' : '' }} om-transition"
 			(click)="displayAccount()"
 			role="button"
-			title="Cuenta"
+			[pTooltip]="'Cuenta'"
+			tooltipPosition="bottom"
 		>
 			<img
 				class="picture"
@@ -125,14 +127,17 @@
 		</a>
 		<app-account></app-account>
 		<ng-container *ngIf="isLoggedIn$ | async; else notProfile">
-			<button class="om-icon-button">
+			<button pRipple class="om-icon-button">
 				<i class="icon uil uil-bell"></i>
 			</button>
 		</ng-container>
 		<ng-template #notProfile>
-			<button class="om-icon-button">
+			<button pRipple class="om-icon-button">
 				<i class="icon uil uil-box"></i>
 			</button>
 		</ng-template>
 	</div>
 </nav>
+<p-sidebar [(visible)]="display" styleClass="p-sidebar-sm" [blockScroll]="true" [closeOnEscape]="true">
+
+</p-sidebar>

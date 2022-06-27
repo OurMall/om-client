@@ -40,8 +40,25 @@
 
 body {
 	font-family: "Ubuntu", sans-serif;
-	background-color: var(--nord-dark-color);
-	color: var(--light-color);
+	background-color: var(--background-theme);
+	color: var(--text-color);
+
+}
+
+body.light-theme {
+	--text-color: var(--dark-color);
+	--text-alt-color: var(--dark-alt-color);
+	--border-color: #3b425240;
+	--background-theme: var(--light-color);
+	--background-alt-theme: var(--light-alt-color);
+}
+
+body.dark-theme {
+	--text-color: var(--light-color);
+	--text-alt-color: var(--light-alt-color);
+	--border-color: #e5e9f040;
+	--background-theme: var(--nord-dark-color);
+	--background-alt-theme: var(--nord-dark-alt-color);
 }
 
 .no__script {

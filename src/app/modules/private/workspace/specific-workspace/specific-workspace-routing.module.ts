@@ -22,16 +22,33 @@ const routes: Routes = [
 			},
 			{
 				path: 'products',
+				data: {
+					title: 'Productos',
+				},
 				loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
+			},
+			{
+				path: 'posts',
+				data: {
+					title: 'Publicaciones'
+				},
+				loadChildren: () => import('./post/post.module').then(m => m.PostModule)
 			},
 		]
 	},
-	{ 
-		path: 'settings', 
+	// {
+	// 	path: 'cashRegister',
+	// 	data: {
+	// 		title: "Caja registradora"
+	// 	},
+	// 	loadChildren: () => import('./cash-register/cash-register.module').then(m => m.CashRegisterModule)
+	// },
+	{
+		path: 'settings',
 		data: {
 			title: 'Configuraciones'
 		},
-		loadChildren: () => import('./workspace-settings/workspace-settings.module').then(m => m.WorkspaceSettingsModule) 
+		loadChildren: () => import('./workspace-settings/workspace-settings.module').then(m => m.WorkspaceSettingsModule)
 	},
 ];
 

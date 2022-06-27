@@ -23,8 +23,8 @@
 			justify-content: space-around;
 			padding: 1.25rem 0;
 			margin: 0 0 1rem 0;
-			background-color: variables.$nord-dark-alt-color;
-			border: 1px solid rgba($color: variables.$light-color, $alpha: 0.1);
+			background-color: var(--background-alt-theme);
+			border: 1px solid var(--border-color);
 			border-radius: 10px;
 			transition: all 0.5s cubic-bezier(0.86, 0.01, 0.15, 0.99);
 
@@ -66,19 +66,8 @@
 					cursor: pointer;
 
 					&:checked {
-						outline: rgba($color: variables.$light-color, $alpha: 1) solid 1px;
+						outline: var(--text-color) solid 1px;
 						background-color: variables.$main-color;
-					}
-				}
-
-				.selected {
-					border-radius: 50%;
-					width: 40px;
-					height: 40px;
-					background-color: white;
-
-					&:checked {
-						background-color: green;
 					}
 				}
 			}

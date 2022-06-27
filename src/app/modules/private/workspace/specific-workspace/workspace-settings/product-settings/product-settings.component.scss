@@ -1,5 +1,32 @@
 @use "~src/assets/sass/variables";
 
+:host ::ng-deep {
+	.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+		background-color: transparent;
+
+	}
+
+	.p-tabview {
+		background-color: transparent;
+
+		&-nav {
+			//background-color: variables.$nord-dark-alt-color;
+
+			li {
+				.p-tabview-nav-link {
+					color: var(--text-color);
+					background-color: transparent;
+				}
+			}
+		}
+
+		&-panels {
+			color: var(--text-color);
+			background-color: transparent;
+		}
+	}
+}
+
 .product__form {
     .om-field {
 

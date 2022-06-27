@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -75,8 +74,9 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
 		this.subscription.unsubscribe();
 	}
 
-	showPassword(): void {
-		this.visiblePassword = !this.visiblePassword;
+	showPassword(event: Event): void {
+		const element: HTMLInputElement = (event.target as HTMLInputElement);
+		this.visiblePassword = element.checked;
 	}
 
 	private validate(): boolean {

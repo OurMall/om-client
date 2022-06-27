@@ -1,0 +1,21 @@
+<div class="posts">
+	<div class="posts__container">
+		<div class="heading" *ngIf="isWorkspaceOwner$|async">
+			<div class="new__post">
+				<button pRipple type="button" class="new__post__button om-base-button" (click)="createPost()">
+					Crear publicaci&oacute;n
+				</button>
+			</div>
+		</div>
+		<div class="content">
+			<div class="wrapper">
+				<ng-container *ngIf="(posts$|async)!.length > 0; else noPosts">
+					<app-post-card *ngFor="let post of (posts$|async)" [post]="post"></app-post-card>
+				</ng-container>
+				<ng-template #noPosts>
+					No hay publicaciones
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</div>

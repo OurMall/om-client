@@ -7,3 +7,4 @@ export { WorkspaceCreate, WorkspaceProfile, Workspace } from './workspace.interf
 export { Permission } from './permissions.interface';
 export { Group } from './group.interface';
 export { ProductCreate, ProductStatus, Product } from './product.interface';
+export { Post, PostCreate } from './post.interface';

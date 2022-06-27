@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { PrimeNGConfig } from 'primeng/api';
 
-import { RouteService, AuthorizationService } from '@app/common/services';
+import { RouteService, AuthorizationService, ThemeService } from '@app/common/services';
 
 @Component({
 	selector: 'app-root',
@@ -10,12 +11,16 @@ import { RouteService, AuthorizationService } from '@app/common/services';
 export class AppComponent implements OnInit, AfterContentInit {
 
 	constructor(
+		private primengConfig: PrimeNGConfig,
 		private routeService: RouteService,
-		private authorizationService: AuthorizationService
+		private authorizationService: AuthorizationService,
+		private themeService: ThemeService
 	) {}
 
 	ngOnInit(): void {
+		this.primengConfig.ripple = true;
 		this.routeService.setRouteTitle();
+		this.themeService.setUpTheme();
 	}
 
 	ngAfterContentInit(): void {

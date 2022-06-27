@@ -72,7 +72,8 @@
 	align-items: center;
 	border-radius: 50%;
 	background-color: transparent;
-	color: var(--nord-light-color);
+	color: var(--text-color);
+	opacity: .8;
 
 	.icon {
 		font-size: 2rem;
@@ -108,7 +109,6 @@
 
 	&:hover {
 		background-color: variables.$main-alt-color;
-		color: currentColor;
 		border-radius: 0;
 		outline: none;
 	}
@@ -118,7 +118,7 @@
 	display: inline-block;
 	font-family: "Poppins", sans-serif;
 	padding: 0.25rem 0.85rem 0.25rem 0;
-	color: variables.$nord-light-color;
+	color: var(--text-color);
 	letter-spacing: 1px;
 
 	&-active,
@@ -128,6 +128,7 @@
 }
 
 .om-active-button {
+	color: variables.$nord-light-color;
 	background-color: variables.$main-alt-color;
 }
 
@@ -151,7 +152,7 @@
 	font-size: 0.85rem;
 	padding: 0 0 0 0.5rem;
 	margin-bottom: 0.25rem;
-	color: rgba($color: variables.$light-color, $alpha: 0.85);
+	color: var(--text-color);
 
 	&::after {
 		content: " *";
@@ -176,24 +177,7 @@
 	padding: 0.5rem 0 0 0;
 
 	.om-error-text {
-		color: rgba($color: variables.$light-color, $alpha: 0.75);
-	}
-}
-
-.om-field-help {
-	width: 70%;
-	margin: 0.5rem auto 0 auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0.25rem 1.5rem;
-	border: 1px solid rgba($color: variables.$main-color, $alpha: 1);
-	background-color: rgba($color: variables.$main-color, $alpha: 0.1);
-	color: rgba($color: variables.$main-color, $alpha: 1);
-	border-radius: 5px;
-
-	.text {
-		margin-left: 0.5rem;
+		color: var(--text-color);
 	}
 }
 
@@ -202,12 +186,6 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-}
-
-.om-field-grid {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
 }
 
 %_input {
@@ -223,9 +201,14 @@
 
 .om-input {
 	@extend %_input;
-	background-color: rgba($color: variables.$nord-dark-alt-color, $alpha: 0.5);
-	color: rgba($color: variables.$nord-light-color, $alpha: 1);
+	background-color: var(--background-alt-theme);
+	color: var(--text-color);
 	width: 100%;
+
+	&::placeholder {
+		color: var(--text-color);
+		opacity: .5;
+	}
 }
 
 /* =============== ENDFORMS =================== */

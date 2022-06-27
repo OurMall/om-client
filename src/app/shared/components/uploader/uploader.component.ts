@@ -13,11 +13,11 @@ export class UploaderComponent implements OnInit {
 
 	@Input() multiple: boolean = false;
 	@Input() label!: string;
-	@Output() selectedFiles: EventEmitter<{
+	@Input() selectedFiles!: {
 		name: string,
 		size: number,
 		type: string,
-	}[]> = new EventEmitter();
+	}[];
 
 	constructor() { }
 
@@ -32,7 +32,7 @@ export class UploaderComponent implements OnInit {
 			type: files![0].type
 		}
 		console.log(file)
-		this.selectedFiles.emit([file]);
+		this.selectedFiles.push(file);
 	}
 
 	get files$(): Observable<FileList> {

@@ -25,7 +25,6 @@ export class ProductComponent implements OnInit {
 		this.subscriptions.push(
 			this.activatedRoute.parent!.parent!.params.subscribe(params => {
 				this.workspaceService.workspace(params['id']).subscribe(workspace => {
-					console.log(workspace);
 					this.productsSubject$.next(workspace.products);
 				})
 			})

@@ -9,7 +9,9 @@ export {
 	ServiceService,
 	UserService,
 	WorkspaceService,
-	ProductService
+	ProductService,
+	PostService
 } from './remote';
 export { FileUploadService } from './file-upload.service';
 export { WorkspaceNamespace } from './sockets';
+export { ThemeService, ThemeType } from './theme.service';

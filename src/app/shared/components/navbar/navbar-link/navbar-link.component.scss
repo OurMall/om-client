@@ -6,7 +6,8 @@
 	align-items: center;
 	padding: 0 1.5rem;
 	text-decoration: none;
-	color: var(--nord-light-color);
+	color: var(--text-color);
+	opacity: .8;
 	border-radius: 2.5px;
 	margin: 0 0.15rem;
 
@@ -16,7 +17,8 @@
 
 	&-active,
 	&:hover {
+		opacity: 1;
 		color: var(--main-color);
-		background-color: var(--nord-dark-alt-color);
+		background-color: var(--background-alt-theme);
 	}
 }

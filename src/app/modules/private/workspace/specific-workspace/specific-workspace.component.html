@@ -1,7 +1,7 @@
 <main class="workspace__content om-section">
 	<div class="wrapper">
 		<div class="layout om-container">
-			<aside class="layout__sidebar om-shadow" role="navigation">
+			<aside class="layout__sidebar" role="navigation">
 				<div class="sidebar__container">
 					<div class="workspace__info" *ngIf="workspace$|async; let workspace">
 						<div class="options">
@@ -82,11 +82,11 @@
 			<section class="layout__main" role="main">
 				<router-outlet></router-outlet>
 			</section>
-			<div class="layout__panel om-shadow" role="tab">
+			<div class="layout__panel" role="tab">
 				<div class="content">
 					<div class="content__subscribers">
 						<h2 class="heading">
-							<span class="title">Suscriptores</span>
+							<span class="title">Seguidores</span>
 							<span class="count">({{ (subscribers$|async)?.length }})</span>
 						</h2>
 						<ul class="subscribers">

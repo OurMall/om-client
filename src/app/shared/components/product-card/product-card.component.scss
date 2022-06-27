@@ -9,6 +9,7 @@
 	min-height: 400px;
 	margin: 0 0 0.85rem 0;
 	font-family: "Sora", sans-serif;
+	border-radius: 8.5px;
 	//outline: solid 1px white;
 
 	&__container {
@@ -20,8 +21,8 @@
 		-webkit-transform: transform 1s;
 		-ms-transform: transform 1s;
 		transform: transform 1s;
-		border: 1px solid rgba($color: variables.$dark-color, $alpha: 0.5);
-		border-radius: 10px;
+		border: 1px solid var(--border-color);
+		border-radius: 8.5px;
 
 		.flip__button {
 			position: absolute;
@@ -37,11 +38,11 @@
 			right: 0;
 			z-index: 1;
 			color: variables.$main-color;
-			background-color: variables.$dark-color;
+			background-color: var(--background-theme);
 
 			&:hover {
 				cursor: pointer;
-				background-color: variables.$nord-light-color;
+				background-color: var(--background-alt-theme);
 				color: variables.$main-color;
 			}
 		}
@@ -58,7 +59,7 @@
 			user-select: none;
 			-webkit-user-select: none;
 			-moz-user-select: none;
-			background-color: variables.$nord-dark-color;
+			background-color: var(--background-theme);
 		}
 
 		.card__front {
@@ -93,7 +94,7 @@
 					margin-bottom: .25rem;
 
 					.badge {
-						color: white;
+						color: variables.$light-color;
 						font-size: 14px;
 						font-weight: 700;
 						padding: .35rem .45rem;
@@ -149,6 +150,7 @@
 		}
 
 		.card__back {
+			color: var(--text-color);
 			background-color: variables.$main-alt-color;
 			-webkit-transform: rotateY(-180deg);
 			-ms-transform: rotateY(-180deg);

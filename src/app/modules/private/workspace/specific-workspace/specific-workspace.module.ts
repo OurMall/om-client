@@ -13,8 +13,8 @@ import { SharedModule } from '@app/shared/shared.module';
   imports: [
     CommonModule,
 	FormsModule,
-	SharedModule,
 	ReactiveFormsModule,
+	SharedModule,
     SpecificWorkspaceRoutingModule
   ]
 })

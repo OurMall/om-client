@@ -25,7 +25,7 @@
 				max-width: 280px;
 				max-height: 280px;
 				object-fit: cover;
-				border: 5px double rgba($color: variables.$nord-dark-alt-color, $alpha: 1);
+				border: 5px solid var(--border-color);
 				border-radius: 50%;
 				overflow: hidden;
 			}
@@ -60,7 +60,7 @@
 					.username {
 						max-width: 200px;
 						font-size: 1.25rem;
-						color: var(--nord-light-color);
+						color: var(--text-color);
 					}
 				}
 
@@ -90,7 +90,7 @@
 					}
 
 					.link {
-						color: variables.$light-color;
+						color: var(--text-color);
 
 						&:hover {
 							color: variables.$main-color;

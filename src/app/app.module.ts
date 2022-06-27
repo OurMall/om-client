@@ -3,11 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ToastrModule } from 'ngx-toastr';
 import { SocketIoModule } from 'ngx-socket-io';
 
 import { environment } from '@environment/environment';
 import { SharedModule } from '@shared/shared.module';
+import { PrimeModule } from '@shared/prime.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { EndpointInterceptor } from '@app/common/interceptors';
@@ -22,6 +25,9 @@ import { WorkspaceNamespace } from '@app/common/services';
 		AppRoutingModule,
 		HttpClientModule,
 		SharedModule,
+		PrimeModule,
+		FormsModule,
+		ReactiveFormsModule,
 		ToastrModule.forRoot({
 			closeButton: true,
 			timeOut: 5000,
@@ -45,6 +51,7 @@ import { WorkspaceNamespace } from '@app/common/services';
 		LoggedInGuard,
 		NotLoggedGuard,
 		WorkspaceNamespace,
+		DialogService,
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: EndpointInterceptor,

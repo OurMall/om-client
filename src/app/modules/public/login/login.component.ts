@@ -30,11 +30,11 @@ export class LoginComponent implements OnInit {
 		if (!this.loginForm.valid) return;
 		this.authenticationService.logIn(this.loginForm.value).subscribe({
 			next: (_) => {
-				this.message.success('Anciabamos tu regreso', 'Bienvenido');
-				this.router.navigate(['']);
+				this.message.success('Nos agrada tenerte de vuelta!', 'Bienvenido');
+				this.router.navigateByUrl('profile');
 			},
-			error: (err) => {
-				this.message.error('Los datos que ingresaste son inválidos');
+			error: (_) => {
+				this.message.error('Los datos que ingresaste son erróneos');
 			},
 		});
 	}

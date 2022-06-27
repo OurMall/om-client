@@ -1,7 +1,7 @@
 @use "~src/assets/sass/variables";
 
 .settings__container {
-    height: variables.$total-height;
+    height: calc(100vh - 110px);
 
     .om-container {
         max-width: 1366px;
@@ -86,7 +86,7 @@
                             display: flex;
                             align-items: center;
                             padding: .35rem .65rem;
-                            color: variables.$light-alt-color;
+                            color: var(--text-color);
 
                             &__icon {
                                 width: 20%;
@@ -102,6 +102,7 @@
                                 cursor: pointer;
                                 border-radius: 5px;
                                 background-color: variables.$main-color;
+								color: variables.$light-color;
                             }
                         }
                     }
@@ -109,7 +110,7 @@
                     .divider {
                         width: 90%;
                         margin: .85rem 0;
-                        background-color: rgba($color: variables.$nord-light-alt-color, $alpha: 0.1);
+                        background-color: var(--border-color);
                     }
 
                     &__title {

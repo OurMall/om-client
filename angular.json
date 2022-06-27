@@ -33,11 +33,16 @@
 						],
 						"styles": [
 							"node_modules/ngx-toastr/toastr.css",
-							"node_modules/primeng/resources/themes/tailwind-light/theme.css",
+							"node_modules/primeng/resources/themes/arya-blue/theme.css",
 							"node_modules/primeng/resources/primeng.min.css",
+							"node_modules/primeicons/primeicons.css",
+							"node_modules/quill/dist/quill.core.css",
+							"node_modules/quill/dist/quill.snow.css",
 							"src/styles.scss"
 						],
-						"scripts": [],
+						"scripts": [
+							"node_modules/quill/dist/quill.js"
+						],
 						"serviceWorker": true,
 						"ngswConfigPath": "ngsw-config.json"
 					},
