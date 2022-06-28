@@ -52,12 +52,9 @@
 			<h1 class="link">Our Mall</h1>
 		</a>
 		<div class="header__search">
-			<input
-				class="om-input search__input"
-				type="search"
-				placeholder="Buscar categor&iacute;a, espacio de trabajo, etc"
-				#search
-			/>
+			<div class="wrapper">
+				<app-search-engine [placeholder]="'Buscar espacio de trabajo, producto, categoria'"></app-search-engine>
+			</div>
 		</div>
 		<div class="header__options">
 			<ng-container *ngIf="isLoggedIn$ | async; else notLogged">
@@ -86,7 +83,7 @@
 </header>
 <nav class="navigation">
 	<div class="menu">
-		<button type="button" role="button" class="om-icon-button" (click)="toggleSidebar()">
+		<button type="button" role="button" class="om-icon-button om-transition" (click)="toggleSidebar()">
 			<i class="icon uil uil-{{ !display ? 'bars' : 'times'}}"></i>
 		</button>
 	</div>

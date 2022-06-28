@@ -6,3 +6,5 @@ export { UserService } from './user.service';
 export { WorkspaceService } from './workspace.service';
 export { ProductService } from './product.service';
 export { PostService } from './post.service';
+export { InvoiceService } from './invoice.service';
+export { DetailsService } from './details.service';

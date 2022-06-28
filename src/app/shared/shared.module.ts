@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { KeyFilterModule } from 'primeng/keyfilter';
 
+import { PrimeModule } from './prime.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NavbarLinkComponent } from './components/navbar/navbar-link/navbar-link.component';
 import { LoaderComponent } from './components/loader/loader.component';
@@ -14,7 +15,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { UploaderComponent } from './components/uploader/uploader.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
-import { PrimeModule } from './prime.module';
+import { SearchEngineComponent } from './components/search-engine/search-engine.component';
 
 @NgModule({
 	declarations: [
@@ -28,7 +29,8 @@ import { PrimeModule } from './prime.module';
 		ProductCardComponent,
 		UploaderComponent,
 		FooterComponent,
-		PostCardComponent
+		PostCardComponent,
+		SearchEngineComponent,
 	],
 	imports: [
 		CommonModule,
@@ -47,7 +49,8 @@ import { PrimeModule } from './prime.module';
 		ProductCardComponent,
 		UploaderComponent,
 		FooterComponent,
-		PostCardComponent
+		PostCardComponent,
+		SearchEngineComponent,
 	],
 })
 export class SharedModule {}

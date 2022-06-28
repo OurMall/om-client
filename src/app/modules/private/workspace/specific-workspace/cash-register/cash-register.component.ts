@@ -1,15 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { map, Observable, startWith } from 'rxjs';
-import { DialogConfirmationComponent } from '../dialog-confirmation/dialog-confirmation.component';
-import { Details } from 'src/app/models/details';
-import { Invoice } from 'src/app/models/invoice';
-import { Product } from 'src/app/models/product';
-import { InvoiceService } from 'src/app/services/ServicesInvoices/invoice.service';
-import { ProductsService } from 'src/app/services/ServicesProducts/products.service';
-import { MyModuleComponent } from '../my-module/my-module.component';
-import { calculateBorderBoxPath } from 'html2canvas/dist/types/render/bound-curves';
+import { Observable } from 'rxjs';
+
+import { InvoiceService, ProductService, MessageService } from "@app/common/services";
+import { Invoice, Product, Details, Currency, Price } from '@app/common/interfaces';
 
 @Component({
 	selector: 'app-cash-register',
@@ -19,7 +13,7 @@ import { calculateBorderBoxPath } from 'html2canvas/dist/types/render/bound-curv
 export class CashRegisterComponent implements OnInit {
 
 	public id_client!: string;
-	public total_price!: number;
+	public total_price: number = 0;
 	public invoice!: Invoice;
 	public products!: any[];
 	public showProducts!: any[];
@@ -36,7 +30,7 @@ export class CashRegisterComponent implements OnInit {
 	// TRKRG
 	public control = new FormControl()
 	public searh!: Observable<string[]>
-	public listNames!: string[]
+	public listNames!: string[];
 	public names!: any[];
 	public return!: number
 
@@ -53,10 +47,10 @@ export class CashRegisterComponent implements OnInit {
 	public formGroup!: FormGroup;
 
 	constructor(
-		private apiInvoice: InvoiceService,
-		private apiProduct: ProductsService,
+		private invoiceService: InvoiceService,
+		private productService: ProductService,
 		private formBuilder: FormBuilder,
-		public snackBar: MatSnackBar
+		private message: MessageService,
 
 	) {
 		this.products = [];
@@ -101,7 +95,7 @@ export class CashRegisterComponent implements OnInit {
 	};
 
 	getNames() {
-		this.apiProduct.getNamesProducts().subscribe(response => {
+		this.productService.productsNames().subscribe(response => {
 			this.listNames = response;
 			this.names = response;
 		});
@@ -109,7 +103,7 @@ export class CashRegisterComponent implements OnInit {
 
 
 	getInvoices() {
-		this.apiInvoice.getInvoices().subscribe((invoice: any) => {
+		this.invoiceService.invoices().subscribe((invoice: any) => {
 			this.products = invoice;
 		})
 	};
@@ -119,12 +113,12 @@ export class CashRegisterComponent implements OnInit {
 	};
 
 	getProducts() {
-		this.apiProduct.getProducts().subscribe((response => {
+		this.productService.products().subscribe((response => {
 			try {
 				let range = response.length;
-				let array = [];
+				let array: string[] = [];
 				for (let index = 0; index < range; index++) {
-					array.push(response[index].name)
+					array.push(response[index].name!)
 				}
 				this.listNames = array
 
@@ -147,31 +141,37 @@ export class CashRegisterComponent implements OnInit {
 	addProductsToDetails(name: string, Quantity: string) {
 		let quantity = parseInt(Quantity);
 		let product: Product = {
-			Name: "",
-			Price: 0.0,
-			Code: "",
-			Quantity: 0,
-			Vat: 0.0
+			name: "",
+			price: {
+				value: 0.0,
+				currency: Currency.COP
+			},
+			code: "",
+			quantity: 0,
+			vat: 0.0
 		};
 		/* ------- Valida que sí se ingrese un código ------- */
 		if (name === null || '' || undefined) {
-			this.snackBar.open("Por favor ingrese un código de producto")
+			this.message.info("Por favor ingrese un código de producto");
 			/* ------- Valida que sí se ingrese una cantidad para poder registrar un producto ------- */
 		} else if (quantity == null || undefined) {
-			this.snackBar.open("Por favor ingrese una cantidad para este producto")
+			this.message.info("Por favor ingrese una cantidad para este producto");
 		} else {
 			/* ------- Traigo el producto relacionado con el código que se ingresa ------- */
-			this.apiProduct.getProductsByAdi(name).subscribe((response => {
+			this.productService.product(name).subscribe(((response: any) => {
 				try {
 					/*  ------- Asigno los valor que necesito del producto a la variable product ------- */
 					const element = response[0];
 					let priceProduct = Math.round((element.price * parseFloat(`${1}.${element.vat}`)))
 					product = {
-						Name: name,
-						Price: priceProduct,
-						Code: element.code,
-						Quantity: quantity,
-						Vat: (element.price * parseFloat(`${0}.${element.vat}`))
+						name: name,
+						price: {
+							value: priceProduct,
+							currency: Currency.COP
+						},
+						code: element.code,
+						quantity: quantity,
+						vat: (element.price * parseFloat(`${0}.${element.vat}`))
 					};
 					this.initialValueVAT = element.vat;
 					/* ------- Valida si el producto que se ingresa ya existe en los detalles y en caso de que exista suma la nueva cantidad a la cantidad que ya tenía ------- */
@@ -189,7 +189,7 @@ export class CashRegisterComponent implements OnInit {
 				} catch (error) {
 
 					/* ------- En caso de que no haya un producto con el código que se ingreso salta este mensaje ------- */
-					this.snackBar.open("No hay un producto con éste código");
+					this.message.error("No hay un producto con éste código");
 				};
 			}));
 		};
@@ -201,12 +201,10 @@ export class CashRegisterComponent implements OnInit {
 		this.invoice.details = this.products;
 		/* ------- Valida que si hayan productos en los detalles para poder crear la factura ------- */
 		if (this.products.length === 0) {
-			this.snackBar.open("Para crear la factura necesita mínimo un producto");
+			this.message.info("Para crear la factura necesita mínimo un producto");
 		} else {
-			this.apiInvoice.postInvoices(this.invoice).subscribe(response => {
-				this.snackBar.open('Factura creada', '', {
-					duration: 2000
-				});
+			this.invoiceService.create(this.invoice).subscribe(response => {
+				this.message.success('Factura creada');
 				this.recordLocalStorage();
 			});
 		};

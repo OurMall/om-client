@@ -112,7 +112,6 @@ export class UserService {
 			take(1),
 			filter(response => response && !!response),
 			catchError((err: HttpErrorResponse) => {
-				console.log(err);
 				return throwError(() => err);
 			})
 		)

@@ -15,16 +15,19 @@ export interface Price {
 }
 
 export interface ProductCreate {
-	name: string;
-	detail: string;
-	price: Price;
-	stock: number;
+	name?: string;
+	code?: string; // For cash register integration.
+	quantity?: number; // For cash register integration.
+	detail?: string;
+	price?: Price;
+	stock?: number;
 	images?: string[];
-	status: ProductStatus;
-	is_available: boolean;
+	status?: ProductStatus;
+	is_available?: boolean;
 }
 
 export interface Product extends ProductCreate {
-	created_at: Date;
-	updated_at: Date;
+	vat: number;
+	created_at?: Date;
+	updated_at?: Date;
 }

@@ -1,9 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
 @use "sass:color";
 @use "assets/sass/variables";
 @use "assets/sass/normalize";
 @use "assets/sass/custom";
 @use "assets/sass/animations";
+/*@use '@angular/material' as mat;
+@include mat.core();
+
+$om-client-primary: mat.define-palette(mat.$indigo-palette);
+$om-client-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$om-client-warn: mat.define-palette(mat.$red-palette);
+
+$om-client-theme: mat.define-light-theme((
+  color: (
+    primary: $om-client-primary,
+    accent: $om-client-accent,
+    warn: $om-client-warn,
+  )
+));
+
+@include mat.all-component-themes($om-client-theme);*/
+
 
 @import url("https://fonts.googleapis.com/css2?family=Anybody:wght@100;200;300;400;500;600;800&family=Eczar:wght@400;500;700;800&family=Poppins:wght@100;200;300;400;500;600;700;900&family=Sora:wght@100;200;300;400;500;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400;1,500&display=swap");
 

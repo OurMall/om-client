@@ -33,9 +33,6 @@ export class AccountComponent implements OnInit {
 		this.userService.toggle.subscribe((isOpen) => {
 			this.isOpen = isOpen;
 		});
-		this.theme$.subscribe(theme => {
-			console.log(theme)
-		})
 	}
 
 	logout(): void {

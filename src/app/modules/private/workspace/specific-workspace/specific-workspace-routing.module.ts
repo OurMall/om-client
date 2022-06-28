@@ -36,13 +36,13 @@ const routes: Routes = [
 			},
 		]
 	},
-	// {
-	// 	path: 'cashRegister',
-	// 	data: {
-	// 		title: "Caja registradora"
-	// 	},
-	// 	loadChildren: () => import('./cash-register/cash-register.module').then(m => m.CashRegisterModule)
-	// },
+	{
+		path: 'cashRegister',
+		data: {
+			title: "Caja registradora"
+		},
+		loadChildren: () => import('./cash-register/cash-register.module').then(m => m.CashRegisterModule)
+	},
 	{
 		path: 'settings',
 		data: {

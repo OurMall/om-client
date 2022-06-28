@@ -29,6 +29,9 @@ export class ForgotPasswordComponent implements OnInit {
 		this.userService.forgotPassword(email).subscribe({
 			complete: () => {
 				this.message.info("Enviaremos un correo electrónico si el email se encuentra registrado");
+			},
+			error: (_) => {
+				this.message.info("Enviaremos un correo electrónico si el email se encuentra registrado");
 			}
 		})
 	}

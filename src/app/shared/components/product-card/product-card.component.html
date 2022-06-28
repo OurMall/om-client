@@ -21,8 +21,8 @@
 			<div class="body">
 				<h2 class="name">{{ product.name | titlecase }}</h2>
 				<div class="price">
-					<span class="value">{{ product.price.value | currency }}</span>
-					<span class="currency">{{ product.price.currency }}</span>
+					<span class="value">{{ product.price?.value | currency }}</span>
+					<span class="currency">{{ product.price?.currency }}</span>
 				</div>
 
 			</div>
