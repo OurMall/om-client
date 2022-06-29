@@ -7,17 +7,17 @@
 		<div class="card-content">
 			<div class="card">
 				<h1 class="title">Agregar producto</h1>
-				<!-- <form [formGroup]="formGroup" (ngSubmit)="addProductsToDetails(nameProduct.value, quantity.value)">
-					<input type="text" matInput formControlName="employee" [matAutocomplete]="auto" name="nameProduct"
+				 <form [formGroup]="formGroup" (ngSubmit)="traerProductos(nameProduct.value, quantity.value)">
+					<input  class="om-input" type="text" matInput formControlName="employee" [matAutocomplete]="auto" name="nameProduct"
 						#nameProduct>
 					<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
 						<mat-option *ngFor="let name of names" [value]="name">{{name}}</mat-option>
 					</mat-autocomplete>
-					<input type="text" name="quantity" #quantity placeholder="Cantidad">
+					<input type="text" class="om-input" name="quantity" #quantity placeholder="Cantidad">
 					<div>
-						<button type="submit" class="btn-pro">Add</button>
+						<button type="submit" class="om-button">Add</button>
 					</div>
-				</form> -->
+				</form> 
 			</div>
 		</div>
 		<div class="content-table">
@@ -36,16 +36,16 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let item of products">
-							<td>{{item.Code}}</td>
-							<td>{{item.Name}}</td>
-							<td>{{item.Price | currency}}</td>
-							<td><input type="number" value={{item.Quantity}} min="1" name="quantityDetails"
+							<td>{{item.code}}</td>
+							<td>{{item.name}}</td>
+							<td>{{item.price.value | currency}}</td>
+							<td><input type="number" value={{item.quantity}} min="1" name="quantityDetails"
 									#quantityDetails max="9999"></td>
-							<td>{{item.Vat * item.Quantity | currency}}</td>
-							<td>{{item.Price * item.Quantity | currency}}</td>
+							<td>{{item.vat * item.quantity | currency}}</td>
+							<td>{{item.price.value * item.quantity | currency}}</td>
 							<td><button class="delete-btn" (click)="deleteProductToDetails(item.Code)"><i
 										class="fa-solid fa-trash"></i></button><button class="update-btn"
-									(click)="UpdateQuantity(item.Code, quantityDetails.value, initialValueVAT)"><i
+									(click)="UpdateQuantity(item.name, quantityDetails.value, initialValueVAT)"><i
 										class="fa-solid fa-pen"></i></button></td>
 
 						</tr>

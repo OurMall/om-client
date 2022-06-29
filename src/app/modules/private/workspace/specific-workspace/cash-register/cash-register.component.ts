@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { InvoiceService, ProductService, MessageService } from "@app/common/services";
+import { InvoiceService, ProductService, MessageService, WorkspaceService } from "@app/common/services";
 import { Invoice, Product, Details, Currency, Price } from '@app/common/interfaces';
 
 @Component({
@@ -22,6 +22,7 @@ export class CashRegisterComponent implements OnInit {
 	public vatProduct!: number;
 	public initialValueVAT!: number;
 	public vats!: number[];
+	public productos!: any[];
 
 
 	public searhProduct!: Observable<Product>;
@@ -51,6 +52,7 @@ export class CashRegisterComponent implements OnInit {
 		private productService: ProductService,
 		private formBuilder: FormBuilder,
 		private message: MessageService,
+		private workSpaceService: WorkspaceService
 
 	) {
 		this.products = [];
@@ -62,12 +64,22 @@ export class CashRegisterComponent implements OnInit {
 		this.getProducts();
 		this.initForm();
 		this.getNames();
+		this.getProductos();
+		this.workSpaceService.workspaces().subscribe()
 		/*
 	  this.searh = this.control.valueChanges.pipe(
 		  startWith(''),
 		  map(value => this.filter(value))
 		  );*/
 	};
+
+	getProductos() {
+		
+		this.workSpaceService.workspaces$.subscribe(workspace => {
+			this.productos = workspace[0].products
+			console.log(this.productos,"lista con los productos")
+		})
+	}
 
 	initForm() {
 		this.formGroup = this.formBuilder.group({
@@ -95,7 +107,7 @@ export class CashRegisterComponent implements OnInit {
 	};
 
 	getNames() {
-		this.productService.productsNames().subscribe(response => {
+		this.workSpaceService.worksNames().subscribe(response => {
 			this.listNames = response;
 			this.names = response;
 		});
@@ -137,7 +149,8 @@ export class CashRegisterComponent implements OnInit {
 		return subject ? subject.name : undefined;
 	  }
 	*/
-
+	
+	/*
 	addProductsToDetails(name: string, Quantity: string) {
 		let quantity = parseInt(Quantity);
 		let product: Product = {
@@ -150,17 +163,17 @@ export class CashRegisterComponent implements OnInit {
 			quantity: 0,
 			vat: 0.0
 		};
-		/* ------- Valida que sí se ingrese un código ------- */
+		/* ------- Valida que sí se ingrese un código ------- 
 		if (name === null || '' || undefined) {
 			this.message.info("Por favor ingrese un código de producto");
-			/* ------- Valida que sí se ingrese una cantidad para poder registrar un producto ------- */
+			/* ------- Valida que sí se ingrese una cantidad para poder registrar un producto ------- 
 		} else if (quantity == null || undefined) {
 			this.message.info("Por favor ingrese una cantidad para este producto");
 		} else {
-			/* ------- Traigo el producto relacionado con el código que se ingresa ------- */
+			/* ------- Traigo el producto relacionado con el código que se ingresa ------- 
 			this.productService.product(name).subscribe(((response: any) => {
 				try {
-					/*  ------- Asigno los valor que necesito del producto a la variable product ------- */
+					/*  ------- Asigno los valor que necesito del producto a la variable product ------- 
 					const element = response[0];
 					let priceProduct = Math.round((element.price * parseFloat(`${1}.${element.vat}`)))
 					product = {
@@ -174,14 +187,76 @@ export class CashRegisterComponent implements OnInit {
 						vat: (element.price * parseFloat(`${0}.${element.vat}`))
 					};
 					this.initialValueVAT = element.vat;
-					/* ------- Valida si el producto que se ingresa ya existe en los detalles y en caso de que exista suma la nueva cantidad a la cantidad que ya tenía ------- */
+					/* ------- Valida si el producto que se ingresa ya existe en los detalles y en caso de que exista suma la nueva cantidad a la cantidad que ya tenía ------- 
 					if (this.products.find(product => product.Name == name)) {
 						let index = this.products.findIndex(p => p.Name === name);
 						let newQuantity = this.products[index].Quantity += quantity;
 						this.UpdateQuantity(element.code, newQuantity, this.initialValueVAT);
 					} else {
+						/* ------- Ingresa los productos a los detalles que va a tener la factura -------
+						this.products.push(product);
+					};
+					/* ------- Llamo a la función para que vaya sumando los valores y así obtener el valor total de la factura -------
+					this.sumPrices();
+					//this.calculateVat(element.vat, element.price, this.quantity, element.code);
+				} catch (error) {
+
+					/* ------- En caso de que no haya un producto con el código que se ingreso salta este mensaje ------- 
+					this.message.error("No hay un producto con éste código");
+				};
+			}));
+		};
+	};
+	*/
+
+	traerProductos(nombre:string, Quantity:string) {
+		let index = this.productos.findIndex(p => p.name == nombre)
+		console.log(index,"rkregn");
+		let quantity = parseInt(Quantity);
+		let product: Product = {
+			name: "",
+			price: {
+				value: 0.0,
+				currency: Currency.COP
+			},
+			code: "",
+			quantity: 0,
+			vat: 0.0
+		};
+		/* ------- Valida que sí se ingrese un código ------- */
+		if (nombre === null || '' || undefined) {
+			this.message.info("Por favor ingrese un código de producto");
+			/* ------- Valida que sí se ingrese una cantidad para poder registrar un producto ------- */
+		} else if (quantity == null || undefined) {
+			this.message.info("Por favor ingrese una cantidad para este producto");
+		} else {
+			/* ------- Traigo el producto relacionado con el código que se ingresa ------- */
+				try {
+					/*  ------- Asigno los valor que necesito del producto a la variable product ------- */
+					const element = this.productos[index];
+					let priceProduct = Math.round((element.price.value * parseFloat(`${1}.${element.vat}`)))
+					console.log(priceProduct,"precio")
+					product = {
+						name: nombre,
+						price: {
+							value: priceProduct,
+							currency: Currency.COP
+						},
+						code: element.code,
+						quantity: quantity,
+						vat: (element.price.value * parseFloat(`${0}.${element.vat}`))
+					};
+					this.initialValueVAT = element.vat;
+					/* ------- Valida si el producto que se ingresa ya existe en los detalles y en caso de que exista suma la nueva cantidad a la cantidad que ya tenía ------- */
+					if (this.products.find(product => product.name == nombre)) {
+						let index = this.products.findIndex(p => p.name === nombre);
+						let newQuantity = this.products[index].quantity += quantity;
+						this.UpdateQuantity(element.code, newQuantity, this.initialValueVAT);
+					} else {
 						/* ------- Ingresa los productos a los detalles que va a tener la factura -------*/
 						this.products.push(product);
+						console.log(this.products,"lista ");
+						
 					};
 					/* ------- Llamo a la función para que vaya sumando los valores y así obtener el valor total de la factura -------*/
 					this.sumPrices();
@@ -191,9 +266,8 @@ export class CashRegisterComponent implements OnInit {
 					/* ------- En caso de que no haya un producto con el código que se ingreso salta este mensaje ------- */
 					this.message.error("No hay un producto con éste código");
 				};
-			}));
+			};
 		};
-	};
 
 	addInvoices() {
 		this.invoice.id_client = this.id_client
@@ -214,21 +288,21 @@ export class CashRegisterComponent implements OnInit {
 		this.vats.push(this.initialValueVAT);
 	};
 
-	UpdateQuantity(code: String, quantity: string, vat: number) {
+	UpdateQuantity(name: String, quantity: string, vat: number) {
 		/* ------- Posición del producto que se desea actualizar -------*/
-		let index = this.products.findIndex(p => p.Code === code);
+		let index = this.products.findIndex(p => p.name === name);
 		/* ------- Nuevo valor que se ingresa ------- */
 		let newQuantity = parseInt(quantity)
 		/* ------- Se valida si el producto está en la lista y si su cantidad actual es mayor
 		o igual a la que se está ingresando ------- */
-		if (index > -1 && this.products[index].Quantity >= newQuantity) {
+		if (index > -1 && this.products[index].quantity >= newQuantity) {
 			/* ------- Se cambia la cantidad que tiene el producto por la nueva ------- */
-			this.products[index].Quantity = newQuantity;
+			this.products[index].quantity = newQuantity;
 			this.subtractPrices();
 			/* ------- Se llama a la función que se encarga de restar los valores para obtener el total de la factura ------- */
 			//this.calculateVat(vat, this.products[index].Price, newQuantity, this.products[index].Code)
-		} else if (index > -1 && this.products[index].Quantity <= newQuantity) {
-			this.products[index].Quantity = newQuantity;
+		} else if (index > -1 && this.products[index].quantity <= newQuantity) {
+			this.products[index].quantity = newQuantity;
 			/* ------- Se llama a la función que se encarga de sumar los valores para obtener el total de la factura ------- */
 			this.sumPrices();
 			//this.calculateVat(vat, this.products[index].Price, newQuantity, this.products[index].Code)
@@ -249,7 +323,7 @@ export class CashRegisterComponent implements OnInit {
 		this.total_price = this.products.reduce((
 			currentValue,
 			object,
-		) => currentValue + (object.Price * object.Quantity), initialValue);
+		) => currentValue + (object.price.value * object.quantity), initialValue);
 	};
 
 	subtractPrices() {
@@ -257,7 +331,7 @@ export class CashRegisterComponent implements OnInit {
 		this.total_price = this.products.reduce((
 			currentValue,
 			object,
-		) => currentValue - (object.Price * object.Quantity) * -1, initialValue);
+		) => currentValue - (object.price.value * object.quantity) * -1, initialValue);
 	};
 
 	recordLocalStorage() {

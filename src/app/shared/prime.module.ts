@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { TooltipModule } from 'primeng/tooltip';
 import { TabViewModule } from 'primeng/tabview';
@@ -20,7 +20,7 @@ import { SidebarModule } from 'primeng/sidebar';
 	DynamicDialogModule,
 	EditorModule,
 	SidebarModule,
-	// MatAutocompleteModule, //material
+	MatAutocompleteModule, //material
   ],
   exports: [
 	TooltipModule,
@@ -29,7 +29,7 @@ import { SidebarModule } from 'primeng/sidebar';
 	DynamicDialogModule,
 	EditorModule,
 	SidebarModule,
-	// MatAutocompleteModule, //material
+	MatAutocompleteModule, //material
   ]
 })
 export class PrimeModule { }
