@@ -8,3 +8,4 @@ export { ProductService } from './product.service';
 export { PostService } from './post.service';
 export { InvoiceService } from './invoice.service';
 export { DetailsService } from './details.service';
+export { SearchEngineService } from './search-engine.service';

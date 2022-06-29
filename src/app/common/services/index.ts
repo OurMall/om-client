@@ -12,7 +12,8 @@ export {
 	ProductService,
 	PostService,
 	InvoiceService,
-	DetailsService
+	DetailsService,
+	SearchEngineService,
 } from './remote';
 export { FileUploadService } from './file-upload.service';
 export { WorkspaceNamespace } from './sockets';

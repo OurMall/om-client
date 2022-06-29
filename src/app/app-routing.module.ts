@@ -18,6 +18,13 @@ const routes: Routes = [
 			import('./modules/public/home/home.module').then((m) => m.HomeModule),
 	},
 	{
+		path: 'search',
+		data: {
+			title: "Resultados"
+		},
+		loadChildren: () => import('./modules/public/search-result/search-result.module').then(m => m.SearchResultModule)
+	},
+	{
 		path: 'signup',
 		data: {
 			title: 'Registrarse',

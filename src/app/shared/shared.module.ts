@@ -16,6 +16,7 @@ import { UploaderComponent } from './components/uploader/uploader.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { SearchEngineComponent } from './components/search-engine/search-engine.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -37,6 +38,8 @@ import { SearchEngineComponent } from './components/search-engine/search-engine.
 		RouterModule,
 		KeyFilterModule,
 		PrimeModule,
+		FormsModule,
+		ReactiveFormsModule,
 	],
 	exports: [
 		NavbarComponent,
