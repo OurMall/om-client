@@ -4,6 +4,8 @@ import { Product, Workspace } from '@app/common/interfaces';
 import { SearchEngineService } from '@app/common/services';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
+type ResultsType = "products" | "workspaces";
+
 @Component({
 	selector: 'app-search-result',
 	templateUrl: './search-result.component.html',
@@ -15,6 +17,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 	private productsSubject$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
 
 	subscriptions: Subscription[] = [];
+	section: ResultsType = "products";
 
 	constructor(
 		private readonly router: Router,
@@ -38,6 +41,10 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 				);
 			})
 		)
+	}
+
+	changeSection(section: ResultsType): void {
+		this.section = section;
 	}
 
 	ngOnDestroy(): void {

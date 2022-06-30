@@ -1,2 +1,48 @@
-{{ products$|async|json }}
-{{ workspaces$|async|json }}
+<section class="search-result om-section">
+	<div class="container om-container">
+		<div class="nav" role="navigation">
+			<div class="nav__link {{section == 'products' ? 'nav__link-active' : ''}}" (click)="changeSection('products')">
+				<a role="link" class="link om-link">
+					Productos
+				</a>
+			</div>
+			<div class="nav__link {{section == 'workspaces' ? 'nav__link-active' : ''}}" (click)="changeSection('workspaces')">
+				<a role="link" class="link om-link">
+					Espacios de trabajo
+				</a>
+			</div>
+		</div>
+		<div class="content">
+			<ng-container [ngSwitch]="section">
+				<div class="section" *ngSwitchCase="'products'">
+					<ng-container *ngIf="(products$|async)!.length > 0; else noProducts">
+						<div class="wrapper-products">
+							<app-product-card *ngFor="let product of (products$|async)" [product]="product"></app-product-card>
+						</div>
+					</ng-container>
+					<ng-template #noProducts>
+						<div class="no-products">
+							<h3>
+								No se encontraron productos
+							</h3>
+						</div>
+					</ng-template>
+				</div>
+				<div class="section" *ngSwitchCase="'workspaces'">
+					<div class="wrapper">
+						<ng-container *ngIf="(workspaces$|async)!.length > 0; else noWorkspaces">
+							<app-workspace-card *ngFor="let workspace of (workspaces$|async)" [workspace]="workspace"></app-workspace-card>
+						</ng-container>
+						<ng-template #noWorkspaces>
+							<div class="no-results">
+								<h3>
+									No se encontraron espacios de trabajo
+								</h3>
+							</div>
+						</ng-template>
+					</div>
+				</div>
+			</ng-container>
+		</div>
+	</div>
+</section>

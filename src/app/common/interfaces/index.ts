@@ -10,3 +10,4 @@ export { ProductCreate, ProductStatus, Product, Currency, Price } from './produc
 export { Post, PostCreate } from './post.interface';
 export { Invoice } from './invoice.interface';
 export { Details } from './details.interface';
+export { Review } from './review.interface';

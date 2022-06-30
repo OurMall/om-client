@@ -34,6 +34,16 @@ export class WorkspaceNamespace extends Socket {
 		});
 	}
 
+	createComment(data: any): void {
+		this.emit('create_commet', data);
+	}
+
+	workspaceComments(workspace: string): void {
+		this.emit('workspace_comments', {
+			workspace
+		});
+	}
+
 	subscribe(data: any): void {
 		this.emit('subscribe_workspace', data);
 	}

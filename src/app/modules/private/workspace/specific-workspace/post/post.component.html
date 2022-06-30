@@ -13,7 +13,11 @@
 					<app-post-card *ngFor="let post of (posts$|async)" [post]="post"></app-post-card>
 				</ng-container>
 				<ng-template #noPosts>
-					No hay publicaciones
+					<div class="no-posts">
+						<h2>
+							No hay publicaciones
+						</h2>
+					</div>
 				</ng-template>
 			</div>
 		</div>

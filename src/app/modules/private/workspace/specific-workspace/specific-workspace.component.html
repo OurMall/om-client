@@ -50,13 +50,13 @@
 								<li class="shortcuts__element">
 									<a class="shortcut om-transition" [routerLink]="'./products'" routerLinkActive="shortcut-active" role="link">
 										<i class="shortcut__icon uil uil-shopping-bag"></i>
-										<span>Productos</span>
+										<span>Productos ({{ (workspace$|async)?.products?.length }})</span>
 									</a>
 								</li>
 								<li class="shortcuts__element">
 									<a class="shortcut om-transition" [routerLink]="'./posts'" routerLinkActive="shortcut-active" role="link">
 										<i class="shortcut__icon uil uil-apps"></i>
-										<span>Publicaciones</span>
+										<span>Publicaciones ({{ (workspace$|async)?.posts?.length }})</span>
 									</a>
 								</li>
 								<li class="shortcuts__element" *ngIf="isWorkspaceOwner$ | async">
@@ -106,6 +106,38 @@
 								</div>
 							</ng-template>
 						</ul>
+					</div>
+					<div class="content__comments">
+						<div class="wrapper">
+							<div class="body">
+								<h2 class="heading">
+									<span class="title">Comentarios</span>
+									<span class="count">({{ (workspace$|async)?.reviews?.length }})</span>
+								</h2>
+								<ul class="comments">
+									<li class="comment">
+										<img src="assets/images/profile.png" alt="Profile photo" class="picture">
+										<div class="content">
+											<p class="value">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, fugiat.</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="footer">
+								<div class="wrapper">
+									<input
+										[pKeyFilter]="blockSpecial"
+										type="text"
+										class="comment-input om-input"
+										placeholder="Escribe un comentario..."
+										#commentInput
+									>
+									<button type="button" class="send__button om-base-button" (click)="comment(commentInput)">
+										<i class="icon uil uil-message"></i>
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

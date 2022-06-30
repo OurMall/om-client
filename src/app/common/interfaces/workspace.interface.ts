@@ -1,4 +1,4 @@
-import { Category, Product, Post } from './';
+import { Category, Product, Post, Review } from './';
 
 export interface WorkspaceProfile {
 	name: string;
@@ -25,6 +25,7 @@ export interface Workspace extends WorkspaceCreate {
 	products: Product[];
 	posts: Post[];
 	notifications: any[];
+	reviews: Review[];
 	is_verified: boolean;
 	created_at: Date;
 	updated_at: Date;

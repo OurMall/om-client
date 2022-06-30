@@ -15,13 +15,6 @@
 				<p class="description">
 					{{workspace?.profile?.description}}
 				</p>
-				<div class="rating">
-					<i class="uil uil-star"></i>
-					<i class="uil uil-star"></i>
-					<i class="uil uil-star"></i>
-					<i class="uil uil-star"></i>
-					<i class="uil uil-star"></i>
-				</div>
 			</div>
 			<div class="footer">
 				<ul class="tags">
@@ -30,9 +23,9 @@
 					</li>
 				</ul>
 				<div class="options">
-					<a class="rounded-button om-button">
+					<!-- <a class="rounded-button om-button">
 						<i class="uil uil-info-circle"></i>
-					</a>
+					</a> -->
 					<a [routerLink]="'/workspaces/' + workspace?.id" class="rounded-button om-button" style="margin-right: .25rem;" (click)="joinWorkspace(workspace.id)">
 						<i class="uil uil-eye"></i>
 					</a>

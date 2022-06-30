@@ -18,6 +18,7 @@ export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnD
 
 	subscriptions: Subscription[] = [];
 	workspace!: string;
+	blockSpecial: RegExp = /^[^{}<>*!]+$/;
 
 	constructor(
 		private readonly activatedRoute: ActivatedRoute,
@@ -47,6 +48,7 @@ export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnD
 				})
 				this.workspaceNamespace.joinWorkspace(params['id']);
 				this.workspaceNamespace.workspaceSubscribers(params['id']);
+				this.workspaceNamespace.workspaceComments(params['id']);
 				this.userService.isOwner(params['id']);
 			}),
 			/*this.workspaceNamespace.onJoined().subscribe(response => {
@@ -72,6 +74,18 @@ export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnD
 				this.router.navigateByUrl("login");
 			}),
 		)
+	}
+
+	comment(input: HTMLInputElement): void {
+		const value = input.value;
+		const data: any = {
+			workspace: this.workspace,
+			user: this.localStorageService.get("user_id"),
+			review: {
+				comment: value
+			}
+		}
+		this.workspaceNamespace.createComment(data);
 	}
 
 	subscribeToWorkspace(): void {

@@ -27,9 +27,9 @@
 			justify-content: center;
 
 			&__card {
-				background-color: variables.$nord-dark-color;
+				background-color: var(--background-theme);
 				padding: 2rem;
-				border: 1px solid rgba($color: variables.$nord-light-color, $alpha: 0.25);
+				border: 1px solid var(--border-color);
 				border-radius: 10px;
 
 				.body {
