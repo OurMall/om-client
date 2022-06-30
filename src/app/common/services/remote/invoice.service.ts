@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 	providedIn: 'root'
 })
 export class InvoiceService {
+  getInvoices() {
+    throw new Error('Method not implemented.');
+  }
 
 	constructor(
 		private readonly http: HttpClient
