@@ -7,7 +7,7 @@
 		<div class="card-content">
 			<div class="card">
 				<h1 class="title">Agregar producto</h1>
-				 <form [formGroup]="formGroup" (ngSubmit)="traerProductos(nameProduct.value, quantity.value)">
+				<form [formGroup]="formGroup" (ngSubmit)="traerProductos(nameProduct.value, quantity.value)">
 					<input  class="om-input" type="text" matInput formControlName="employee" [matAutocomplete]="auto" name="nameProduct"
 						#nameProduct>
 					<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -25,7 +25,6 @@
 				<table class="fl-table">
 					<thead>
 						<tr>
-							<th>Codigo</th>
 							<th>Nombre</th>
 							<th>Precio</th>
 							<th>Cantidad</th>
@@ -36,7 +35,6 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let item of products">
-							<td>{{item.code}}</td>
 							<td>{{item.name}}</td>
 							<td>{{item.price.value | currency}}</td>
 							<td><input type="number" value={{item.quantity}} min="1" name="quantityDetails"

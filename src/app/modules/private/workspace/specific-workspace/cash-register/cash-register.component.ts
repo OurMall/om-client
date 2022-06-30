@@ -74,8 +74,7 @@ export class CashRegisterComponent implements OnInit {
 	};
 
 	getProductos() {
-		
-		this.workSpaceService.workspaces$.subscribe(workspace => {
+		this.workSpaceService.workspaces$.subscribe((workspace: { products: any[]; }[]) => {
 			this.productos = workspace[0].products
 			console.log(this.productos,"lista con los productos")
 		})
@@ -85,7 +84,7 @@ export class CashRegisterComponent implements OnInit {
 		this.formGroup = this.formBuilder.group({
 			'employee': ['']
 		});
-		this.formGroup.get('employee')?.valueChanges.subscribe(response => {
+		this.formGroup.get('employee')?.valueChanges.subscribe((response: any) => {
 			console.log('data is', response)
 			this.filterData(response);
 		});
@@ -99,7 +98,6 @@ export class CashRegisterComponent implements OnInit {
 	}
 
 
-
 	filterData(enteredData: any) {
 		this.names = this.listNames.filter(item => {
 			return item.toLowerCase().indexOf(enteredData.toLowerCase()) > -1
@@ -107,9 +105,18 @@ export class CashRegisterComponent implements OnInit {
 	};
 
 	getNames() {
-		this.workSpaceService.worksNames().subscribe(response => {
-			this.listNames = response;
-			this.names = response;
+		
+		this.workSpaceService.worksNames().subscribe((response: any[]) => {
+			console.log(response[0],"nombres")
+			console.log(response[0][0].name,"nombres")
+			let listNames: any[] = []
+			for (let index = 0; index < response.length + 1; index++) {
+				const element = response[0][index].name;
+				listNames.push(element)
+			}
+			this.listNames = listNames;
+			console.log(this.listNames,"nombres dentro de la lista");
+			this.names = listNames;
 		});
 	};
 
@@ -125,7 +132,7 @@ export class CashRegisterComponent implements OnInit {
 	};
 
 	getProducts() {
-		this.productService.products().subscribe((response => {
+		this.productService.products().subscribe(((response: string | any[]) => {
 			try {
 				let range = response.length;
 				let array: string[] = [];
@@ -133,7 +140,6 @@ export class CashRegisterComponent implements OnInit {
 					array.push(response[index].name!)
 				}
 				this.listNames = array
-
 			} catch (error) {
 				console.log("Error al traer productos")
 			}
@@ -262,7 +268,6 @@ export class CashRegisterComponent implements OnInit {
 					this.sumPrices();
 					//this.calculateVat(element.vat, element.price, this.quantity, element.code);
 				} catch (error) {
-
 					/* ------- En caso de que no haya un producto con el código que se ingreso salta este mensaje ------- */
 					this.message.error("No hay un producto con éste código");
 				};
@@ -340,16 +345,4 @@ export class CashRegisterComponent implements OnInit {
 		localStorage.setItem("product", JSON.stringify(products));
 		localStorage.setItem("total_price", this.total_price.toString());
 	};
-
-
-
-	/*calculateVat(vat:number, price:number, quantity:number, code:string) {
-	  let index = this.products.findIndex(p => p.Code == code);
-	  /* ------- Con este valor se va a hallar el precio del producto sin el IVA ------- */
-	/*let percentageToDividePrice:string = `${1}.${vat}`;
-	let productWithVAT = this.products[index].Price * parseFloat(percentageToDividePrice);
-	this.products[index].Vat = productWithVAT
-  };*/
-
-
 }

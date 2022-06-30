@@ -69,8 +69,8 @@ export class WorkspaceService {
 	}
 
 	worksNames(): Observable<any[]> {
-		return this.http.get<any[]>("workS").pipe(
-			map((product: any[]) => product.map(element => element["name"]))
+		return this.http.get<any[]>("workspace").pipe(
+			map((product: any[]) => product.map(element => element.products))
 		);
 	};
 	
