@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
 
 import { MessageService, UserService } from '@app/common/services';
 import { User, Workspace } from '@app/common/interfaces';
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private readonly fb: FormBuilder,
+		private readonly confirmationService: ConfirmationService,
 		private userService: UserService,
 		private message: MessageService
 	) {}
@@ -67,6 +69,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
 				}
 			)
 		);
+	}
+
+	confirm(): void {
+		this.confirmationService.confirm({
+			message: "¿Quieres convertirte en vendedor/a?",
+			accept: () => {
+				this.userService.addGroupToUser("seller").subscribe({
+					complete: () => {
+						this.message.success("Ahora eres un vendedor, por favor crea el espacio de trabajo")
+					},
+					error: (_) => {
+						this.message.error("Algo salió mal");
+					}
+				})
+			},
+		})
 	}
 
 	onSubmit(): void {

@@ -4,9 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DialogService } from 'primeng/dynamicdialog';
 import { ToastrModule } from 'ngx-toastr';
 import { SocketIoModule } from 'ngx-socket-io';
+import { ConfirmationService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
 import { environment } from '@environment/environment';
 import { SharedModule } from '@shared/shared.module';
@@ -14,7 +15,7 @@ import { PrimeModule } from '@shared/prime.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { EndpointInterceptor } from '@app/common/interceptors';
-import { LoggedInGuard, NotLoggedGuard } from '@app/common/guards';
+import { LoggedInGuard, NotLoggedGuard, GroupGuard } from '@app/common/guards';
 import { WorkspaceNamespace } from '@app/common/services';
 
 @NgModule({
@@ -50,8 +51,10 @@ import { WorkspaceNamespace } from '@app/common/services';
 	providers: [
 		LoggedInGuard,
 		NotLoggedGuard,
+		GroupGuard,
 		WorkspaceNamespace,
 		DialogService,
+		ConfirmationService,
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: EndpointInterceptor,

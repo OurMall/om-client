@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { GroupGuard } from '@app/common/guards';
 import { WorkspaceComponent } from './workspace.component';
 
 const routes: Routes = [
@@ -9,6 +11,15 @@ const routes: Routes = [
 			title: 'Espacios de trabajo'
 		},
 		component: WorkspaceComponent
+	},
+	{
+		path: 'create',
+		data: {
+			title: "Crear espacio de trabajo",
+			group: "seller"
+		},
+		canActivate: [GroupGuard],
+		loadChildren: () => import('./create-workspace/create-workspace.module').then(m => m.CreateWorkspaceModule)
 	},
 	{
 		path: ':id',

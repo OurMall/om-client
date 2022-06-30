@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'primeng/tooltip';
 import { TabViewModule } from 'primeng/tabview';
 import { RippleModule } from 'primeng/ripple';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { EditorModule } from 'primeng/editor';
 import { SidebarModule } from 'primeng/sidebar';
@@ -20,6 +21,7 @@ import { SidebarModule } from 'primeng/sidebar';
 	DynamicDialogModule,
 	EditorModule,
 	SidebarModule,
+	ConfirmDialogModule,
 	// MatAutocompleteModule, //material
   ],
   exports: [
@@ -29,6 +31,7 @@ import { SidebarModule } from 'primeng/sidebar';
 	DynamicDialogModule,
 	EditorModule,
 	SidebarModule,
+	ConfirmDialogModule,
 	// MatAutocompleteModule, //material
   ]
 })

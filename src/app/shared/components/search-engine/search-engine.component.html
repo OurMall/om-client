@@ -1,7 +1,7 @@
 <div class="search-engine">
 	<input
 		[formControl]="query"
-		pKeyFilter="alpha"
+		[pKeyFilter]="blockSpecial"
 		class="search-engine__input om-input"
 		type="search"
 		[placeholder]="placeholder"

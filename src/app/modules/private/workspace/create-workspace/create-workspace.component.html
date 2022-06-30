@@ -1,0 +1,109 @@
+<section class="workspace-create om-section">
+	<div class="container">
+		<h1>Create workspace works</h1>
+		<div class="body">
+			<form [formGroup]="userWorkspaceForm" class="user__workspace-form" (ngSubmit)="onSubmit()">
+				<div class="om-field-group" formGroupName="profile">
+					<div class="om-field">
+						<label for="name" class="om-field-label">Nombre</label>
+						<input [pKeyFilter]="blockSpecial" formControlName="name" type="text" class="om-input" id="name"
+							placeholder="Our Mall" autofocus />
+						<div class="om-field-error" *ngIf="name?.invalid && (name?.touched || name?.dirty)">
+							<small class="om-error-text" *ngIf="name?.errors?.['required']">
+								El campo es requerido
+							</small>
+						</div>
+					</div>
+					<div class="om-field">
+						<label for="slogan" class="om-field-label om-optional-label">Slogan</label>
+						<input [pKeyFilter]="blockSpecial" formControlName="slogan" type="text" class="om-input"
+							id="slogan" placeholder="Lorem ipsum" />
+						<div class="om-field-error" *ngIf="slogan?.invalid && (slogan?.touched || slogan?.dirty)">
+							<small class="om-error-text" *ngIf="slogan?.errors?.['maxlength']">
+								M&aacute;ximo 100 caracteres
+							</small>
+						</div>
+					</div>
+				</div>
+				<div class="om-field" formGroupName="profile">
+					<label for="description" class="om-field-label">Descripci&oacute;n</label>
+					<textarea [pKeyFilter]="blockSpecial" formControlName="description" class="om-input"
+						id="description" placeholder="Impresiona a las personas con tu espacio de trabajo..." rows="5"
+						cols="30" style="resize: none"></textarea>
+					<div class="om-field-error"
+						*ngIf="description?.invalid && (description?.touched || description?.dirty)">
+						<small class="om-error-text" *ngIf="description?.errors?.['required']">
+							El campo es requerido
+						</small>
+						<small class="om-error-text" *ngIf="description?.errors?.['maxlength']">
+							M&aacute;ximo 300 caracteres
+						</small>
+					</div>
+				</div>
+				<div class="om-field" formGroupName="category">
+					<label for="category" class="om-field-label">Categor&iacute;a</label>
+					<select formControlName="code_name" class="om-input" id="category">
+						<option selected disabled>Seleccionar categor&iacute;a</option>
+						<option *ngFor="let category of categories$ | async" [value]="category.code_name">
+							{{ category.name }}
+						</option>
+					</select>
+					<div class="om-field-error" *ngIf="category?.invalid && (category?.touched || category?.dirty)">
+						<small class="om-error-text" *ngIf="category?.errors?.['required']">
+							El campo es requerido
+						</small>
+					</div>
+				</div>
+				<!--<div class="om-field">
+		<app-uploader formControlName="logo" [label]="'Subir imagen'" [multiple]="false" (selectedFiles)="setWorkspaceLogo($event)"></app-uploader>
+		<div
+			class="om-field-error"
+			*ngIf="logo?.invalid && (logo?.touched || logo?.dirty)"
+		>
+			<small class="om-error-text" *ngIf="logo?.errors?.['required']">
+				El campo es requerido
+			</small>
+		</div>
+	</div>-->
+				<div class="om-field" formGroupName="profile">
+					<label for="logo" class="om-field-label">Logotipo</label>
+					<input formControlName="logo" type="url" class="om-input" id="logo"
+						placeholder="example.com/logo.png" />
+					<div class="om-field-error" *ngIf="logo?.invalid && (logo?.touched || logo?.dirty)">
+						<small class="om-error-text" *ngIf="logo?.errors?.['required']">
+							El campo es requerido
+						</small>
+					</div>
+				</div>
+				<div class="om-field">
+					<label for="tags" class="om-field-label om-optional-label">Etiquetas</label>
+					<input type="text" class="om-input" id="tags" placeholder="Vestidos, blusas, collares" />
+				</div>
+				<div class="services__section om-field">
+					<div class="information">
+						<h3 class="information__title">Servicios</h3>
+						<p class="information__description">
+							&iquest;Qu&eacute; funcionalidades deseas implementar en tu espacio de
+							trabajo? Te listamos las principales.
+						</p>
+					</div>
+					<div class="option" *ngFor="let service of services$ | async; index as i">
+						<input formControlName="services" type="checkbox"
+							(click)="addServiceToList(service, inputCheck)" #inputCheck />
+						<label for="{{ service.code_name }}" class="helper">
+							<h4 class="name">{{ service.name }}</h4>
+							<p class="description">{{ service.description }}</p>
+						</label>
+					</div>
+				</div>
+				<div class="om-field">
+					<button class="om-button {{ !userWorkspaceForm.valid ? 'om-button-disabled' : '' }}" type="submit"
+						[disabled]="!userWorkspaceForm.valid">
+						Finalizar
+					</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</section>

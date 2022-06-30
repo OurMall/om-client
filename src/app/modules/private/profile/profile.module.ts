@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { SharedModule } from '@app/shared/shared.module';
+import { PrimeModule } from '@shared/prime.module';
+import { SharedModule } from '@shared/shared.module';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
@@ -14,6 +15,7 @@ import { ProfileComponent } from './profile.component';
 		CommonModule,
 		ProfileRoutingModule,
 		SharedModule,
+		PrimeModule,
 		ReactiveFormsModule
 	],
 	exports: [],

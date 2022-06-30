@@ -16,6 +16,14 @@ import { UserWorkspaceComponent } from './user-workspace/user-workspace.componen
 		UserRoleComponent,
 		UserWorkspaceComponent,
 	],
-	imports: [CommonModule, SignupRoutingModule, ReactiveFormsModule, SharedModule],
+	imports: [
+		CommonModule,
+		SignupRoutingModule,
+		ReactiveFormsModule,
+		SharedModule,
+	],
+	exports: [
+		UserWorkspaceComponent
+	]
 })
 export class SignupModule {}

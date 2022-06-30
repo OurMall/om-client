@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { GroupGuard } from '@app/common/guards';
 import { SpecificWorkspaceComponent } from './specific-workspace.component';
 
 const routes: Routes = [
@@ -39,15 +40,19 @@ const routes: Routes = [
 	{
 		path: 'cashRegister',
 		data: {
-			title: "Caja registradora"
+			title: "Caja registradora",
+			group: "seller"
 		},
+		canActivate: [GroupGuard],
 		loadChildren: () => import('./cash-register/cash-register.module').then(m => m.CashRegisterModule)
 	},
 	{
 		path: 'settings',
 		data: {
-			title: 'Configuraciones'
+			title: 'Configuraciones',
+			group: "seller"
 		},
+		canActivate: [GroupGuard],
 		loadChildren: () => import('./workspace-settings/workspace-settings.module').then(m => m.WorkspaceSettingsModule)
 	},
 ];

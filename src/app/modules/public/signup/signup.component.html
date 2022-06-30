@@ -35,7 +35,7 @@
 				[title]="'Info'"
 				[description]="'Los campos con asterisco (*) son requeridos'"
 			></app-alert-message>
-			<button (click)="incrementStep()">Step</button>
+			<!-- <button (click)="incrementStep()">Step</button> -->
 			<ng-template [ngIf]="stepper == 1">
 				<app-user-register
 					(nextStepEvent)="changeCurrentStep($event)"

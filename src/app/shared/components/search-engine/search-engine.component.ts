@@ -10,9 +10,10 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs';
 })
 export class SearchEngineComponent implements OnInit {
 
-	query: FormControl = new FormControl('');
-
 	@Input() placeholder!: string;
+
+	query: FormControl = new FormControl('');
+	blockSpecial: RegExp = /^[^<>*!]+$/
 
 	constructor(
 		private readonly router: Router,
