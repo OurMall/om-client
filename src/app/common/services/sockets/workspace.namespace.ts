@@ -35,7 +35,7 @@ export class WorkspaceNamespace extends Socket {
 	}
 
 	createComment(data: any): void {
-		this.emit('create_commet', data);
+		this.emit('create_comment', data);
 	}
 
 	workspaceComments(workspace: string): void {
@@ -76,12 +76,24 @@ export class WorkspaceNamespace extends Socket {
 		return this.fromEvent<ApiResponse>('joined');
 	}
 
+	onAlreadyCommented(): Observable<ApiResponse> {
+		return this.fromEvent<ApiResponse>('already_commented');
+	}
+
+	onNewComment(): Observable<ApiResponse> {
+		return this.fromEvent<ApiResponse>('new_comment');
+	}
+
 	onSubscribed(): Observable<ApiResponse> {
 		return this.fromEvent<ApiResponse>('subscribed');
 	}
 
 	onUnsubscribed(): Observable<ApiResponse> {
 		return this.fromEvent<ApiResponse>('unsubscribed');
+	}
+
+	onReviews(): Observable<ApiResponse> {
+		return this.fromEvent<ApiResponse>('reviews');
 	}
 
 	onSubscribersList(): Observable<ApiResponse> {

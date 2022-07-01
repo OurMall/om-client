@@ -112,29 +112,31 @@
 							<div class="body">
 								<h2 class="heading">
 									<span class="title">Comentarios</span>
-									<span class="count">({{ (workspace$|async)?.reviews?.length }})</span>
+									<span class="count">({{ (reviews$|async)?.length }})</span>
 								</h2>
 								<ul class="comments">
-									<li class="comment">
+									<li class="comment" *ngFor="let review of (reviews$|async)">
 										<img src="assets/images/profile.png" alt="Profile photo" class="picture">
 										<div class="content">
-											<p class="value">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, fugiat.</p>
+											<p class="value">{{review.comment}}</p>
 										</div>
 									</li>
 								</ul>
 							</div>
 							<div class="footer">
 								<div class="wrapper">
-									<input
-										[pKeyFilter]="blockSpecial"
-										type="text"
-										class="comment-input om-input"
-										placeholder="Escribe un comentario..."
-										#commentInput
-									>
-									<button type="button" class="send__button om-base-button" (click)="comment(commentInput)">
-										<i class="icon uil uil-message"></i>
-									</button>
+									<ng-container *ngIf="!(isWorkspaceOwner$|async)">
+										<input
+											[pKeyFilter]="blockSpecial"
+											type="text"
+											class="comment-input om-input"
+											placeholder="Escribe un comentario..."
+											#commentInput
+										>
+										<button type="button" class="send__button om-base-button" (click)="confirm(commentInput)">
+											<i class="icon uil uil-message"></i>
+										</button>
+									</ng-container>
 								</div>
 							</div>
 						</div>

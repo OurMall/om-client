@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterContentInit, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
 
-import { User, Workspace } from '@app/common/interfaces';
+import { Review, User, Workspace } from '@app/common/interfaces';
 import { LocalStorageService, MessageService, UserService, WorkspaceNamespace, WorkspaceService } from '@app/common/services';
 
 @Component({
@@ -13,6 +14,7 @@ import { LocalStorageService, MessageService, UserService, WorkspaceNamespace, W
 export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnDestroy {
 
 	private subscribersSubject$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+	private reviewsSubject$: BehaviorSubject<Review[]> = new BehaviorSubject<Review[]>([]);
 	private workspaceSubject$: BehaviorSubject<Workspace> = new BehaviorSubject<Workspace>(null!);
 	private isSubscribedSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -22,6 +24,7 @@ export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnD
 
 	constructor(
 		private readonly activatedRoute: ActivatedRoute,
+		private readonly confirmationService: ConfirmationService,
 		private readonly router: Router,
 		private localStorageService: LocalStorageService,
 		private workspaceService: WorkspaceService,
@@ -65,8 +68,13 @@ export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnD
 			this.workspaceNamespace.onSubscribersList().subscribe(data => {
 				this.subscribersSubject$.next(data.response.subscribers);
 			}),
+			this.workspaceNamespace.onReviews().subscribe(data => {
+				this.reviewsSubject$.next(data.response.reviews);
+			}),
+			this.workspaceNamespace.onNewComment().subscribe(_ => this.message.info("Nuevo comentario en el espacio de trabajo")),
 			this.workspaceNamespace.onSubscribed().subscribe(_ => this.message.success("Te haz suscrito al espacio de trabajo")),
 			this.workspaceNamespace.onUnsubscribed().subscribe(_ => this.message.info("Cancelaste la subscripción al espacio de trabajo")),
+			this.workspaceNamespace.onAlreadyCommented().subscribe(_ => this.message.warning("Ya comentaste en este espacio de trabajo")),
 			this.workspaceNamespace.onAlreadySubscribed().subscribe(_ => this.message.warning("Ya estás suscrito a este espacio de trabajo")),
 			this.workspaceNamespace.onWorkspaceError().subscribe(_ => this.message.error("Algo salio mal", "Reintenta")),
 			this.workspaceNamespace.onNotToken().subscribe(_ => {
@@ -74,6 +82,17 @@ export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnD
 				this.router.navigateByUrl("login");
 			}),
 		)
+	}
+
+	confirm(input: HTMLInputElement): void {
+		this.confirmationService.confirm({
+			header: 'Comentar',
+			message: '¿Estás seguro de que deseas comentar en el espacio de trabajo?',
+			icon: 'uil uil-check',
+			accept: () => {
+				this.comment(input);
+			}
+		});
 	}
 
 	comment(input: HTMLInputElement): void {
@@ -139,5 +158,9 @@ export class SpecificWorkspaceComponent implements OnInit, AfterContentInit, OnD
 
 	get subscribers$(): Observable<User[]> {
 		return this.subscribersSubject$.asObservable();
+	}
+
+	get reviews$(): Observable<Review[]> {
+		return this.reviewsSubject$.asObservable();
 	}
 }

@@ -124,14 +124,14 @@
 		</a>
 		<app-account></app-account>
 		<ng-container *ngIf="isLoggedIn$ | async; else notProfile">
-			<button pRipple class="om-icon-button">
+			<!-- <button pRipple class="om-icon-button">
 				<i class="icon uil uil-bell"></i>
-			</button>
+			</button> -->
 		</ng-container>
 		<ng-template #notProfile>
-			<button pRipple class="om-icon-button">
+			<!-- <button pRipple class="om-icon-button">
 				<i class="icon uil uil-box"></i>
-			</button>
+			</button> -->
 		</ng-template>
 	</div>
 </nav>

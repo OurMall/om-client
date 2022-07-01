@@ -1,8 +1,6 @@
 @use "~src/assets/sass/variables";
 
 .workspace__content {
-	//height: 100vh;
-	//overflow: hidden;
 	height: calc(100vh - 110px);
 
 	.wrapper {
@@ -338,7 +336,8 @@
 									flex-direction: column;
 									align-items: center;
 									justify-content: center;
-									padding: 0 .5rem;
+									padding: .5rem 0;
+									margin: 0 auto;
 
 									.comment {
 										display: flex;
@@ -357,6 +356,9 @@
 										.content {
 											display: flex;
 											flex-direction: column;
+											align-items: center;
+											justify-content: center;
+											margin-top: 0;
 
 											.value {
 												font-size: 14px;

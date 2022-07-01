@@ -1,9 +1,9 @@
 @use "~src/assets/sass/variables";
 
 .footer {
-	background-color: rgba($color: variables.$dark-alt-color, $alpha: 1);
+	background-color: var(--background-alt-theme);
 	opacity: .85;
-	color: white;
+	color: var(--text-color);
 	line-height: 1;
 	z-index: 1;
 
@@ -16,7 +16,7 @@
 			justify-content: center;
 			align-items: center;
 			padding: 1rem 0;
-			border-bottom: 1px solid #fff;
+			border-bottom: 1px solid var(--border-color);
 
 			&__links {
 				width: 50%;
@@ -65,13 +65,13 @@
 
 					p {
 						font-size: 1.2rem;
-						font-weight: 500;
+						font-weight: 700;
 						margin-bottom: 2rem;
 					}
 
 					a {
 						text-decoration: none;
-						color: gray;
+						color: var(--text-alt-color);
 						font-size: 1.1rem;
 						font-weight: 400;
 						margin-bottom: 0.5rem;
