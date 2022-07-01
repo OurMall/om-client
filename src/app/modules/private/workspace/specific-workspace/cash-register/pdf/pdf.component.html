@@ -32,7 +32,6 @@
   <table class="table table-striped-columns">
     <thead>
       <tr>
-        <th scope="col">Código</th>
         <th scope="col">Nombre</th>
         <th scope="col">Precio</th>
         <th scope="col">IVA</th>
@@ -41,11 +40,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of products">
-        <td>{{item.Code}}</td>
-        <td>{{item.Name}}</td>
-        <td>{{item.Price}}</td>
-        <td>{{item.Vat}}</td>
-        <td>{{item.Quantity}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.price.value}}</td>
+        <td>{{item.vat}}</td>
+        <td>{{item.quantity}}</td>
       </tr>
     </tbody>
   </table>

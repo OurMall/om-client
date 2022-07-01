@@ -75,11 +75,6 @@ export class CashRegisterComponent implements OnInit {
 			this.getet()
 		})
 		this.workSpaceService.workspaces().subscribe()
-		/*
-	  this.searh = this.control.valueChanges.pipe(
-		  startWith(''),
-		  map(value => this.filter(value))
-		  );*/
 	};
 
 	getProductos() {
@@ -90,10 +85,7 @@ export class CashRegisterComponent implements OnInit {
 
 	getet() {
 		this.workSpaceService.workspace(this.workSpaceId).subscribe(response => {
-			console.log(response.products,"Productos")
-			console.log(response.products[0].name,"Productos con nombre")
 			this.productos = response.products;
-			console.log(this.productos,"EN LISTA")
 		})
 	};
 
@@ -111,7 +103,6 @@ export class CashRegisterComponent implements OnInit {
 		const icash: any = document.getElementById("i-cash");
 		const calculo = (icash.value - this.total_price);
 		this.return = calculo;
-		console.log(calculo)
 	}
 
 
@@ -172,7 +163,6 @@ export class CashRegisterComponent implements OnInit {
 	
 	traerProductos(nombre:string, Quantity:string) {
 		let index = this.productos.findIndex(p => p.name == nombre)
-		console.log(index,"rkregn");
 		let quantity = parseInt(Quantity);
 		let product: Product = {
 			name: "",

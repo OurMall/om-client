@@ -29,17 +29,12 @@ export class PdfComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    console.log(this.dollarInPeso,'precio en pesos')
 
   };
 
   receiveInovice($event:Invoice) {
     this.invoices = $event;
   };
-
-
- 
-
 
 
   getInvoiceStorage() {
@@ -50,11 +45,9 @@ export class PdfComponent implements OnInit {
       this.products = [];
     } else {
       this.products = JSON.parse(products);
+      console.log(this.products,"poductos")
     };
   };
-
- 
-
 
 
   makePDF() {
