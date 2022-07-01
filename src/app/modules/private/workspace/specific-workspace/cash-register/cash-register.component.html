@@ -11,7 +11,7 @@
 					<input  class="om-input" type="text" matInput formControlName="employee" [matAutocomplete]="auto" name="nameProduct"
 						#nameProduct>
 					<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-						<mat-option *ngFor="let name of names" [value]="name">{{name}}</mat-option>
+						<mat-option *ngFor="let name of productos" [value]="name.name">{{name.name}}</mat-option>
 					</mat-autocomplete>
 					<input type="text" class="om-input" name="quantity" #quantity placeholder="Cantidad">
 					<div>
