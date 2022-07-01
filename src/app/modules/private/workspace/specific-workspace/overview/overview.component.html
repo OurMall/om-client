@@ -3,12 +3,56 @@
 		<div role="banner" class="heading">
 			<div class="wrapper">
 				<div class="statistics">
-
+					<div class="statistic">
+						<i class="icon uil uil-shopping-basket"></i>
+						<div class="content">
+							<div class="count">
+								{{(workspace$|async)?.products?.length}}
+							</div>
+							<p class="title">
+								Productos
+							</p>
+						</div>
+					</div>
+					<div class="statistic">
+						<i class="icon uil uil-globe"></i>
+						<div class="content">
+							<div class="count">
+								{{(workspace$|async)?.posts?.length}}
+							</div>
+							<p class="title">
+								Publicaciones
+							</p>
+						</div>
+					</div>
+					<div class="statistic">
+						<i class="icon uil uil-users-alt"></i>
+						<div class="content">
+							<div class="count">
+								{{(workspace$|async)?.suscribers?.length}}
+							</div>
+							<p class="title">
+								Suscriptores
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="content">
-
+			<div class="card" *ngIf="(workspace$|async); let workspace">
+				<div class="card__header">
+					<h2>
+						{{ workspace.profile.name }}
+					</h2>
+				</div>
+				<div class="card__body">
+					<p>
+						{{ workspace.profile.description }}
+					</p>
+					<i class="icon uil uil-store-alt"></i>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

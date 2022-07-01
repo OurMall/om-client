@@ -34,4 +34,12 @@ export class ProductService {
 			})
 		);
 	}
+
+	delete(product_id?: string): Observable<ApiResponse> {
+		return this.http.delete<ApiResponse>(`product/${product_id}`).pipe(
+			catchError((err: HttpErrorResponse) => {
+				return throwError(() => err);
+			})
+		);
+	}
 }

@@ -8,7 +8,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 
 import { User } from '@app/common/interfaces';
-import { AuthenticationService, UserService } from '@app/common/services';
+import { AuthenticationService, UserService, ThemeService, ThemeType } from '@app/common/services';
 
 @Component({
 	selector: 'app-navbar',
@@ -28,7 +28,8 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	constructor(
 		private authenticationService: AuthenticationService,
-		private userService: UserService
+		private userService: UserService,
+		private themeService: ThemeService
 	) {
 		this.links = [
 			{
@@ -42,14 +43,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 				icon: 'uil uil-apps',
 			},
 			{
-				route: 'help',
-				tooltip: 'Ayuda',
+				route: 'support',
+				tooltip: 'Soporte',
 				icon: 'uil uil-question',
-			},
-			{
-				route: 'login',
-				tooltip: 'Iniciar sesión',
-				icon: 'uil uil-signout',
 			},
 		];
 	}
@@ -77,5 +73,13 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	toggleSidebar(): void {
 		this.display = !this.display;
+	}
+
+	toggleTheme(): void {
+		this.themeService.switchTheme();
+	}
+
+	get theme$(): Observable<ThemeType> {
+		return this.themeService.theme$;
 	}
 }

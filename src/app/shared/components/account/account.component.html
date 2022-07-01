@@ -32,17 +32,6 @@
 				</div>
 			</div>
 			<div class="body">
-				<a role="button" class="item-link" (click)="toggleTheme()">
-					<span class="text" [ngSwitch]="theme$|async">
-						Tema:
-						<div *ngSwitchCase="'dark-theme'">
-							Oscuro
-						</div>
-						<div *ngSwitchCase="'light-theme'">
-							Claro
-						</div>
-					</span>
-				</a>
 				<ng-container *ngIf="isLoggedIn$ | async; else notLogged">
 					<a [routerLink]="'support'" routerLinkActive="item-link-active" class="item-link">
 						<span class="text">Soporte</span>

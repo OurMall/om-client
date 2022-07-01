@@ -33,11 +33,11 @@
 								</ng-container>
 							</div>
 						</div>
-						<div class="description">
+						<!-- <div class="description">
 							<span>
 								{{ workspace.profile.description }}
 							</span>
-						</div>
+						</div> -->
 						<div class="accesibility">
 							<h4>Acceso directo</h4>
 							<ul class="shortcuts">
@@ -114,14 +114,21 @@
 									<span class="title">Comentarios</span>
 									<span class="count">({{ (reviews$|async)?.length }})</span>
 								</h2>
-								<ul class="comments">
-									<li class="comment" *ngFor="let review of (reviews$|async)">
-										<img src="assets/images/profile.png" alt="Profile photo" class="picture">
-										<div class="content">
-											<p class="value">{{review.comment}}</p>
-										</div>
-									</li>
-								</ul>
+								<ng-container *ngIf="(reviews$|async)!.length > 0; else noComments">
+									<ul class="comments">
+										<li class="comment" *ngFor="let review of (reviews$|async)">
+											<img src="assets/images/profile.png" alt="Profile photo" class="picture">
+											<div class="content">
+												<p class="value">{{review.comment}}</p>
+											</div>
+										</li>
+									</ul>
+								</ng-container>
+								<ng-template #noComments>
+									<div class="comments">
+										<span>No hay comentarios</span>
+									</div>
+								</ng-template>
 							</div>
 							<div class="footer">
 								<div class="wrapper">

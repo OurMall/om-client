@@ -1,6 +1,52 @@
 <p-tabView>
 	<p-tabPanel [header]="'Mostrar'">
-		Products
+		<ng-container *ngIf="(workspace$ | async)?.products!.length > 0; else noProducts">
+			<ul class="notification-list">
+				<li class="notification-element" *ngFor="let product of (workspace$|async)?.products">
+					<form class="notification-content">
+						<!-- <small class="identifier">
+							<i class="pi pi-hashtag"></i>
+							{{ product.id }}
+						</small> -->
+						<h3 class="title">
+							<span>
+								{{ product.name | titlecase }}
+							</span>
+							<span class="status">
+								{{ product.is_available ? 'Disponible' : 'No disponible' }}
+							</span>
+						</h3>
+						<p class="description">
+							{{ product.detail }}
+						</p>
+						<div class="details">
+							<strong>
+								<span class="time-ago">
+									<i class="icon pi pi-clock"></i>
+									{{ product.created_at | date }}
+								</span>
+								<span class="visibility">
+									<i class="icon uil uil-list-ol"></i>
+									{{ product.stock }}
+								</span>
+								<!-- <span class="expired-date">
+									<i class="icon pi pi-calendar-times"></i>
+									{{ notification.expired_date | date }}
+								</span> -->
+							</strong>
+						</div>
+					</form>
+					<div class="notification-options">
+						<button class="option-button delete-button" (click)="confirm(product.id)">
+							<i class="pi pi-trash"></i>
+						</button>
+					</div>
+				</li>
+			</ul>
+		</ng-container>
+		<ng-template #noProducts>
+			No hay productos
+		</ng-template>
 	</p-tabPanel>
 	<p-tabPanel [header]="'Crear'">
 		<form [formGroup]="productForm" class="product__form" (ngSubmit)="onSubmit()">

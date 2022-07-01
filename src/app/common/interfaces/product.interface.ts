@@ -27,6 +27,7 @@ export interface ProductCreate {
 }
 
 export interface Product extends ProductCreate {
+	id?: string;
 	vat: number;
 	created_at?: Date;
 	updated_at?: Date;

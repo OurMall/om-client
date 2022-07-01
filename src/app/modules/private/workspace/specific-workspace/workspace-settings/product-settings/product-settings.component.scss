@@ -3,7 +3,6 @@
 :host ::ng-deep {
 	.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
 		background-color: transparent;
-
 	}
 
 	.p-tabview {
@@ -27,16 +26,127 @@
 	}
 }
 
+.notification-list {
+	max-width: 1366px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	margin: 1rem auto 0 auto;
+	padding: 0 1rem;
+
+	.notification-element {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+		border-bottom: 2px solid var(--border-color);
+		padding: 1rem 0;
+
+		.notification-content {
+			margin-top: 0.5rem;
+			width: 70%;
+
+			.identifier {
+				font-weight: 400;
+				color: var(--text-color);
+				cursor: not-allowed;
+
+				i {
+					font-size: 0.5rem;
+				}
+			}
+
+			.title {
+				display: flex;
+				align-items: center;
+				align-content: center;
+				margin: 0;
+
+				.hyperlink {
+					font-size: 2rem;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+
+				.status {
+					margin-left: 0.5rem;
+					font-size: 0.8rem;
+					padding: 0.2rem;
+					text-transform: capitalize;
+					color: var(--text-alt-color);
+					border: 1px solid var(--border-color);
+					border-radius: 10px;
+				}
+			}
+
+			.description {
+				margin: 0 0 1rem 0;
+			}
+
+			.details {
+				display: flex;
+				justify-content: start;
+				align-items: center;
+				$font-size: 0.8rem;
+				font-size: 14px;
+
+				.visibility {
+					margin-left: 1rem;
+				}
+
+				.expired-date {
+					margin-left: 1rem;
+				}
+
+				.icon {
+					font-size: $font-size;
+				}
+			}
+		}
+
+		.notification-options {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: center;
+			align-self: center;
+
+			.option-button {
+				padding: 0.5rem 1rem;
+				border: none;
+				border-radius: 4px;
+				margin: 0 0.5rem;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			.delete-button {
+				background-color: rgba($color: #a50202, $alpha: 1);
+				color: var(--light);
+			}
+
+			.edit-button {
+				background-color: rgba($color: #c49806, $alpha: 1);
+				color: var(--light);
+			}
+		}
+	}
+}
+
 .product__form {
-    .om-field {
+	.om-field {
+		.check-field {
+			display: flex;
+			align-items: center;
 
-        .check-field {
-            display: flex;
-            align-items: center;
-
-            input {
-                margin-right: .5rem;
-            }
-        }
-    }
+			input {
+				margin-right: 0.5rem;
+			}
+		}
+	}
 }

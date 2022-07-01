@@ -26,7 +26,6 @@ export class AccountComponent implements OnInit {
 	constructor(
 		private authenticationService: AuthenticationService,
 		private userService: UserService,
-		private themeService: ThemeService
 	) {}
 
 	ngOnInit(): void {
@@ -37,13 +36,5 @@ export class AccountComponent implements OnInit {
 
 	logout(): void {
 		this.authenticationService.logOut();
-	}
-
-	toggleTheme(): void {
-		this.themeService.switchTheme();
-	}
-
-	get theme$(): Observable<ThemeType> {
-		return this.themeService.theme$;
 	}
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductStatus } from '@app/common/interfaces';
-import { MessageService, ProductService } from '@app/common/services';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
+
+import { ProductStatus, Workspace } from '@app/common/interfaces';
+import { MessageService, ProductService, WorkspaceService } from '@app/common/services';
 
 @Component({
     selector: 'app-product-settings',
@@ -11,6 +13,8 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./product-settings.component.scss']
 })
 export class ProductSettingsComponent implements OnInit, OnDestroy {
+
+	private workspaceSubject$: BehaviorSubject<Workspace> = new BehaviorSubject<Workspace>(null!);
 
 	subscriptions: Subscription[] = [];
     productForm: FormGroup;
@@ -21,7 +25,9 @@ export class ProductSettingsComponent implements OnInit, OnDestroy {
         private readonly fb: FormBuilder,
 		private readonly router: Router,
 		private readonly activatedRoute: ActivatedRoute,
+		private confirmationService: ConfirmationService,
 		private productService: ProductService,
+		private workspaceService: WorkspaceService,
 		private message: MessageService,
     ) {
         this.productForm = this.fb.group({
@@ -44,8 +50,34 @@ export class ProductSettingsComponent implements OnInit, OnDestroy {
 		this.subscriptions.push(
 			this.activatedRoute.parent!.params.subscribe(params => {
 				this.workspace = params['id'];
+				this.workspaceService.workspace(this.workspace).subscribe(workspace => {
+					console.log(workspace);
+					this.workspaceSubject$.next(workspace);
+				});
 			})
 		);
+	}
+
+	confirm(product_id?: string): void {
+		this.confirmationService.confirm({
+			header: "Borrar",
+			message: "¿Estás seguro de que deseas borrar el producto?",
+			accept: () => {
+				this.deleteProduct(product_id);
+			}
+		});
+	}
+
+	deleteProduct(product_id?: string): void {
+		console.log(product_id);
+		this.productService.delete(product_id).subscribe({
+			complete: () => {
+				this.message.success("El producto ha sido eliminado", "Correcto");
+			},
+			error: (_) => {
+				this.message.error("Algo salió mal", "Reintenta");
+			}
+		});
 	}
 
 	onSubmit(): void {
@@ -75,6 +107,10 @@ export class ProductSettingsComponent implements OnInit, OnDestroy {
 		});
 	}
 
+	get workspace$(): Observable<Workspace> {
+		return this.workspaceSubject$.asObservable();
+	}
+
     get name() {
         return this.productForm.get('name');
     }
@@ -102,4 +138,5 @@ export class ProductSettingsComponent implements OnInit, OnDestroy {
     get is_available() {
         return this.productForm.get('is_available');
     }
+
 }
