@@ -105,6 +105,11 @@
 			a {
 				font-size: 14px;
 			}
+
+			.logout {
+				text-decoration: underline;
+				cursor: pointer;
+			}
 		}
 	}
 }
@@ -153,13 +158,13 @@
 		justify-content: flex-end;
 
 		.profile {
-			width: 100px;
+			width: 110px;
 			height: 40px;
 			display: flex;
 			flex-direction: row;
 			align-items: center;
 			justify-content: center;
-			padding: 0.15rem 0.15rem 0.15rem 0;
+			padding: 0.15rem 0.15rem 0.15rem .15rem;
 			border-radius: 20px;
 
 			.picture {

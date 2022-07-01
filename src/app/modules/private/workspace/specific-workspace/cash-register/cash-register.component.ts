@@ -2,8 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { InvoiceService, ProductService, MessageService } from "@app/common/services";
+import { InvoiceService, ProductService, MessageService, WorkspaceService } from "@app/common/services";
 import { Invoice, Product, Details, Currency, Price } from '@app/common/interfaces';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'app-cash-register',
@@ -22,6 +23,7 @@ export class CashRegisterComponent implements OnInit {
 	public vatProduct!: number;
 	public initialValueVAT!: number;
 	public vats!: number[];
+	public productos!: any[];
 
 
 	public searhProduct!: Observable<Product>;
@@ -41,6 +43,7 @@ export class CashRegisterComponent implements OnInit {
 		Quantity: [0, Validators.required]
 	})
 
+	private workSpaceId!: string;
 	@ViewChild('quantityDetails')
 	public quantityDetails!: ElementRef;
 
@@ -51,6 +54,8 @@ export class CashRegisterComponent implements OnInit {
 		private productService: ProductService,
 		private formBuilder: FormBuilder,
 		private message: MessageService,
+		private workSpaceService: WorkspaceService,
+		private activatedRoute: ActivatedRoute
 
 	) {
 		this.products = [];
@@ -62,18 +67,33 @@ export class CashRegisterComponent implements OnInit {
 		this.getProducts();
 		this.initForm();
 		this.getNames();
-		/*
-	  this.searh = this.control.valueChanges.pipe(
-		  startWith(''),
-		  map(value => this.filter(value))
-		  );*/
+		this.getProductos();
+		this.activatedRoute.parent?.params.subscribe(params => {
+			console.log(params,"params") ;
+			
+			this.workSpaceId = params["id"]
+			this.getet()
+		})
+		this.workSpaceService.workspaces().subscribe()
+	};
+
+	getProductos() {
+		this.workSpaceService.workspaces$.subscribe((workspace: { id: any, products: any[]; }[]) => {
+			let index
+		})
+	}
+
+	getet() {
+		this.workSpaceService.workspace(this.workSpaceId).subscribe(response => {
+			this.productos = response.products;
+		})
 	};
 
 	initForm() {
 		this.formGroup = this.formBuilder.group({
 			'employee': ['']
 		});
-		this.formGroup.get('employee')?.valueChanges.subscribe(response => {
+		this.formGroup.get('employee')?.valueChanges.subscribe((response: any) => {
 			console.log('data is', response)
 			this.filterData(response);
 		});
@@ -83,9 +103,7 @@ export class CashRegisterComponent implements OnInit {
 		const icash: any = document.getElementById("i-cash");
 		const calculo = (icash.value - this.total_price);
 		this.return = calculo;
-		console.log(calculo)
 	}
-
 
 
 	filterData(enteredData: any) {
@@ -95,10 +113,26 @@ export class CashRegisterComponent implements OnInit {
 	};
 
 	getNames() {
-		this.productService.productsNames().subscribe(response => {
-			this.listNames = response;
-			this.names = response;
+		this.workSpaceService.worksNames().subscribe((response: any[]) => {
+			console.log(response[0],"nombres")
+			console.log(response[0][0].name,"nombres")
+			let listNames: any[] = []
+			for (let index = 0; index < response.length + 1; index++) {
+				const element = response[0][index].name;
+				listNames.push(element)
+			}
+			this.listNames = listNames;
+			console.log(this.listNames,"nombres dentro de la lista");
+			this.names = listNames;
 		});
+	};
+
+	getName() {
+		this.workSpaceService.workspace(this.workSpaceId).subscribe(response => {
+			console.log(response.products,"Productos")
+			 console.log(response.products[0].name,"NOMBRES DENTRO");
+			console.log(this.productos,"EN LISTA")
+		})
 	};
 
 
@@ -113,7 +147,7 @@ export class CashRegisterComponent implements OnInit {
 	};
 
 	getProducts() {
-		this.productService.products().subscribe((response => {
+		this.productService.products().subscribe(((response: string | any[]) => {
 			try {
 				let range = response.length;
 				let array: string[] = [];
@@ -121,24 +155,14 @@ export class CashRegisterComponent implements OnInit {
 					array.push(response[index].name!)
 				}
 				this.listNames = array
-
 			} catch (error) {
 				console.log("Error al traer productos")
 			}
 		}));
 	};
-	/*
-	  filter(val:string): string[] {
-		const formatValue = val.toLocaleLowerCase();
-		console.log(this.listNames,'nombres')
-		return this.listNames.filter(country =>  country.toLocaleLowerCase().includes(formatValue));
-	  };
-	  displayFn(subject:any) {
-		return subject ? subject.name : undefined;
-	  }
-	*/
-
-	addProductsToDetails(name: string, Quantity: string) {
+	
+	traerProductos(nombre:string, Quantity:string) {
+		let index = this.productos.findIndex(p => p.name == nombre)
 		let quantity = parseInt(Quantity);
 		let product: Product = {
 			name: "",
@@ -151,49 +175,49 @@ export class CashRegisterComponent implements OnInit {
 			vat: 0.0
 		};
 		/* ------- Valida que sí se ingrese un código ------- */
-		if (name === null || '' || undefined) {
+		if (nombre === null || '' || undefined) {
 			this.message.info("Por favor ingrese un código de producto");
 			/* ------- Valida que sí se ingrese una cantidad para poder registrar un producto ------- */
 		} else if (quantity == null || undefined) {
 			this.message.info("Por favor ingrese una cantidad para este producto");
 		} else {
 			/* ------- Traigo el producto relacionado con el código que se ingresa ------- */
-			this.productService.product(name).subscribe(((response: any) => {
 				try {
 					/*  ------- Asigno los valor que necesito del producto a la variable product ------- */
-					const element = response[0];
-					let priceProduct = Math.round((element.price * parseFloat(`${1}.${element.vat}`)))
+					const element = this.productos[index];
+					let priceProduct = Math.round((element.price.value * parseFloat(`${1}.${element.vat}`)))
+					console.log(priceProduct,"precio")
 					product = {
-						name: name,
+						name: nombre,
 						price: {
 							value: priceProduct,
 							currency: Currency.COP
 						},
 						code: element.code,
 						quantity: quantity,
-						vat: (element.price * parseFloat(`${0}.${element.vat}`))
+						vat: (element.price.value * parseFloat(`${0}.${element.vat}`))
 					};
 					this.initialValueVAT = element.vat;
 					/* ------- Valida si el producto que se ingresa ya existe en los detalles y en caso de que exista suma la nueva cantidad a la cantidad que ya tenía ------- */
-					if (this.products.find(product => product.Name == name)) {
-						let index = this.products.findIndex(p => p.Name === name);
-						let newQuantity = this.products[index].Quantity += quantity;
+					if (this.products.find(product => product.name == nombre)) {
+						let index = this.products.findIndex(p => p.name === nombre);
+						let newQuantity = this.products[index].quantity += quantity;
 						this.UpdateQuantity(element.code, newQuantity, this.initialValueVAT);
 					} else {
 						/* ------- Ingresa los productos a los detalles que va a tener la factura -------*/
 						this.products.push(product);
+						console.log(this.products,"lista ");
+						
 					};
 					/* ------- Llamo a la función para que vaya sumando los valores y así obtener el valor total de la factura -------*/
 					this.sumPrices();
 					//this.calculateVat(element.vat, element.price, this.quantity, element.code);
 				} catch (error) {
-
 					/* ------- En caso de que no haya un producto con el código que se ingreso salta este mensaje ------- */
 					this.message.error("No hay un producto con éste código");
 				};
-			}));
+			};
 		};
-	};
 
 	addInvoices() {
 		this.invoice.id_client = this.id_client
@@ -214,21 +238,21 @@ export class CashRegisterComponent implements OnInit {
 		this.vats.push(this.initialValueVAT);
 	};
 
-	UpdateQuantity(code: String, quantity: string, vat: number) {
+	UpdateQuantity(name: String, quantity: string, vat: number) {
 		/* ------- Posición del producto que se desea actualizar -------*/
-		let index = this.products.findIndex(p => p.Code === code);
+		let index = this.products.findIndex(p => p.name === name);
 		/* ------- Nuevo valor que se ingresa ------- */
 		let newQuantity = parseInt(quantity)
 		/* ------- Se valida si el producto está en la lista y si su cantidad actual es mayor
 		o igual a la que se está ingresando ------- */
-		if (index > -1 && this.products[index].Quantity >= newQuantity) {
+		if (index > -1 && this.products[index].quantity >= newQuantity) {
 			/* ------- Se cambia la cantidad que tiene el producto por la nueva ------- */
-			this.products[index].Quantity = newQuantity;
+			this.products[index].quantity = newQuantity;
 			this.subtractPrices();
 			/* ------- Se llama a la función que se encarga de restar los valores para obtener el total de la factura ------- */
 			//this.calculateVat(vat, this.products[index].Price, newQuantity, this.products[index].Code)
-		} else if (index > -1 && this.products[index].Quantity <= newQuantity) {
-			this.products[index].Quantity = newQuantity;
+		} else if (index > -1 && this.products[index].quantity <= newQuantity) {
+			this.products[index].quantity = newQuantity;
 			/* ------- Se llama a la función que se encarga de sumar los valores para obtener el total de la factura ------- */
 			this.sumPrices();
 			//this.calculateVat(vat, this.products[index].Price, newQuantity, this.products[index].Code)
@@ -249,7 +273,7 @@ export class CashRegisterComponent implements OnInit {
 		this.total_price = this.products.reduce((
 			currentValue,
 			object,
-		) => currentValue + (object.Price * object.Quantity), initialValue);
+		) => currentValue + (object.price.value * object.quantity), initialValue);
 	};
 
 	subtractPrices() {
@@ -257,7 +281,7 @@ export class CashRegisterComponent implements OnInit {
 		this.total_price = this.products.reduce((
 			currentValue,
 			object,
-		) => currentValue - (object.Price * object.Quantity) * -1, initialValue);
+		) => currentValue - (object.price.value * object.quantity) * -1, initialValue);
 	};
 
 	recordLocalStorage() {
@@ -266,16 +290,4 @@ export class CashRegisterComponent implements OnInit {
 		localStorage.setItem("product", JSON.stringify(products));
 		localStorage.setItem("total_price", this.total_price.toString());
 	};
-
-
-
-	/*calculateVat(vat:number, price:number, quantity:number, code:string) {
-	  let index = this.products.findIndex(p => p.Code == code);
-	  /* ------- Con este valor se va a hallar el precio del producto sin el IVA ------- */
-	/*let percentageToDividePrice:string = `${1}.${vat}`;
-	let productWithVAT = this.products[index].Price * parseFloat(percentageToDividePrice);
-	this.products[index].Vat = productWithVAT
-  };*/
-
-
 }

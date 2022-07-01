@@ -1,0 +1,76 @@
+<div id="htmlInvoice">
+  <div class="header">
+  <h1>FACTURA</h1>
+  <img src="../../../../../../../assets/logos/om-logo.svg" alt="">
+  </div>
+  <div class="information">
+      <h3 class="name-local">NameLocal</h3>
+      <p class="p-information">Adress</p>
+      <p class="p-information">City</p>
+  </div>
+
+  <div class="fac">
+    <div class="information2">
+      <h3 >FACTURAR A </h3>
+      <p class="p-information">NameClient</p>
+      <p class="p-information">NumberID</p>
+      <p class="p-information">DireccionClient</p>
+    </div>
+    <div class="information-fac">
+      <h3>N FACTURA</h3>
+	  <p class="p-information">NumberFacture</p>
+      <h3>FECHA </h3>
+	  <p class="p-information">Date</p>
+      <h3>N PEDIDO</h3>
+	  <p class="p-information">NumberPedido</p>
+
+
+    </div>
+  </div>
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Iva</th>
+            <th>Cantidad</th>
+        </tr>
+        </thead>
+        <tbody>
+			<tr *ngFor="let item of products">
+            <td>{{item.name}}</td>
+            <td>{{item.price.value}}</td>
+            <td>{{item.vat}}</td>
+            <td>{{item.quantity}}</td>
+        </tr>
+        <tr>
+		<tbody>
+	</table>
+</div>
+<div class="">
+  <button class="btn-download" title="Download PDF"><i class="icon uil uil-file"></i></button>
+</div>
+
+<!--<table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>IVA</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of products">
+        <td>{{item.name}}</td>
+        <td>{{item.price.value}}</td>
+        <td>{{item.vat}}</td>
+        <td>{{item.quantity}}</td>
+      </tr>
+    </tbody>
+  </table> !--->
+
+
+
+
+

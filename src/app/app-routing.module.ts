@@ -57,6 +57,7 @@ const routes: Routes = [
 		path: 'workspaces',
 		loadChildren: () => import('./modules/private/workspace/workspace.module').then(m => m.WorkspaceModule)
 	},
+
 	{
 		path: 'support',
 		data: {

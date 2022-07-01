@@ -4,7 +4,7 @@
 @use "assets/sass/normalize";
 @use "assets/sass/custom";
 @use "assets/sass/animations";
-/*@use '@angular/material' as mat;
+@use '@angular/material' as mat;
 @include mat.core();
 
 $om-client-primary: mat.define-palette(mat.$indigo-palette);
@@ -20,7 +20,7 @@ $om-client-theme: mat.define-light-theme((
   )
 ));
 
-@include mat.all-component-themes($om-client-theme);*/
+@include mat.all-component-themes($om-client-theme);
 
 
 @import url("https://fonts.googleapis.com/css2?family=Anybody:wght@100;200;300;400;500;600;800&family=Eczar:wght@400;500;700;800&family=Poppins:wght@100;200;300;400;500;600;700;900&family=Sora:wght@100;200;300;400;500;700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400;1,500&display=swap");

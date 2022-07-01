@@ -1,23 +1,18 @@
 <section class="cash-register om-section">
 	<div class="cash-register__container om-container">
-
-	</div>
-</section>
-<div class="full-content">
 		<div class="card-content">
 			<div class="card">
 				<h1 class="title">Agregar producto</h1>
-				<!-- <form [formGroup]="formGroup" (ngSubmit)="addProductsToDetails(nameProduct.value, quantity.value)">
-					<input type="text" matInput formControlName="employee" [matAutocomplete]="auto" name="nameProduct"
-						#nameProduct>
-					<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-						<mat-option *ngFor="let name of names" [value]="name">{{name}}</mat-option>
-					</mat-autocomplete>
-					<input type="text" name="quantity" #quantity placeholder="Cantidad">
+				<form [formGroup]="formGroup" (ngSubmit)="traerProductos(nameProduct.value, quantity.value)">
+				<input  class="om-input" type="text" matInput formControlName="employee" [matAutocomplete]="auto" name="nameProduct" #nameProduct>
+				<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+				<mat-option *ngFor="let name of productos" [value]="name.name">{{name.name}}</mat-option>
+				</mat-autocomplete>
+					<input type="text" class="om-input" name="quantity" #quantity placeholder="Cantidad">
 					<div>
-						<button type="submit" class="btn-pro">Add</button>
+						<button type="submit" class="om-button">Add</button>
 					</div>
-				</form> -->
+				</form> 
 			</div>
 		</div>
 		<div class="content-table">
@@ -25,7 +20,6 @@
 				<table class="fl-table">
 					<thead>
 						<tr>
-							<th>Codigo</th>
 							<th>Nombre</th>
 							<th>Precio</th>
 							<th>Cantidad</th>
@@ -36,17 +30,16 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let item of products">
-							<td>{{item.Code}}</td>
-							<td>{{item.Name}}</td>
-							<td>{{item.Price | currency}}</td>
-							<td><input type="number" value={{item.Quantity}} min="1" name="quantityDetails"
+							<td>{{item.name}}</td>
+							<td>{{item.price.value | currency}}</td>
+							<td><input type="number" value={{item.quantity}} min="1" name="quantityDetails"
 									#quantityDetails max="9999"></td>
-							<td>{{item.Vat * item.Quantity | currency}}</td>
-							<td>{{item.Price * item.Quantity | currency}}</td>
+							<td>{{item.vat * item.quantity | currency}}</td>
+							<td>{{item.price.value * item.quantity | currency}}</td>
 							<td><button class="delete-btn" (click)="deleteProductToDetails(item.Code)"><i
-										class="fa-solid fa-trash"></i></button><button class="update-btn"
-									(click)="UpdateQuantity(item.Code, quantityDetails.value, initialValueVAT)"><i
-										class="fa-solid fa-pen"></i></button></td>
+										class="icon uil uil-trash"></i></button><button class="update-btn"
+									(click)="UpdateQuantity(item.name, quantityDetails.value, initialValueVAT)"><i
+										class="icon uil uil-edit"></i></button></td>
 
 						</tr>
 					</tbody>
@@ -58,9 +51,9 @@
 		<h2 class="details-h2">Total</h2>
 		<p class="p-details">Total price: {{total_price | currency}}</p>
 	</div>
-
 	<input type="checkbox" id="btn-modal">
 	<label for="btn-modal" class="lbl-modal" (click)="recordLocalStorage()">Pagar</label>
+
 	<div class="modal">
 		<div class="contenedor">
 			<label for="btn-modal" class="lbl-cerrar">X</label>
@@ -78,8 +71,6 @@
 						</div>
 						<div class="pay-methods">
 							<fieldset>
-								<legend>Payment Method</legend>
-								<br>
 								<section class="content-sec">
 									<div class="app-paper">
 										<div class="paper-title">Choose your payment method </div>
@@ -88,7 +79,7 @@
 											<input type="radio" name="methodtype" id="1" class="hidebx">
 											<label for="1" class="lbl-radio">
 												<div class="display-box">
-													<div class="logo"><img src="../../../assets/icons8-cash-app.svg"
+													<div class="logo"><img src="../../../../../../assets/images/icons8-cash-app.svg"
 															alt=""></div>
 													<div class="name-type">Cash</div>
 												</div>
@@ -99,7 +90,7 @@
 											<input type="radio" name="methodtype" id="4" class="hidebx2">
 											<label for="4" class="lbl-radio2">
 												<div class="display-box2">
-													<div class="logo2"><img src="../../../assets/icons8-visa.svg"
+													<div class="logo2"><img src="../../../../../../assets/images/icons8-visa.svg"
 															alt=""></div>
 													<div class="name-type2">Proximamente...</div>
 												</div>
@@ -133,11 +124,11 @@
 																		<button class="btn-calc"
 																			(click)="calcash()">Calcular</button>
 																	</div>
-																	<p class="p-devolver">Monto a devolver: {{return}}
+																	<p class="p-devolver">Monto a devolver: ${{return}} pesos
 																	</p>
 																	<div class="btn-finish">
 																		<button class="btn-pdf-pay"
-																			routerLink="/pdf">Finalizar</button>
+																			routerLink="./pdf">Finalizar</button>
 																	</div>
 																</div>
 
@@ -156,5 +147,7 @@
 				</div>
 			</div>
 		</div>
+
+
 	</div>
-</div>
+	

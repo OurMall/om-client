@@ -36,9 +36,10 @@
 		</div>
 		<div class="header__options">
 			<ng-container *ngIf="isLoggedIn$ | async; else notLogged">
-				<button class="om-icon-button" (click)="onLogout()">
-					<i class="icon uil uil-signout"></i>
-				</button>
+				<a class="logout om-link" (click)="onLogout()">
+					Salir
+					<i class="uil uil-signout"></i>
+				</a>
 			</ng-container>
 			<ng-template #notLogged>
 				<a routerLink="login" routerLinkActive="om-link-active" class="om-link om-transition">

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, catchError, Observable, take, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Subject, catchError, Observable, take, tap, throwError, map } from 'rxjs';
 
 import { ApiResponse, Workspace, WorkspaceCreate } from '@app/common/interfaces';
 import { MessageService } from '@app/common/services';
@@ -67,6 +67,13 @@ export class WorkspaceService {
 			})
 		);
 	}
+
+	worksNames(): Observable<any[]> {
+		return this.http.get<any[]>("workspace").pipe(
+			map((product: any[]) => product.map(element => element.products))
+		);
+	};
+	
 
 	get workspaces$(): Observable<Workspace[]> {
 		return this.workspacesSubject$.asObservable();

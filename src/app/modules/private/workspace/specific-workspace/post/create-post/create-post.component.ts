@@ -24,7 +24,7 @@ export class CreatePostComponent implements OnInit {
 		this.createPostForm = this.fb.group({
 			title: [null, [Validators.required]],
 			content: [null, [Validators.required, Validators.maxLength(3000)]],
-			image: [null, []],
+			image: [null, [Validators.required]],
 			is_public: [true, []],
 			workspace: [null, []]
 		});
@@ -39,9 +39,6 @@ export class CreatePostComponent implements OnInit {
 			this.message.warning('Completa la información requerida');
 			return;
 		}
-		this.createPostForm.patchValue({
-			image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTelVna9__Qwt9GifGdE0R4FmsiTmZjoSE1vnC4LXdgozvqbjiOGufuXrladHL7nXowTt4&usqp=CAU',
-		});
 		this.createPostForm.patchValue({
 			workspace: this.workspace
 		});

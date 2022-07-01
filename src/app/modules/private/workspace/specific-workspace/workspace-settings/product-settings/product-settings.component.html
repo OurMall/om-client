@@ -72,6 +72,15 @@
 					</small>
 				</div>
 			</div>
+			<div class="om-field">
+				<label for="image" class="om-field-label">Imagen</label>
+				<input formControlName="images" type="url" class="om-input" id="image" placeholder="example.png">
+				<div class="om-field-error" *ngIf="images?.invalid && (images?.touched || images?.dirty)">
+					<small class="om-error-text" *ngIf="images?.errors?.['required']">
+						El campo es requerido
+					</small>
+				</div>
+			</div>
 			<div class="om-field-group">
 				<div class="om-field" formGroupName="price">
 					<label for="price" class="om-field-label">Precio</label>
@@ -123,6 +132,5 @@
 				</button>
 			</div>
 		</form>
-
 	</p-tabPanel>
 </p-tabView>

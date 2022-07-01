@@ -38,7 +38,7 @@ export class ProductSettingsComponent implements OnInit, OnDestroy {
 				currency: ["COP", []]
 			}),
             stock: [0, [Validators.required]],
-            images: [[], []],
+            images: [[], [Validators.required]],
             status: [0, [Validators.required]],
             is_available: [false, [Validators.required]],
 			workspace: [this.workspace, []]
@@ -51,7 +51,6 @@ export class ProductSettingsComponent implements OnInit, OnDestroy {
 			this.activatedRoute.parent!.params.subscribe(params => {
 				this.workspace = params['id'];
 				this.workspaceService.workspace(this.workspace).subscribe(workspace => {
-					console.log(workspace);
 					this.workspaceSubject$.next(workspace);
 				});
 			})
@@ -69,7 +68,6 @@ export class ProductSettingsComponent implements OnInit, OnDestroy {
 	}
 
 	deleteProduct(product_id?: string): void {
-		console.log(product_id);
 		this.productService.delete(product_id).subscribe({
 			complete: () => {
 				this.message.success("El producto ha sido eliminado", "Correcto");
@@ -88,6 +86,10 @@ export class ProductSettingsComponent implements OnInit, OnDestroy {
 		this.productForm.patchValue({
 			workspace: this.workspace
 		});
+		this.productForm.patchValue({
+			images: [this.images?.value]
+		});
+		console.log(this.productForm.value);
 		this.subscriptions.push(
 			this.productService.createProduct(this.productForm.value).subscribe({
 				complete: () => {
