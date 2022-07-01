@@ -29,17 +29,12 @@ export class PdfComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    console.log(this.dollarInPeso,'precio en pesos')
 
   };
 
   receiveInovice($event:Invoice) {
     this.invoices = $event;
   };
-
-
-
-
 
 
   getInvoiceStorage() {
@@ -50,40 +45,7 @@ export class PdfComponent implements OnInit {
       this.products = [];
     } else {
       this.products = JSON.parse(products);
+      console.log(this.products,"poductos")
     };
-  };
-
-
-
-
-
-  makePDF() {
-    const DATA:any = document.getElementById('htmlInvoice');
-    const PDF = new jsPDF('p', 'pt', 'a4');
-    const OPTIONS = {
-      background: 'white',
-      scale: 3,
-    };
-    html2canvas(DATA, OPTIONS).then((canvas) => {
-      const img = canvas.toDataURL('image/PNG');
-      const bufferX = 15;
-      const bufferY = 15;
-      const imgProps = (PDF as any).getImageProperties(img);
-      const pdfWidth = PDF.internal.pageSize.getWidth() -2 * bufferX;
-      const pdHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      PDF.addImage(
-        img,
-        'PNG',
-        bufferX,
-        bufferY,
-        pdfWidth,
-        pdHeight,
-        undefined,
-        'FAST'
-      );
-      return PDF;
-    }).then((docResult) => {
-      docResult.save(`${new Date().toISOString()}_invoice.pdf`);
-    });
   };
 }

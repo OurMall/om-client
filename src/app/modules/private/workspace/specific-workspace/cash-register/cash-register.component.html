@@ -4,11 +4,10 @@
 			<div class="card">
 				<h1 class="title">Agregar producto</h1>
 				<form [formGroup]="formGroup" (ngSubmit)="traerProductos(nameProduct.value, quantity.value)">
-					<input  class="om-input" type="text" matInput formControlName="employee" [matAutocomplete]="auto" name="nameProduct"
-						#nameProduct>
-					<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-						<mat-option *ngFor="let name of names" [value]="name">{{name}}</mat-option>
-					</mat-autocomplete>
+				<input  class="om-input" type="text" matInput formControlName="employee" [matAutocomplete]="auto" name="nameProduct" #nameProduct>
+				<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+				<mat-option *ngFor="let name of productos" [value]="name.name">{{name.name}}</mat-option>
+				</mat-autocomplete>
 					<input type="text" class="om-input" name="quantity" #quantity placeholder="Cantidad">
 					<div>
 						<button type="submit" class="om-button">Add</button>
@@ -38,9 +37,9 @@
 							<td>{{item.vat * item.quantity | currency}}</td>
 							<td>{{item.price.value * item.quantity | currency}}</td>
 							<td><button class="delete-btn" (click)="deleteProductToDetails(item.Code)"><i
-										class="fa-solid fa-trash"></i></button><button class="update-btn"
+										class="icon uil uil-trash"></i></button><button class="update-btn"
 									(click)="UpdateQuantity(item.name, quantityDetails.value, initialValueVAT)"><i
-										class="fa-solid fa-pen"></i></button></td>
+										class="icon uil uil-edit"></i></button></td>
 
 						</tr>
 					</tbody>

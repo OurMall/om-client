@@ -1,103 +1,211 @@
 #htmlInvoice {
-  margin: 50px 50px;
-  font-family: "Ubuntu", sans-serif;
+    margin: 50px 50px;
 }
 
 .header {
- width: 100%;
- height: 200px;
+   width: 100%;
+   height: 200px;
 }
 
 h1 {
-  float: left;
-  margin-top: 75px;
-  align-items: center;
-  font-size: 45px;
-  font-weight: 700;
-  color: #027ed8;
+    float: left;
+    margin-top: 75px;
+    align-items: center;
+    font-size: 45px;
+    font-weight: 700;
+    color: #027ed8;
 }
 
 img {
-  width: 120px;
-  float: right;
-  margin-top: 40px;
-  margin-right: 60px;
+    width: 120px;
+    float: right;
+    margin-top: 40px;
+    margin-right: 60px;
 }
 
 .information {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 .name-local{
-  font-size: 17px;    
-  font-weight: 500;
+    font-size: 17px;
+    font-weight: 700;
 }
 
 p {
-  font-weight: 300s;
+    font-weight: 300s;
 }
 
 .h2-fac {
-  color: #027ed8;
+    color: #027ed8;
 }
 
 .information2{
-  float: left;
-  width: 30%;
-  font-weight: 500;
+    float: left;
+    width: 30%;
+    font-weight: 500;
 
 }
 
 .information-fac {
-  display: inline-block;
-  width: 8%;
-  margin-left: 570px;
+    display: inline-block;
+    width: 8%;
+    margin-left: 570px;
 }
 
 table {
-  margin-top: 50px;
-  margin-bottom: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 
 h3 {
-  font-weight: 500;
-  color: #027ed8;
+    font-weight: 700;
+    color: #027ed8;
 }
 
 .details-fac {
-  display: inline-block;
-  width: 15%;
-  height: 200px;
-  float: right;
+    display: inline-block;
+    width: 15%;
+    height: 200px;
+    float: right;
 }
 
 .p-information {
-  font-weight: 500;
-  margin-bottom: 25px;
+    font-weight: 500;
+    margin-bottom: 5px;
 }
 
 
 .btn-download {
-  float: right;
-  width: 50px;
-height: 50px;
-border-radius: 50%;
-border: none;
-font-size: 1.5rem;
-margin: 0 20px 0 0;
-background-color: #fd3030;	
-color: #ffffff;
+    float: right;
+    width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: none;
+	font-size: 1.5rem;
+	margin: 0 20px 0 0;
+	background-color: #fd3030;
+	color: #ffffff;
 
 }
 
 .btn-download:hover{
-  background-color: #111111;
+    background-color: #111111;
 }
 
+.table-wrapper {
+	position: relative;
+	background: none;
+	overflow-x: auto;
+	width: 700px;
+	height: 250px;
+}
 
+.table-wrapper::-webkit-scrollbar {
+	width: 7px;
+	background: none;
+}
 
+.table-wrapper::-webkit-scrollbar-thumb {
+	background: #dfdfdf;
+	border-radius: 5px;
+}
 
+.fl-table {
+	border-radius: 5px;
+	font-size: 12px;
+	font-weight: normal;
+	border: none;
+	border-collapse: collapse;
+	width: 100%;
+	max-width: 100%;
+	white-space: nowrap;
+	background-color: none;
+	border: none;
+}
+
+.fl-table td,
+.fl-table th {
+	text-align: center;
+	padding: 8px;
+}
+
+.fl-table td {
+	border-bottom: 0.5 solid #fff;
+	font-size: 12px;
+}
+
+.fl-table thead th {
+	color: #fff;
+	background: #0086e6;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+    }
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: white;
+        padding: 0 0 10px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+    .fl-table tr td:nth-child(odd) {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
 
 
 

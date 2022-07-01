@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { InvoiceService, ProductService, MessageService, WorkspaceService } from "@app/common/services";
 import { Invoice, Product, Details, Currency, Price } from '@app/common/interfaces';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'app-cash-register',
@@ -42,6 +43,7 @@ export class CashRegisterComponent implements OnInit {
 		Quantity: [0, Validators.required]
 	})
 
+	private workSpaceId!: string;
 	@ViewChild('quantityDetails')
 	public quantityDetails!: ElementRef;
 
@@ -52,7 +54,8 @@ export class CashRegisterComponent implements OnInit {
 		private productService: ProductService,
 		private formBuilder: FormBuilder,
 		private message: MessageService,
-		private workSpaceService: WorkspaceService
+		private workSpaceService: WorkspaceService,
+		private activatedRoute: ActivatedRoute
 
 	) {
 		this.products = [];
@@ -65,20 +68,26 @@ export class CashRegisterComponent implements OnInit {
 		this.initForm();
 		this.getNames();
 		this.getProductos();
+		this.activatedRoute.parent?.params.subscribe(params => {
+			console.log(params,"params") ;
+			
+			this.workSpaceId = params["id"]
+			this.getet()
+		})
 		this.workSpaceService.workspaces().subscribe()
-		/*
-	  this.searh = this.control.valueChanges.pipe(
-		  startWith(''),
-		  map(value => this.filter(value))
-		  );*/
 	};
 
 	getProductos() {
-		this.workSpaceService.workspaces$.subscribe((workspace: { products: any[]; }[]) => {
-			this.productos = workspace[0].products
-			console.log(this.productos,"lista con los productos")
+		this.workSpaceService.workspaces$.subscribe((workspace: { id: any, products: any[]; }[]) => {
+			let index
 		})
 	}
+
+	getet() {
+		this.workSpaceService.workspace(this.workSpaceId).subscribe(response => {
+			this.productos = response.products;
+		})
+	};
 
 	initForm() {
 		this.formGroup = this.formBuilder.group({
@@ -94,7 +103,6 @@ export class CashRegisterComponent implements OnInit {
 		const icash: any = document.getElementById("i-cash");
 		const calculo = (icash.value - this.total_price);
 		this.return = calculo;
-		console.log(calculo)
 	}
 
 
@@ -105,7 +113,6 @@ export class CashRegisterComponent implements OnInit {
 	};
 
 	getNames() {
-		
 		this.workSpaceService.worksNames().subscribe((response: any[]) => {
 			console.log(response[0],"nombres")
 			console.log(response[0][0].name,"nombres")
@@ -118,6 +125,14 @@ export class CashRegisterComponent implements OnInit {
 			console.log(this.listNames,"nombres dentro de la lista");
 			this.names = listNames;
 		});
+	};
+
+	getName() {
+		this.workSpaceService.workspace(this.workSpaceId).subscribe(response => {
+			console.log(response.products,"Productos")
+			 console.log(response.products[0].name,"NOMBRES DENTRO");
+			console.log(this.productos,"EN LISTA")
+		})
 	};
 
 
@@ -145,79 +160,9 @@ export class CashRegisterComponent implements OnInit {
 			}
 		}));
 	};
-	/*
-	  filter(val:string): string[] {
-		const formatValue = val.toLocaleLowerCase();
-		console.log(this.listNames,'nombres')
-		return this.listNames.filter(country =>  country.toLocaleLowerCase().includes(formatValue));
-	  };
-	  displayFn(subject:any) {
-		return subject ? subject.name : undefined;
-	  }
-	*/
 	
-	/*
-	addProductsToDetails(name: string, Quantity: string) {
-		let quantity = parseInt(Quantity);
-		let product: Product = {
-			name: "",
-			price: {
-				value: 0.0,
-				currency: Currency.COP
-			},
-			code: "",
-			quantity: 0,
-			vat: 0.0
-		};
-		/* ------- Valida que sí se ingrese un código ------- 
-		if (name === null || '' || undefined) {
-			this.message.info("Por favor ingrese un código de producto");
-			/* ------- Valida que sí se ingrese una cantidad para poder registrar un producto ------- 
-		} else if (quantity == null || undefined) {
-			this.message.info("Por favor ingrese una cantidad para este producto");
-		} else {
-			/* ------- Traigo el producto relacionado con el código que se ingresa ------- 
-			this.productService.product(name).subscribe(((response: any) => {
-				try {
-					/*  ------- Asigno los valor que necesito del producto a la variable product ------- 
-					const element = response[0];
-					let priceProduct = Math.round((element.price * parseFloat(`${1}.${element.vat}`)))
-					product = {
-						name: name,
-						price: {
-							value: priceProduct,
-							currency: Currency.COP
-						},
-						code: element.code,
-						quantity: quantity,
-						vat: (element.price * parseFloat(`${0}.${element.vat}`))
-					};
-					this.initialValueVAT = element.vat;
-					/* ------- Valida si el producto que se ingresa ya existe en los detalles y en caso de que exista suma la nueva cantidad a la cantidad que ya tenía ------- 
-					if (this.products.find(product => product.Name == name)) {
-						let index = this.products.findIndex(p => p.Name === name);
-						let newQuantity = this.products[index].Quantity += quantity;
-						this.UpdateQuantity(element.code, newQuantity, this.initialValueVAT);
-					} else {
-						/* ------- Ingresa los productos a los detalles que va a tener la factura -------
-						this.products.push(product);
-					};
-					/* ------- Llamo a la función para que vaya sumando los valores y así obtener el valor total de la factura -------
-					this.sumPrices();
-					//this.calculateVat(element.vat, element.price, this.quantity, element.code);
-				} catch (error) {
-
-					/* ------- En caso de que no haya un producto con el código que se ingreso salta este mensaje ------- 
-					this.message.error("No hay un producto con éste código");
-				};
-			}));
-		};
-	};
-	*/
-
 	traerProductos(nombre:string, Quantity:string) {
 		let index = this.productos.findIndex(p => p.name == nombre)
-		console.log(index,"rkregn");
 		let quantity = parseInt(Quantity);
 		let product: Product = {
 			name: "",
